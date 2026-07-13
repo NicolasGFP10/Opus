@@ -1,0 +1,15 @@
+﻿html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #8E2DCF;
+}
+
+.link-neutro {
+    color: #000000;
+    text-decoration: none;
+}
+
+.padding-lat-10 {
+    padding-left: 10px;
+    padding-right: 10px;
+}

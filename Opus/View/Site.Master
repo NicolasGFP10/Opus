@@ -1,0 +1,77 @@
+﻿<%@ master language="C#" autoeventwireup="true" codebehind="Site.master.cs" inherits="Opus.View.Site" %>
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="../View/Img/OpusIconePagina.png">
+
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link href="CSS/estilo.css" rel="stylesheet">
+
+    <title>Opus - </title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <header class="p-3 mb-3 border-bottom" style="background-color: #ffffff">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+                    <a href="../Usuario/Default.aspx">
+                        <img src="../../Img/OpusIcone.png" class="padding-lat-10" alt="Icone do Opus" height="30px" width="50px" />
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+
+                        <!-- <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
+                        <li><a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a></li> -->
+
+                        <!-- Usuário -->
+
+                        <asp:LinkButton ID="lbtSobre" class="link-neutro padding-lat-10" visible="true" runat="server">Sobre</asp:LinkButton>
+                        <asp:LinkButton ID="lbtServicos" class="link-neutro padding-lat-10" visible="false" runat="server">Serviços</asp:LinkButton>
+                        <asp:LinkButton ID="lbtAvaliacao" class="link-neutro padding-lat-10" visible="false" runat="server">Avaliação</asp:LinkButton>
+                        <asp:LinkButton ID="lbtSuporte" class="link-neutro padding-lat-10" visible="true" runat="server">Suporte</asp:LinkButton>
+
+                        <!-- Autônomo -->
+
+                        <asp:LinkButton ID="lbtCarreira" class="link-neutro padding-lat-10" visible="false" runat="server">Carreira</asp:LinkButton>
+
+                        <!-- Administrador -->
+
+                        <asp:LinkButton ID="lbtDenuncias" class="link-neutro padding-lat-10" visible="false" runat="server">Denuncias</asp:LinkButton>
+                        <asp:LinkButton ID="lbtContas" class="link-neutro padding-lat-10" visible="false" runat="server">Contas</asp:LinkButton>
+                        <asp:LinkButton ID="lbtTrabalhos" class="link-neutro padding-lat-10" visible="false" runat="server">Trabalhos</asp:LinkButton>
+                        <asp:LinkButton ID="lbtRegioes" class="link-neutro padding-lat-10" visible="false" runat="server">Regiões</asp:LinkButton>
+
+                    </ul>
+
+                    <div class="text-end">
+                        <asp:LinkButton ID="lbtEntrar" class="link-neutro padding-lat-10" visible="true" runat="server">Entrar</asp:LinkButton>
+                        <img src="../../Img/GenericAvatar.png" alt="avatar" width="32" height="32" class="rounded-circle">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+
+    </form>
+</body>
+</html>
