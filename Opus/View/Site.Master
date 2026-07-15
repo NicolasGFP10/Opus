@@ -38,7 +38,7 @@
                         <!-- Usuário -->
 
                         <asp:LinkButton ID="lbtSobre" class="link-neutro padding-lat-10" visible="true" runat="server">Sobre</asp:LinkButton>
-                        <asp:LinkButton ID="lbtServicos" class="link-neutro padding-lat-10" visible="false" runat="server">Serviços</asp:LinkButton>
+                        <asp:LinkButton ID="lbtServicos" class="link-neutro padding-lat-10" visible="false" runat="server" href="Servicos.aspx">Serviços</asp:LinkButton>
                         <asp:LinkButton ID="lbtAvaliacao" class="link-neutro padding-lat-10" visible="false" runat="server">Avaliação</asp:LinkButton>
                         <asp:LinkButton ID="lbtSuporte" class="link-neutro padding-lat-10" visible="true" runat="server">Suporte</asp:LinkButton>
 
@@ -57,7 +57,12 @@
 
                     <div class="text-end">
                         <asp:LinkButton ID="lbtEntrar" class="link-neutro padding-lat-10" visible="true" href="../Usuario/Entrar.aspx" runat="server">Entrar</asp:LinkButton>
-                        <img src="../../Img/GenericAvatar.png" alt="avatar" width="32" height="32" class="rounded-circle">
+
+                        <asp:Label ID="labNome" runat="server" class="link-neutro padding-lat-10" Text=""></asp:Label>
+
+                        <asp:Image ID="imgDeslogado" runat="server" src="../../Img/GenericAvatar.png" alt="avatar" width="32" height="32" class="rounded-circle"/>
+
+                        <asp:ImageButton ID="imgUsuario" alt="avatar" width="32" height="32" class="rounded-circle" runat="server" Visible="false" OnClick="imgUsuario_Click"/>
                     </div>
                 </div>
             </div>
@@ -73,7 +78,6 @@
             </div>
 
         </div>
-
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

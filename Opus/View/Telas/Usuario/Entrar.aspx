@@ -15,10 +15,10 @@
 
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Senha</label>
-        <asp:TextBox ID="TextSenha" type="password" class="form-control" runat="server"></asp:TextBox>
+        <asp:TextBox ID="tbxSenha" type="password" class="form-control" runat="server"></asp:TextBox>
     </div>
 
-    <center><asp:Button runat="server" ID="btnEnviar" type="button" class="btn cor-roxa" Text="Entrar"/></center><br />
+    <center><asp:Button runat="server" ID="btnEnviar" type="button" OnClick="btnEnviar_Click" class="btn cor-roxa" Text="Entrar"/></center><br />
 
     <center><asp:LinkButton href="Cadastrar.aspx" class="link-neutro" runat="server">Não possuí uma conta? Clique aqui!</asp:LinkButton></center>
 

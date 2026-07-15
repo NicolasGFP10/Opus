@@ -41,6 +41,8 @@ namespace Opus.View.Telas.Usuario
 
                         ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Cadastro realizado com sucesso!');", true);
 
+                        Response.Redirect("Entrar.aspx");
+
                     break;
 
                     case 400:
@@ -63,7 +65,7 @@ namespace Opus.View.Telas.Usuario
 
                     default:
 
-                        ClientScript.RegisterStartupScript(this.GetType(), "Erro inesperado", "alert('Misantropia ai kk');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "Erro inesperado", "alert('O Sistema não está respondendo no momento, tente novamente mais tarde');", true);
 
                     break;
                 }

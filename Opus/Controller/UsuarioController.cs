@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.SessionState;
 
 namespace Opus.Controller
 {
@@ -56,6 +57,42 @@ namespace Opus.Controller
             usuario.Status = true;
 
             return dao.CadastrarUsuario(usuario, imagem);
+        }
+
+        public int ValidarLogin(string email, string senha)
+        {
+            UsuarioDAO dao = new UsuarioDAO();
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(senha))
+            {
+
+                return 400;
+
+            }
+
+            return dao.EntrarUsuario(email, senha);
+        }
+
+        public int EditarDados(string nome, string email, string telefone, string senha)
+        {
+            UsuarioDAO dao = new UsuarioDAO();
+
+            if (string.IsNullOrEmpty(nome) ||
+            string.IsNullOrEmpty(email) ||
+            string.IsNullOrEmpty(telefone) ||
+            string.IsNullOrEmpty(senha))
+            {
+                return 400;
+            }
+
+            Usuario usuario = new Usuario();
+            usuario.Id = (int)HttpContext.Current.Session["usu_id"];
+            usuario.Nome = nome;
+            usuario.Email = email;
+            usuario.Telefone = telefone;
+            usuario.Senha = senha;
+
+            return dao.EditarUsuario(usuario);
         }
     }
 }

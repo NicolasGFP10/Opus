@@ -11,8 +11,17 @@ namespace Opus.View.Telas.Usuario
 {
 
 
-    public partial class Entrar
+    public partial class EditarUsuario
     {
+
+        /// <summary>
+        /// Controle tbxNome.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbxNome;
 
         /// <summary>
         /// Controle tbxEmail.
@@ -22,6 +31,15 @@ namespace Opus.View.Telas.Usuario
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbxEmail;
+
+        /// <summary>
+        /// Controle tbxTelefone.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbxTelefone;
 
         /// <summary>
         /// Controle tbxSenha.

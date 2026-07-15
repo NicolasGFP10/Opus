@@ -98,5 +98,130 @@ namespace Opus.DAO
 
             }
         }
+
+        public int EntrarUsuario(string email, string senha)
+        {
+            try
+            {
+
+                using (MySqlConnection conexao = Conexao.ObterConexao())
+                {
+
+                    Usuario usuario = new Usuario();
+
+                    conexao.Open();
+
+                    string sql = @"SELECT usu_ID, 
+                               usu_nome, 
+                               usu_imagem,
+                               usu_email,
+                               usu_telefone,
+                               usu_senha
+                               FROM usuario WHERE
+                               usu_email = @email AND
+                               usu_senha = @senha AND
+                               usu_status = 1";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@senha", senha);
+
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        int id = Convert.ToInt32(reader["usu_ID"]);
+                        string nome = reader["usu_nome"].ToString();
+                        string imagem = reader["usu_imagem"].ToString();
+                        string telefone = reader["usu_telefone"].ToString();
+                        string emailUsuario = reader["usu_email"].ToString();
+                        string senhaUsuario = reader["usu_senha"].ToString();
+
+
+                        HttpContext.Current.Session["usu_ID"] = id;
+                        HttpContext.Current.Session["usu_nome"] = nome;
+                        HttpContext.Current.Session["usu_imagem"] = imagem;
+                        HttpContext.Current.Session["usu_email"] = emailUsuario;     
+                        HttpContext.Current.Session["usu_telefone"] = telefone;
+                        HttpContext.Current.Session["usu_senha"] = senha;
+
+                        return 200;
+                    }
+                    else
+                    {
+                        return 404;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                return 500;
+
+            }
+        }
+
+        public int EditarUsuario(Usuario usuario)
+        {
+            try
+            {
+                using (MySqlConnection conexao = Conexao.ObterConexao())
+                {
+                    conexao.Open();
+                    string sql = @"UPDATE usuario SET
+                                   usu_nome = @nome,
+                                   usu_email = @email,
+                                   usu_telefone = @telefone,
+                                   usu_senha = @senha
+                                   WHERE usu_ID = @id";
+                    MySqlCommand cmd = new MySqlCommand(sql, conexao);
+                    cmd.Parameters.AddWithValue("@nome", usuario.Nome);
+                    cmd.Parameters.AddWithValue("@email", usuario.Email);
+                    cmd.Parameters.AddWithValue("@telefone", usuario.Telefone);
+                    cmd.Parameters.AddWithValue("@senha", usuario.Senha);
+                    cmd.Parameters.AddWithValue("@id", usuario.Id);
+                    cmd.ExecuteNonQuery();
+                }
+                return 200;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                return 500;
+            }
+        }
+
+        public int DesativarUsuario(string id)
+        {
+            try
+            {
+
+                using (MySqlConnection conexao = Conexao.ObterConexao())
+                {
+                    conexao.Open();
+
+                    string sql = @"UPDATE usuario
+                               SET usu_status = 0
+                               WHERE usu_id = @id;";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                return 200;
+
+            } catch (Exception ex) {
+
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                return 500;
+
+            }
+        }
     }
 }
