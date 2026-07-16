@@ -22,7 +22,7 @@ namespace Opus.View.Telas.Usuario
 
                 if (Session["aut_ID"] != null)
                 {
-                    btnAuto.Visible = false;
+                    btnAuto.Visible = false; 
                 }
             }
         }
