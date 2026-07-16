@@ -136,7 +136,7 @@ namespace Opus.DAO
                         string imagem = reader["usu_imagem"].ToString();
                         string telefone = reader["usu_telefone"].ToString();
                         string emailUsuario = reader["usu_email"].ToString();
-                        string senhaUsuario = reader["usu_senha"].ToString();
+                        string senhaU = reader["usu_senha"].ToString();
 
 
                         HttpContext.Current.Session["usu_ID"] = id;
@@ -144,7 +144,13 @@ namespace Opus.DAO
                         HttpContext.Current.Session["usu_imagem"] = imagem;
                         HttpContext.Current.Session["usu_email"] = emailUsuario;     
                         HttpContext.Current.Session["usu_telefone"] = telefone;
-                        HttpContext.Current.Session["usu_senha"] = senha;
+                        HttpContext.Current.Session["usu_senha"] = senhaU;
+
+                        reader.Close();
+
+                        AutonomoDAO aut = new AutonomoDAO();
+
+                        aut.EntrarAutonomo(id);
 
                         return 200;
                     }
@@ -153,7 +159,6 @@ namespace Opus.DAO
                         return 404;
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -164,27 +169,67 @@ namespace Opus.DAO
             }
         }
 
-        public int EditarUsuario(Usuario usuario)
+        public int EditarUsuario(Usuario usuario, HttpPostedFile imagem)
         {
             try
             {
+                if (imagem != null && imagem.ContentLength > 0)
+                {
+                    string nomeImagem = Guid.NewGuid().ToString() +
+                                        Path.GetExtension(imagem.FileName);
+
+                    string pasta = HttpContext.Current.Server.MapPath("~/Uploads/Usuario/");
+
+                    if (!Directory.Exists(pasta))
+                        Directory.CreateDirectory(pasta);
+
+                    imagem.SaveAs(Path.Combine(pasta, nomeImagem));
+
+                    usuario.Imagem = nomeImagem;
+                }
+
                 using (MySqlConnection conexao = Conexao.ObterConexao())
                 {
                     conexao.Open();
-                    string sql = @"UPDATE usuario SET
-                                   usu_nome = @nome,
-                                   usu_email = @email,
-                                   usu_telefone = @telefone,
-                                   usu_senha = @senha
-                                   WHERE usu_ID = @id";
+
+                    string sql;
+
+                    if (!string.IsNullOrEmpty(usuario.Imagem))
+                    {
+                        sql = @"UPDATE usuario SET
+                        usu_nome = @nome,
+                        usu_email = @email,
+                        usu_telefone = @telefone,
+                        usu_senha = @senha,
+                        usu_imagem = @imagem
+                        WHERE usu_ID = @id";
+                    }
+                    else
+                    {
+                        sql = @"UPDATE usuario SET
+                        usu_nome = @nome,
+                        usu_email = @email,
+                        usu_telefone = @telefone,
+                        usu_senha = @senha
+                        WHERE usu_ID = @id";
+                    }
+
                     MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
                     cmd.Parameters.AddWithValue("@nome", usuario.Nome);
                     cmd.Parameters.AddWithValue("@email", usuario.Email);
                     cmd.Parameters.AddWithValue("@telefone", usuario.Telefone);
                     cmd.Parameters.AddWithValue("@senha", usuario.Senha);
                     cmd.Parameters.AddWithValue("@id", usuario.Id);
+
+                    if (!string.IsNullOrEmpty(usuario.Imagem))
+                    {
+                        cmd.Parameters.AddWithValue("@imagem", usuario.Imagem);
+                    }
+
                     cmd.ExecuteNonQuery();
                 }
+
                 return 200;
             }
             catch (Exception ex)

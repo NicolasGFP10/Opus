@@ -11,7 +11,7 @@ namespace Opus.View.Telas.Usuario
 {
 
 
-    public partial class Servicos
+    public partial class Avaliacao
     {
     }
 }

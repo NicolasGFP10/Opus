@@ -130,18 +130,26 @@
     <Content Include="View\Img\OpusIcone.png" />
     <Content Include="View\Img\OpusIconePagina.png" />
     <Content Include="View\JS\AjustarCaracteres.js" />
+    <Content Include="View\Telas\Autonomo\CadastrarAutonomo.aspx" />
+    <Content Include="View\Telas\Autonomo\Carreira.aspx" />
+    <Content Include="View\Telas\Usuario\Avaliacao.aspx" />
     <Content Include="View\Telas\Usuario\Cadastrar.aspx" />
     <Content Include="View\Telas\Usuario\Configuracao.aspx" />
     <Content Include="View\Telas\Usuario\Default.aspx" />
     <Content Include="View\Telas\Usuario\EditarUsuario.aspx" />
     <Content Include="View\Telas\Usuario\Entrar.aspx" />
     <Content Include="View\Telas\Usuario\Servicos.aspx" />
+    <Content Include="View\Telas\Usuario\Sobre.aspx" />
+    <Content Include="View\Telas\Usuario\Suporte.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\AutonomoController.cs" />
     <Compile Include="Controller\UsuarioController.cs" />
+    <Compile Include="DAO\AutonomoDAO.cs" />
     <Compile Include="DAO\UsuarioDAO.cs" />
     <Compile Include="Data\Conexao.cs" />
+    <Compile Include="Model\Autonomo.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Site.Master.cs">
@@ -150,6 +158,27 @@
     </Compile>
     <Compile Include="View\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="View\Telas\Autonomo\CadastrarAutonomo.aspx.cs">
+      <DependentUpon>CadastrarAutonomo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Telas\Autonomo\CadastrarAutonomo.aspx.designer.cs">
+      <DependentUpon>CadastrarAutonomo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Telas\Autonomo\Carreira.aspx.cs">
+      <DependentUpon>Carreira.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Telas\Autonomo\Carreira.aspx.designer.cs">
+      <DependentUpon>Carreira.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Telas\Usuario\Avaliacao.aspx.cs">
+      <DependentUpon>Avaliacao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Telas\Usuario\Avaliacao.aspx.designer.cs">
+      <DependentUpon>Avaliacao.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Telas\Usuario\Cadastrar.aspx.cs">
       <DependentUpon>Cadastrar.aspx</DependentUpon>
@@ -193,6 +222,20 @@
     <Compile Include="View\Telas\Usuario\Servicos.aspx.designer.cs">
       <DependentUpon>Servicos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\Telas\Usuario\Sobre.aspx.cs">
+      <DependentUpon>Sobre.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Telas\Usuario\Sobre.aspx.designer.cs">
+      <DependentUpon>Sobre.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Telas\Usuario\Suporte.aspx.cs">
+      <DependentUpon>Suporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Telas\Usuario\Suporte.aspx.designer.cs">
+      <DependentUpon>Suporte.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -207,7 +250,6 @@
   <ItemGroup>
     <Folder Include="Uploads\Usuario\" />
     <Folder Include="View\Telas\Administrador\" />
-    <Folder Include="View\Telas\Autonomo\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

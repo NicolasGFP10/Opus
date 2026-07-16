@@ -35,7 +35,14 @@ namespace Opus.View.Telas.Usuario
 
             UsuarioController usu = new UsuarioController();
 
-            int resultado = usu.EditarDados(nome, email, telefone, senha);
+            HttpPostedFile imagem = null;
+
+            if (fuImagem.HasFile)
+            {
+                imagem = fuImagem.PostedFile;
+            }
+
+            int resultado = usu.EditarDados(nome, email, telefone, senha, imagem);
 
             switch (resultado)
             {
@@ -52,7 +59,19 @@ namespace Opus.View.Telas.Usuario
 
                     Response.Redirect("Entrar.aspx");
 
-                    break;
+                break;
+
+                case 413:
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Imagem muito grande", "alert('Escolha um arquivo menor!');", true);
+
+                break;
+
+                case 415:
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Arquivo sem suporte", "alert('Escolha um arquivo do tipo imagem!');", true);
+
+                break;
 
                 case 500:
 

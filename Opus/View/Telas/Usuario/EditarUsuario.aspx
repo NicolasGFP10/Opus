@@ -27,6 +27,11 @@
         <asp:TextBox ID="tbxSenha" type="password" class="form-control" runat="server"></asp:TextBox>
     </div>
 
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Foto de perfil (deixe vazio para não alterar)</label>
+        <asp:FileUpload ID="fuImagem" runat="server" CssClass="form-control" />
+    </div>
+
     <br />
 
     <center>

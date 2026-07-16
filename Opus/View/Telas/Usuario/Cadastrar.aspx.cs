@@ -69,7 +69,6 @@ namespace Opus.View.Telas.Usuario
 
                     break;
                 }
-
             }
         }
     }

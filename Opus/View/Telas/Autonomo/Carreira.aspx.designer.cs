@@ -7,11 +7,11 @@
 // </gerado automaticamente>
 //------------------------------------------------------------------------------
 
-namespace Opus.View.Telas.Usuario
+namespace Opus.View.Telas.Autonomo
 {
 
 
-    public partial class Servicos
+    public partial class Carreira
     {
     }
 }

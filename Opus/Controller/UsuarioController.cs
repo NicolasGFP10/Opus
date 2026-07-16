@@ -73,26 +73,47 @@ namespace Opus.Controller
             return dao.EntrarUsuario(email, senha);
         }
 
-        public int EditarDados(string nome, string email, string telefone, string senha)
+        public int EditarDados(string nome, string email, string telefone, string senha, HttpPostedFile imagem)
         {
             UsuarioDAO dao = new UsuarioDAO();
 
             if (string.IsNullOrEmpty(nome) ||
-            string.IsNullOrEmpty(email) ||
-            string.IsNullOrEmpty(telefone) ||
-            string.IsNullOrEmpty(senha))
+                string.IsNullOrEmpty(email) ||
+                string.IsNullOrEmpty(telefone) ||
+                string.IsNullOrEmpty(senha))
             {
                 return 400;
             }
 
+            if (imagem != null)
+            {
+                if (imagem.ContentLength > 5 * 1024 * 1024)
+                    return 413;
+
+                string extensao = Path.GetExtension(imagem.FileName).ToLower();
+
+                if (extensao != ".jpg" &&
+                    extensao != ".jpeg" &&
+                    extensao != ".png")
+                {
+                    return 415;
+                }
+            }
+
             Usuario usuario = new Usuario();
-            usuario.Id = (int)HttpContext.Current.Session["usu_id"];
+
+            usuario.Id = (int)HttpContext.Current.Session["usu_ID"];
             usuario.Nome = nome;
             usuario.Email = email;
             usuario.Telefone = telefone;
             usuario.Senha = senha;
 
-            return dao.EditarUsuario(usuario);
+            if (imagem != null)
+            {
+                usuario.Imagem = imagem.FileName;
+            }
+
+            return dao.EditarUsuario(usuario, imagem);
         }
     }
 }

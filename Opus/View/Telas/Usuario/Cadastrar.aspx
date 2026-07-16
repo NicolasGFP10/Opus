@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/View/Site.Master" autoeventwireup="true" codebehind="Cadastrar.aspx.cs" inherits="Opus.View.Telas.Usuario.Cadastrar" %>
+﻿<%@ page title="Cadastre-se - Opus" language="C#" masterpagefile="~/View/Site.Master" autoeventwireup="true" codebehind="Cadastrar.aspx.cs" inherits="Opus.View.Telas.Usuario.Cadastrar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Foto de perfil</label>
+        <label for="exampleFormControlInput1" class="form-label">Nova foto de perfil</label>
         <asp:FileUpload ID="fuImagem" runat="server" CssClass="form-control" />
     </div>
 

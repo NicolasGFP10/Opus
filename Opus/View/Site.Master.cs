@@ -25,12 +25,17 @@ namespace Opus.View
                     imgUsuario.ImageUrl = "~/Uploads/Usuario/" + Session["usu_imagem"].ToString();
                     
                 }
+
+                if (Session["aut_ID"] != null && Session["usu_ID"] != null)
+                {
+                    lbtCarreira.Visible = true;
+                }
             }
         }
 
         protected void imgUsuario_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("Configuracao.aspx");
+            Response.Redirect("../Usuario/Configuracao.aspx");
         }
     }
 }

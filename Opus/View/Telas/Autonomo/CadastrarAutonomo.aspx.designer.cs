@@ -7,21 +7,21 @@
 // </gerado automaticamente>
 //------------------------------------------------------------------------------
 
-namespace Opus.View.Telas.Usuario
+namespace Opus.View.Telas.Autonomo
 {
 
 
-    public partial class EditarUsuario
+    public partial class CadastrarAutonomo
     {
 
         /// <summary>
-        /// Controle tbxNome.
+        /// Controle tbxCNPJ.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbxNome;
+        protected global::System.Web.UI.WebControls.TextBox tbxCNPJ;
 
         /// <summary>
         /// Controle tbxEmail.
@@ -42,22 +42,13 @@ namespace Opus.View.Telas.Usuario
         protected global::System.Web.UI.WebControls.TextBox tbxTelefone;
 
         /// <summary>
-        /// Controle tbxSenha.
+        /// Controle tbxDescricao.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbxSenha;
-
-        /// <summary>
-        /// Controle fuImagem.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuImagem;
+        protected global::System.Web.UI.WebControls.TextBox tbxDescricao;
 
         /// <summary>
         /// Controle btnEnviar.

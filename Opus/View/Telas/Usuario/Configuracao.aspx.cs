@@ -1,4 +1,5 @@
 ﻿using Opus.DAO;
+using Opus.View.Telas.Autonomo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,10 @@ namespace Opus.View.Telas.Usuario
                     Response.Redirect("Entrar.aspx");
                 }
 
+                if (Session["aut_ID"] != null)
+                {
+                    btnAuto.Visible = false;
+                }
             }
         }
 
@@ -34,7 +39,7 @@ namespace Opus.View.Telas.Usuario
 
         protected void btnAuto_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("../Autonomo/CadastrarAutonomo.aspx");
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)

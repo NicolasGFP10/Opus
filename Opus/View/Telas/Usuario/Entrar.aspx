@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/View/Site.Master" autoeventwireup="true" codebehind="Entrar.aspx.cs" inherits="Opus.View.Telas.Usuario.Entrar" %>
+﻿<%@ page title="Entrar - Opus" language="C#" masterpagefile="~/View/Site.Master" autoeventwireup="true" codebehind="Entrar.aspx.cs" inherits="Opus.View.Telas.Usuario.Entrar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
