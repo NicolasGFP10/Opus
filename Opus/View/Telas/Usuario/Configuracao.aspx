@@ -9,7 +9,7 @@
     <br />
 
     <center>
-        <asp:Button runat="server" ID="btnAuto" OnClick="btnAuto_Click" type="button" class="btn btn-dark cor-roxa" Text="Tornar-se autônomo" Width="200px" /></center>
+        <asp:Button runat="server" ID="btnAuto" OnClick="btnAuto_Click" type="button" class="btn btn-dark cor-roxa" Text="Tornar-se autônomo" Width="200px" Visible="true"/></center>
     <br />
     <br />
     <br />

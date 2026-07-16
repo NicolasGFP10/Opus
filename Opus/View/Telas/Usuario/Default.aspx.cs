@@ -11,7 +11,17 @@ namespace Opus.View.Usuario
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usu_ID"] != null)
+            {
+                Button1.Visible = false;
+            }
+        }
 
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            
+            
+            Response.Redirect("Entrar.aspx");
         }
     }
 }

@@ -103,7 +103,6 @@ namespace Opus.DAO
         {
             try
             {
-
                 using (MySqlConnection conexao = Conexao.ObterConexao())
                 {
 
@@ -137,7 +136,6 @@ namespace Opus.DAO
                         string telefone = reader["usu_telefone"].ToString();
                         string emailUsuario = reader["usu_email"].ToString();
                         string senhaU = reader["usu_senha"].ToString();
-
 
                         HttpContext.Current.Session["usu_ID"] = id;
                         HttpContext.Current.Session["usu_nome"] = nome;

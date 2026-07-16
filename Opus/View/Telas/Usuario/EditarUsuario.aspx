@@ -32,6 +32,22 @@
         <asp:FileUpload ID="fuImagem" runat="server" CssClass="form-control" />
     </div>
 
+    <div class="mb-3">
+        <asp:Label ID="Label1" runat="server" Text="E-mail corporativo" CssClass="form-label" Visible="false"></asp:Label>
+        <asp:TextBox ID="tbxEmailCorp" type="email" class="form-control" runat="server" Visible="false"></asp:TextBox>
+    </div>
+
+    <div class="mb-3">
+        <asp:Label ID="Label2" runat="server" Text="Telefone corporativo" CssClass="form-label" Visible="false"></asp:Label>
+        <asp:TextBox ID="tbxTelefoneCorp" class="form-control" runat="server" CssClass="form-control telefone" Visible="false"></asp:TextBox>
+    </div>
+
+    
+    <div class="mb-3">
+        <asp:Label ID="Label3" runat="server" Text="Edite sua descrição pessoal" CssClass="form-label" Visible="false"></asp:Label>
+        <asp:TextBox ID="tbxDescricao" class="form-control" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3" Visible="false"></asp:TextBox>
+    </div>
+
     <br />
 
     <center>

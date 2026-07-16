@@ -75,9 +75,37 @@ namespace Opus.Controller
                 autonomo.TelefoneCorp = telefone;
             }
 
-            
-
             return aut.CadastrarAutonomo(autonomo);
+        }
+
+        public int EditarDados(string telefoneCorp, string emailCorp, string descricao)
+        {
+
+            AutonomoDAO aut = new AutonomoDAO();
+
+            if (string.IsNullOrEmpty(descricao))
+            {
+                return 400;
+            }
+
+            Autonomo autonomo = new Autonomo();
+
+            autonomo.Descricao = descricao;
+            autonomo.EmailCorp = null;
+            autonomo.TelefoneCorp = null;
+            autonomo.ID = (int)HttpContext.Current.Session["aut_ID"];
+
+            if (emailCorp != null && emailCorp.Length > 0)
+            {
+                autonomo.EmailCorp = emailCorp;
+            }
+
+            if (telefoneCorp != null && telefoneCorp.Length > 0)
+            {
+                autonomo.TelefoneCorp = telefoneCorp;
+            }
+
+            return aut.EditarAutonomo(autonomo);
         }
 
     }

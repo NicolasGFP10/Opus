@@ -49,6 +49,7 @@ namespace Opus.View.Telas.Usuario
 
         protected void btnDesativar_Click(object sender, EventArgs e)
         {
+            AutonomoDAO aut = new AutonomoDAO();
             UsuarioDAO usu = new UsuarioDAO();
 
             int resultado = usu.DesativarUsuario(Session["usu_ID"].ToString());
@@ -57,7 +58,12 @@ namespace Opus.View.Telas.Usuario
             {
                 case 200:
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Dados alterados com sucesso!');", true);
+                    if (Session["aut_ID"] != null)
+                    {
+                        aut.DesativarAutonomo(Session["aut_ID"].ToString());
+                    }
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Usuário desativado');", true);
 
                     Session["usu_id"] = null;
                     Session["usu_nome"] = null;

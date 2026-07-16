@@ -49,7 +49,7 @@ namespace Opus.DAO
                                     aut_email_corp,
                                     aut_telefone_corp,
                                     aut_descricao,
-                                    usu_data_cadastro,
+                                    aut_data_cadastro,
                                     aut_status,
                                     usu_ID)
 
@@ -119,6 +119,67 @@ namespace Opus.DAO
                     HttpContext.Current.Session["aut_descricao"] = descricao;
 
                 }
+            }
+        }
+
+        public int EditarAutonomo(Autonomo autonomo)
+        {
+            try
+            {
+                using (MySqlConnection conexao = Conexao.ObterConexao())
+                {
+
+                    conexao.Open();
+
+                    string sql = @"UPDATE autonomo
+                                   SET aut_telefone_corp = @telefone,
+                                       aut_email_corp = @email,
+                                       aut_descricao = @descricao
+                                       WHERE aut_ID = @id;";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
+                    cmd.Parameters.AddWithValue("@telefone", autonomo.TelefoneCorp);
+                    cmd.Parameters.AddWithValue("@email", autonomo.EmailCorp);
+                    cmd.Parameters.AddWithValue("@descricao", autonomo.Descricao);
+                    cmd.Parameters.AddWithValue("@id", autonomo.ID);
+                    cmd.ExecuteNonQuery();
+                }
+                return 200;
+
+            }
+            catch (Exception ex)
+            {
+                return 500;
+            }
+        }
+
+        public void DesativarAutonomo(string id)
+        {
+            try
+            {
+
+                using (MySqlConnection conexao = Conexao.ObterConexao())
+                {
+                    conexao.Open();
+
+                    string sql = @"UPDATE autonomo
+                               SET aut_status = 0
+                               WHERE aut_ID = @id;";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+
             }
         }
     }
