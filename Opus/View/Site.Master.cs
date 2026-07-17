@@ -23,12 +23,20 @@ namespace Opus.View
                     labNome.Text = Session["usu_nome"].ToString();
                     imgUsuario.Visible = true;
                     imgUsuario.ImageUrl = "~/Uploads/Usuario/" + Session["usu_imagem"].ToString();
-                    
                 }
 
                 if (Session["aut_ID"] != null && Session["usu_ID"] != null)
                 {
                     lbtCarreira.Visible = true;
+                }
+
+                if (Session["usu_ID"] != null && Session["mod_ID"] != null)
+                {
+                    lbtMensagem.Visible = true;
+                    lbtDenuncias.Visible = true;
+                    lbtContas.Visible = true;
+                    lbtTrabalhos.Visible = true;
+                    lbtRegioes.Visible = true;
                 }
             }
         }

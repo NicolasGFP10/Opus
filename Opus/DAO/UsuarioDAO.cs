@@ -147,8 +147,10 @@ namespace Opus.DAO
                         reader.Close();
 
                         AutonomoDAO aut = new AutonomoDAO();
+                        ModeradorDAO mod = new ModeradorDAO();
 
                         aut.EntrarAutonomo(id);
+                        mod.EntrarModerador(id);
 
                         return 200;
                     }

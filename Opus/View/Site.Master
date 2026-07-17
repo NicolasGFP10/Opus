@@ -48,10 +48,11 @@
 
                         <!-- Administrador -->
 
-                        <asp:LinkButton ID="lbtDenuncias" class="link-neutro padding-lat-10" visible="false" runat="server" href="Denuncia.aspx">Denuncias</asp:LinkButton>
-                        <asp:LinkButton ID="lbtContas" class="link-neutro padding-lat-10" visible="false" runat="server" href="Conta.aspx">Contas</asp:LinkButton>
-                        <asp:LinkButton ID="lbtTrabalhos" class="link-neutro padding-lat-10" visible="false" runat="server" href="Trabalho.aspx">Trabalhos</asp:LinkButton>
-                        <asp:LinkButton ID="lbtRegioes" class="link-neutro padding-lat-10" visible="false" runat="server" href="Regiao.aspx">Regiões</asp:LinkButton>
+                        <asp:LinkButton ID="lbtMensagem" class="link-neutro padding-lat-10" visible="false" runat="server" href="../Moderador/Mensagem.aspx">Mensagem</asp:LinkButton>
+                        <asp:LinkButton ID="lbtDenuncias" class="link-neutro padding-lat-10" visible="false" runat="server" href="../Moderador/Denuncia.aspx">Denuncias</asp:LinkButton>
+                        <asp:LinkButton ID="lbtContas" class="link-neutro padding-lat-10" visible="false" runat="server" href="../Moderador/Conta.aspx">Contas</asp:LinkButton>
+                        <asp:LinkButton ID="lbtTrabalhos" class="link-neutro padding-lat-10" visible="false" runat="server" href="../Moderador/Trabalho.aspx">Trabalhos</asp:LinkButton>
+                        <asp:LinkButton ID="lbtRegioes" class="link-neutro padding-lat-10" visible="false" runat="server" href="../Moderador/Regiao.aspx">Regiões</asp:LinkButton>
 
                     </ul>
 

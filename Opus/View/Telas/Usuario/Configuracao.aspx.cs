@@ -34,6 +34,13 @@ namespace Opus.View.Telas.Usuario
             Session["usu_imagem"] = null;
             Session["usu_email"] = null;
 
+            Session["aut_ID"] = null;
+            Session["aut_email_corp"] = null;
+            Session["aut_telefone_corp"] = null;
+            Session["aut_descricao"] = null;
+
+            Session["mod_ID"] = null;
+
             Response.Redirect("Default.aspx");
         }
 

@@ -7,39 +7,21 @@
 // </gerado automaticamente>
 //------------------------------------------------------------------------------
 
-namespace Opus.View.Telas.Usuario
+namespace Opus.View.Telas.Moderador
 {
 
 
-    public partial class Suporte
+    public partial class Trabalho
     {
 
         /// <summary>
-        /// Controle lblEmail.
+        /// Controle tbxServico.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmail;
-
-        /// <summary>
-        /// Controle tbxEmail.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbxEmail;
-
-        /// <summary>
-        /// Controle tbxMensagem.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbxMensagem;
+        protected global::System.Web.UI.WebControls.TextBox tbxServico;
 
         /// <summary>
         /// Controle btnEnviar.
@@ -49,5 +31,14 @@ namespace Opus.View.Telas.Usuario
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEnviar;
+
+        /// <summary>
+        /// Controle gvServico.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvServico;
     }
 }

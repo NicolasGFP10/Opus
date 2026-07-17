@@ -132,6 +132,11 @@
     <Content Include="View\JS\AjustarCaracteres.js" />
     <Content Include="View\Telas\Autonomo\CadastrarAutonomo.aspx" />
     <Content Include="View\Telas\Autonomo\Carreira.aspx" />
+    <Content Include="View\Telas\Moderador\Conta.aspx" />
+    <Content Include="View\Telas\Moderador\Denuncia.aspx" />
+    <Content Include="View\Telas\Moderador\Mensagem.aspx" />
+    <Content Include="View\Telas\Moderador\Regiao.aspx" />
+    <Content Include="View\Telas\Moderador\Trabalho.aspx" />
     <Content Include="View\Telas\Usuario\Avaliacao.aspx" />
     <Content Include="View\Telas\Usuario\Cadastrar.aspx" />
     <Content Include="View\Telas\Usuario\Configuracao.aspx" />
@@ -145,11 +150,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\AutonomoController.cs" />
+    <Compile Include="Controller\ModeradorController.cs" />
+    <Compile Include="Controller\PublicoController.cs" />
+    <Compile Include="Controller\ServicoController.cs" />
     <Compile Include="Controller\UsuarioController.cs" />
     <Compile Include="DAO\AutonomoDAO.cs" />
+    <Compile Include="DAO\ModeradorDAO.cs" />
+    <Compile Include="DAO\PublicDAO.cs" />
+    <Compile Include="DAO\ServicoDAO.cs" />
     <Compile Include="DAO\UsuarioDAO.cs" />
     <Compile Include="Data\Conexao.cs" />
     <Compile Include="Model\Autonomo.cs" />
+    <Compile Include="Model\Mensagem.cs" />
+    <Compile Include="Model\Moderador.cs" />
+    <Compile Include="Model\Servico.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Site.Master.cs">
@@ -172,6 +186,41 @@
     </Compile>
     <Compile Include="View\Telas\Autonomo\Carreira.aspx.designer.cs">
       <DependentUpon>Carreira.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Telas\Moderador\Conta.aspx.cs">
+      <DependentUpon>Conta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Telas\Moderador\Conta.aspx.designer.cs">
+      <DependentUpon>Conta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Telas\Moderador\Denuncia.aspx.cs">
+      <DependentUpon>Denuncia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Telas\Moderador\Denuncia.aspx.designer.cs">
+      <DependentUpon>Denuncia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Telas\Moderador\Mensagem.aspx.cs">
+      <DependentUpon>Mensagem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Telas\Moderador\Mensagem.aspx.designer.cs">
+      <DependentUpon>Mensagem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Telas\Moderador\Regiao.aspx.cs">
+      <DependentUpon>Regiao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Telas\Moderador\Regiao.aspx.designer.cs">
+      <DependentUpon>Regiao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Telas\Moderador\Trabalho.aspx.cs">
+      <DependentUpon>Trabalho.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Telas\Moderador\Trabalho.aspx.designer.cs">
+      <DependentUpon>Trabalho.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Telas\Usuario\Avaliacao.aspx.cs">
       <DependentUpon>Avaliacao.aspx</DependentUpon>
@@ -249,7 +298,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Usuario\" />
-    <Folder Include="View\Telas\Administrador\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
