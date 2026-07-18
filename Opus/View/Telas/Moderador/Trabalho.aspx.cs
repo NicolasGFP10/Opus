@@ -13,6 +13,7 @@ namespace Opus.View.Telas.Moderador
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
 
@@ -39,6 +40,7 @@ namespace Opus.View.Telas.Moderador
                 case 200:
 
                     ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Serviço cadastrado com sucesso!');", true);
+                    Response.Redirect("Trabalho.aspx");
 
                     break;
 

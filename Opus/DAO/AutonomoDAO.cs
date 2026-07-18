@@ -179,7 +179,6 @@ namespace Opus.DAO
             {
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
-
             }
         }
     }

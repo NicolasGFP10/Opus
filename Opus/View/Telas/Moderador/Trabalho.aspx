@@ -1,8 +1,12 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/View/Site.Master" autoeventwireup="true" codebehind="Trabalho.aspx.cs" inherits="Opus.View.Telas.Moderador.Trabalho" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Trabalho.aspx.cs" Inherits="Opus.View.Telas.Moderador.Trabalho" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <center>
+        <h2>Cadastrar Serviços</h2>
+    </center>
 
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Serviço</label>
@@ -16,17 +20,18 @@
     <asp:GridView
         ID="gvServico"
         runat="server"
+        CssClass="table table-striped table-bordered"
         AutoGenerateColumns="False"
         DataKeyNames="ID"
         OnRowDeleting="btnExcluir">
 
-        <columns>
+        <Columns>
 
             <asp:BoundField DataField="ID" HeaderText="ID" />
             <asp:BoundField DataField="Nome" HeaderText="Serviço" />
 
             <asp:TemplateField HeaderText="Ações">
-                <itemtemplate>
+                <ItemTemplate>
 
                     <asp:Button
                         ID="btnExcluir"
@@ -36,10 +41,10 @@
                         CommandName="Delete"
                         OnClientClick="return confirm('Deseja excluir este serviço?');" />
 
-                </itemtemplate>
+                </ItemTemplate>
             </asp:TemplateField>
 
-        </columns>
+        </Columns>
 
     </asp:GridView>
 </asp:Content>
