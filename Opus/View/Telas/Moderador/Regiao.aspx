@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Cadastrar Regiões - Opus" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Regiao.aspx.cs" Inherits="Opus.View.Telas.Moderador.Regiao" %>
+﻿<%@ page title="Cadastrar Regiões - Opus" language="C#" masterpagefile="~/View/Site.Master" autoeventwireup="true" codebehind="Regiao.aspx.cs" inherits="Opus.View.Telas.Moderador.Regiao" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -7,17 +7,41 @@
         <h2>Cadastrar Regiões</h2>
     </center>
 
+    <br />
+    <h5>Novo estado:</h5>
+
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Estado</label>
         <asp:TextBox ID="tbxEstado" type="text" class="form-control" runat="server"></asp:TextBox>
     </div>
 
+    <asp:Button ID="btnEnviarEstado" CssClass="btn btn-dark cor-roxa" runat="server" Text="Cadastrar estado" />
+
+    <br />
+    <hr />
+    <br />
+
+    <h5>Nova cidade:</h5>
+
+    <asp:DropDownList
+        ID="ddlEstado"
+        runat="server"
+        AutoPostBack="true"
+        OnSelectedIndexChanged="ddlEstado_SelectedIndexChanged" />
+
+    <asp:DropDownList
+        ID="ddlCidade"
+        runat="server" />
+
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Cidade</label>
         <asp:TextBox ID="tbxCidade" type="text" class="form-control" runat="server"></asp:TextBox>
     </div>
-    <center>
-        <asp:Button runat="server" ID="btnEnviar" type="button" OnClick="CadastrarRegiao" Width="200px" class="btn cor-roxa btn-dark" Text="Enviar" /></center>
+
+    <asp:Button ID="btnEnviarCidade" CssClass="btn btn-dark cor-roxa" runat="server" Text="Cadastrar cidade" />
+
+    <br />
+    <hr />
     <br />
 
     <asp:GridView
@@ -31,7 +55,7 @@
         OnRowUpdating="gvRegioes_RowUpdating"
         OnRowDeleting="gvRegioes_RowDeleting">
 
-        <Columns>
+        <columns>
 
             <asp:BoundField
                 DataField="ID"
@@ -48,7 +72,7 @@
 
             <asp:TemplateField HeaderText="Ações">
 
-                <ItemTemplate>
+                <itemtemplate>
 
                     <asp:Button
                         ID="btnEditar"
@@ -65,9 +89,9 @@
                         CommandName="Delete"
                         OnClientClick="return confirm('Deseja excluir?');" />
 
-                </ItemTemplate>
+                </itemtemplate>
 
-                <EditItemTemplate>
+                <edititemtemplate>
 
                     <asp:Button
                         ID="btnSalvar"
@@ -83,11 +107,11 @@
                         CssClass="btn btn-danger btn-sm"
                         CommandName="Cancel" />
 
-                </EditItemTemplate>
+                </edititemtemplate>
 
             </asp:TemplateField>
 
-        </Columns>
+        </columns>
 
     </asp:GridView>
     <br />
@@ -102,7 +126,8 @@
         <asp:TextBox ID="tbxEditCidade" type="text" class="form-control" runat="server" Visible="false"></asp:TextBox>
     </div>
     <center>
-        <asp:Button runat="server" ID="btnConfirmar" type="button" Width="200px" class="btn cor-roxa btn-dark" Text="Editar" Visible="false" /></center>
+        <asp:Button runat="server" ID="btnConfirmar" type="button" Width="200px" class="btn cor-roxa btn-dark" Text="Editar" Visible="false" />
+    </center>
     <br />
 
 </asp:Content>

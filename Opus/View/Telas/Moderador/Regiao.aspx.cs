@@ -19,8 +19,52 @@ namespace Opus.View.Telas.Moderador
                 {
                     Response.Redirect("../Usuario/Entrar.aspx");
                 }
-                CarregarGrid();
+
+                CarregarEstados();
+
+                ddlCidade.Items.Clear();
+
+                ddlCidade.Items.Add(
+                    new ListItem("Escolha um Estado", "0"));
+
+                ddlCidade.Enabled = false;
             }
+        }
+
+        private void CarregarEstados()
+        {
+            EstadoController controller = new EstadoController();
+
+            ddlEstado.DataSource = controller.ListarEstados();
+
+            ddlEstado.DataTextField = "Nome";
+
+            ddlEstado.DataValueField = "ID";
+
+            ddlEstado.DataBind();
+
+            ddlEstado.Items.Insert(0,
+                new ListItem("Selecione um Estado", "0"));
+        }
+
+        protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idEstado = Convert.ToInt32(ddlEstado.SelectedValue);
+
+            CidadeController controller = new CidadeController();
+
+            ddlCidade.DataSource = controller.ListarCidades(idEstado);
+
+            ddlCidade.DataTextField = "Nome";
+
+            ddlCidade.DataValueField = "ID";
+
+            ddlCidade.DataBind();
+
+            ddlCidade.Items.Insert(0,
+                new ListItem("Selecione uma Cidade", "0"));
+
+            ddlCidade.Enabled = true;
         }
 
         private void CarregarGrid()
@@ -108,6 +152,64 @@ namespace Opus.View.Telas.Moderador
             gvRegioes.EditIndex = -1;
 
             CarregarGrid();
+        }
+
+        protected void CadastrarEstado()
+        {
+            string estado = tbxEstado.Text;
+
+            EstadoController reg = new EstadoController();
+
+            int resultado = reg.ValidarEstado(estado);
+
+            switch (resultado)
+            {
+                case 200:
+                    ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Estado cadastrado com sucesso!');", true);
+                    Response.Redirect("Regiao.aspx");
+                    break;
+                case 400:
+                    ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Preencha todos os campos!');", true);
+                    break;
+                case 409:
+                    ClientScript.RegisterStartupScript(this.GetType(), "Dados já cadastrados", "alert('Estado já cadastrado');", true);
+                    break;
+                case 500:
+                    ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
+                    break;
+                default:
+                    ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
+                    break;
+            }
+        }
+
+        protected void CadastrarCidade()
+        {
+            string cidade = tbxCidade.Text;
+
+            CidadeController reg = new CidadeController();
+
+            int resultado = reg.ValidarCidade(cidade);
+
+            switch (resultado)
+            {
+                case 200:
+                    ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Cidade cadastrada com sucesso!');", true);
+                    Response.Redirect("Regiao.aspx");
+                    break;
+                case 400:
+                    ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Preencha todos os campos!');", true);
+                    break;
+                case 409:
+                    ClientScript.RegisterStartupScript(this.GetType(), "Dados já cadastrados", "alert('Cidade já cadastrada');", true);
+                    break;
+                case 500:
+                    ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
+                    break;
+                default:
+                    ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
+                    break;
+            }
         }
 
         public void CadastrarRegiao(object sender, EventArgs e)

@@ -42,22 +42,31 @@ namespace Opus.View.Telas.Autonomo
         protected global::System.Web.UI.WebControls.GridView gvServicos;
 
         /// <summary>
-        /// Controle ddlRegiao.
+        /// Controle ddlEstado.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRegiao;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
 
         /// <summary>
-        /// Controle btnCadastrarRegiao.
+        /// Controle ddlCidade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCadastrarRegiao;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCidade;
+
+        /// <summary>
+        /// Controle btnSalvarCidade.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSalvarCidade;
 
         /// <summary>
         /// Controle gvRegiao.

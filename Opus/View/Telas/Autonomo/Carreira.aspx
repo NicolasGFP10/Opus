@@ -1,17 +1,21 @@
-﻿<%@ Page Title="Carreira - Opus" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Carreira.aspx.cs" Inherits="Opus.View.Telas.Autonomo.Carreira" %>
+﻿<%@ page title="Carreira - Opus" language="C#" masterpagefile="~/View/Site.Master" autoeventwireup="true" codebehind="Carreira.aspx.cs" inherits="Opus.View.Telas.Autonomo.Carreira" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <center>
         <h2>Carreira</h2>
     </center>
 
     <br />
 
-    <h4>Opções de serviços para oferecer</h4>
+    <!-- ===================================== SERVIÇO ===================================== -->
+
+    <h5>Opções de serviços para oferecer</h5>
 
     <br />
+
     <asp:DropDownList
         ID="ddlServico"
         runat="server"
@@ -24,11 +28,10 @@
         ID="btnAdicionarServico"
         runat="server"
         Text="Adicionar Serviço"
-        CssClass="btn cor-roxa"
+        CssClass="btn cor-roxa btn-dark"
         OnClick="btnAdicionarServico_Click" />
 
     <br />
-    <hr />
     <br />
 
     <asp:GridView
@@ -39,7 +42,7 @@
         CssClass="table table-striped"
         OnRowDeleting="gvServicos_RowDeleting">
 
-        <Columns>
+        <columns>
 
             <asp:BoundField
                 DataField="NomeServico"
@@ -47,35 +50,48 @@
 
             <asp:CommandField
                 ShowDeleteButton="True"
-                DeleteText="Excluir" />
+                DeleteText="Remover" />
 
-        </Columns>
+        </columns>
 
     </asp:GridView>
 
     <br />
+    <hr />
     <br />
 
-    <h4>Opções de serviços para oferecer</h4>
+    <!-- ===================================== REGIÃO ===================================== -->
+
+    <h5>Opções de regiões para atender</h5>
 
     <br />
+
     <asp:DropDownList
-        ID="ddlRegiao"
+        ID="ddlEstado"
         runat="server"
-        CssClass="form-select">
+        CssClass="form-select"
+        AutoPostBack="true"
+        OnSelectedIndexChanged="ddlEstado_SelectedIndexChanged">
+    </asp:DropDownList>
+
+    <br />
+
+    <asp:DropDownList
+        ID="ddlCidade"
+        runat="server"
+        CssClass="form-select"
+        Enabled="false">
     </asp:DropDownList>
 
     <br />
 
     <asp:Button
-        ID="btnCadastrarRegiao"
+        ID="btnSalvarCidade"
         runat="server"
-        Text="Adicionar Região"
+        Text="Adicionar"
         CssClass="btn cor-roxa"
-        OnClick="btnAdicionarRegiao_Click" />
+        OnClick="btnSalvarCidade_Click" />
 
-    <br />
-    <hr />
     <br />
 
     <asp:GridView
@@ -86,17 +102,21 @@
         CssClass="table table-striped"
         OnRowDeleting="gvRegiao_RowDeleting">
 
-        <Columns>
+        <columns>
 
             <asp:BoundField
-                DataField="NomeRegiao"
-                HeaderText="Região" />
+                DataField="NomeEstado"
+                HeaderText="Estado" />
+
+            <asp:BoundField
+                DataField="NomeCidade"
+                HeaderText="Cidade" />
 
             <asp:CommandField
                 ShowDeleteButton="True"
-                DeleteText="Excluir" />
+                DeleteText="Remover" />
 
-        </Columns>
+        </columns>
 
     </asp:GridView>
 

@@ -24,6 +24,33 @@ namespace Opus.View.Telas.Moderador
         protected global::System.Web.UI.WebControls.TextBox tbxEstado;
 
         /// <summary>
+        /// Controle btnEnviarEstado.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEnviarEstado;
+
+        /// <summary>
+        /// Controle ddlEstado.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
+
+        /// <summary>
+        /// Controle ddlCidade.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCidade;
+
+        /// <summary>
         /// Controle tbxCidade.
         /// </summary>
         /// <remarks>
@@ -33,13 +60,13 @@ namespace Opus.View.Telas.Moderador
         protected global::System.Web.UI.WebControls.TextBox tbxCidade;
 
         /// <summary>
-        /// Controle btnEnviar.
+        /// Controle btnEnviarCidade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEnviar;
+        protected global::System.Web.UI.WebControls.Button btnEnviarCidade;
 
         /// <summary>
         /// Controle gvRegioes.

@@ -5,13 +5,10 @@ using System.Web;
 
 namespace Opus.Model
 {
-    public class Regiao
+    public class Estado
     {
         public int ID { get; set; }
 
-        public string Estado { get; set; }
-
-        public string Cidade { get; set; }
-
+        public string Nome { get; set; }
     }
 }
