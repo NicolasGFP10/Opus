@@ -21,11 +21,11 @@
     <br />
 
     <asp:Button
-        ID="btnAdicionar"
+        ID="btnAdicionarServico"
         runat="server"
         Text="Adicionar Serviço"
         CssClass="btn cor-roxa"
-        OnClick="btnAdicionar_Click" />
+        OnClick="btnAdicionarServico_Click" />
 
     <br />
     <hr />
@@ -55,7 +55,49 @@
 
     <br />
     <br />
-    
 
+    <h4>Opções de serviços para oferecer</h4>
+
+    <br />
+    <asp:DropDownList
+        ID="ddlRegiao"
+        runat="server"
+        CssClass="form-select">
+    </asp:DropDownList>
+
+    <br />
+
+    <asp:Button
+        ID="btnCadastrarRegiao"
+        runat="server"
+        Text="Adicionar Região"
+        CssClass="btn cor-roxa"
+        OnClick="btnAdicionarRegiao_Click" />
+
+    <br />
+    <hr />
+    <br />
+
+    <asp:GridView
+        ID="gvRegiao"
+        runat="server"
+        AutoGenerateColumns="False"
+        DataKeyNames="ID"
+        CssClass="table table-striped"
+        OnRowDeleting="gvRegiao_RowDeleting">
+
+        <Columns>
+
+            <asp:BoundField
+                DataField="NomeRegiao"
+                HeaderText="Região" />
+
+            <asp:CommandField
+                ShowDeleteButton="True"
+                DeleteText="Excluir" />
+
+        </Columns>
+
+    </asp:GridView>
 
 </asp:Content>

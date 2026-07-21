@@ -18,12 +18,12 @@ namespace Opus.View.Telas.Autonomo
                     Response.Redirect("../Usuario/Entrar.aspx");
                 }
 
-                CarregarDropDown();
-                CarregarGrid();
+                CarregarDropDownServico();
+                CarregarGridServico();
             }
         }
 
-        void CarregarDropDown()
+        void CarregarDropDownServico()
         {
             ddlServico.DataSource = controller.ListarServicos();
 
@@ -33,13 +33,13 @@ namespace Opus.View.Telas.Autonomo
             ddlServico.DataBind();
         }
 
-        void CarregarGrid()
+        void CarregarGridServico()
         {
             gvServicos.DataSource = controller.ListarServicosAutonomo();
             gvServicos.DataBind();
         }
 
-        protected void btnAdicionar_Click(object sender, EventArgs e)
+        protected void btnAdicionarServico_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(ddlServico.SelectedValue);
 
@@ -49,7 +49,7 @@ namespace Opus.View.Telas.Autonomo
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "Serviço já existe", "alert('Este serviço já está cadastrado!');", true);
             }
-            CarregarGrid();
+            CarregarGridServico();
         }
 
         protected void gvServicos_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
@@ -58,7 +58,7 @@ namespace Opus.View.Telas.Autonomo
 
             controller.ExcluirServico(id);
 
-            CarregarGrid();
+            CarregarGridServico();
         }
     }
 }

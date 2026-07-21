@@ -24,13 +24,13 @@ namespace Opus.View.Telas.Autonomo
         protected global::System.Web.UI.WebControls.DropDownList ddlServico;
 
         /// <summary>
-        /// Controle btnAdicionar.
+        /// Controle btnAdicionarServico.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdicionar;
+        protected global::System.Web.UI.WebControls.Button btnAdicionarServico;
 
         /// <summary>
         /// Controle gvServicos.
@@ -40,5 +40,32 @@ namespace Opus.View.Telas.Autonomo
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvServicos;
+
+        /// <summary>
+        /// Controle ddlRegiao.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRegiao;
+
+        /// <summary>
+        /// Controle btnCadastrarRegiao.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCadastrarRegiao;
+
+        /// <summary>
+        /// Controle gvRegiao.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvRegiao;
     }
 }
