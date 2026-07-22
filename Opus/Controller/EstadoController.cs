@@ -6,11 +6,15 @@ namespace Opus.Controller
 {
     public class EstadoController
     {
+        EstadoDAO dao = new EstadoDAO();
+
+        public List<Estado> ListarEstados()
+        {
+            return dao.ListarEstados();
+        }
 
         public int ValidarEstado(string nome)
         {
-            EstadoDAO dao = new EstadoDAO();
-
             if (string.IsNullOrWhiteSpace(nome))
                 return 400;
 
@@ -24,19 +28,9 @@ namespace Opus.Controller
             return dao.CadastrarEstado(estado);
         }
 
-        public List<Estado> ListarEstados()
-        {
-            EstadoDAO dao = new EstadoDAO();
-
-            return dao.ListarEstados();
-        }
-
         public int ExcluirEstado(int id)
         {
-            EstadoDAO dao = new EstadoDAO();
-
             return dao.ExcluirEstado(id);
         }
-
     }
 }

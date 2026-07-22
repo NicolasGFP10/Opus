@@ -24,13 +24,22 @@ namespace Opus.View.Telas.Moderador
         protected global::System.Web.UI.WebControls.TextBox tbxEstado;
 
         /// <summary>
-        /// Controle btnEnviarEstado.
+        /// Controle btnCadastrarEstado.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEnviarEstado;
+        protected global::System.Web.UI.WebControls.Button btnCadastrarEstado;
+
+        /// <summary>
+        /// Controle gvEstados.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvEstados;
 
         /// <summary>
         /// Controle ddlEstado.
@@ -42,15 +51,6 @@ namespace Opus.View.Telas.Moderador
         protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
 
         /// <summary>
-        /// Controle ddlCidade.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCidade;
-
-        /// <summary>
         /// Controle tbxCidade.
         /// </summary>
         /// <remarks>
@@ -60,66 +60,21 @@ namespace Opus.View.Telas.Moderador
         protected global::System.Web.UI.WebControls.TextBox tbxCidade;
 
         /// <summary>
-        /// Controle btnEnviarCidade.
+        /// Controle btnCadastrarCidade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEnviarCidade;
+        protected global::System.Web.UI.WebControls.Button btnCadastrarCidade;
 
         /// <summary>
-        /// Controle gvRegioes.
+        /// Controle gvCidades.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvRegioes;
-
-        /// <summary>
-        /// Controle lblEditEstado.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEditEstado;
-
-        /// <summary>
-        /// Controle tbxEditEstado.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbxEditEstado;
-
-        /// <summary>
-        /// Controle lblEditCidade.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEditCidade;
-
-        /// <summary>
-        /// Controle tbxEditCidade.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbxEditCidade;
-
-        /// <summary>
-        /// Controle btnConfirmar.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnConfirmar;
+        protected global::System.Web.UI.WebControls.GridView gvCidades;
     }
 }

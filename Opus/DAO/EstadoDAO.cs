@@ -1,17 +1,42 @@
 ﻿using MySqlConnector;
 using Opus.Data;
 using Opus.Model;
-using System;
 using System.Collections.Generic;
 
 namespace Opus.DAO
 {
     public class EstadoDAO
     {
+        public List<Estado> ListarEstados()
+        {
+            List<Estado> lista = new List<Estado>();
 
-        //=========================
-        // Verifica se já existe
-        //=========================
+            using (MySqlConnection conexao = Conexao.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = @"SELECT est_ID,
+                                      est_nome
+                               FROM estado
+                               ORDER BY est_nome";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Estado estado = new Estado();
+
+                    estado.ID = reader.GetInt32("est_ID");
+                    estado.Nome = reader.GetString("est_nome");
+
+                    lista.Add(estado);
+                }
+            }
+
+            return lista;
+        }
 
         public bool EstadoExiste(string nome)
         {
@@ -27,15 +52,9 @@ namespace Opus.DAO
 
                 cmd.Parameters.AddWithValue("@nome", nome);
 
-                int quantidade = Convert.ToInt32(cmd.ExecuteScalar());
-
-                return quantidade > 0;
+                return System.Convert.ToInt32(cmd.ExecuteScalar()) > 0;
             }
         }
-
-        //=========================
-        // Cadastro
-        //=========================
 
         public int CadastrarEstado(Estado estado)
         {
@@ -57,51 +76,11 @@ namespace Opus.DAO
 
                 return 200;
             }
-            catch (Exception ex)
+            catch
             {
-                System.Diagnostics.Debug.WriteLine(ex);
-
                 return 500;
             }
         }
-
-        //=========================
-        // Listagem
-        //=========================
-
-        public List<Estado> ListarEstados()
-        {
-            List<Estado> lista = new List<Estado>();
-
-            using (MySqlConnection conexao = Conexao.ObterConexao())
-            {
-                conexao.Open();
-
-                string sql = @"SELECT *
-                               FROM estado
-                               ORDER BY est_nome";
-
-                MySqlCommand cmd = new MySqlCommand(sql, conexao);
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Estado estado = new Estado();
-
-                    estado.ID = Convert.ToInt32(reader["est_ID"]);
-                    estado.Nome = reader["est_nome"].ToString();
-
-                    lista.Add(estado);
-                }
-            }
-
-            return lista;
-        }
-
-        //=========================
-        // Excluir
-        //=========================
 
         public int ExcluirEstado(int id)
         {
@@ -111,9 +90,8 @@ namespace Opus.DAO
                 {
                     conexao.Open();
 
-                    string sql = @"DELETE
-                                   FROM estado
-                                   WHERE est_ID = @id";
+                    string sql = @"DELETE FROM estado
+                                   WHERE est_ID=@id";
 
                     MySqlCommand cmd = new MySqlCommand(sql, conexao);
 
@@ -124,13 +102,10 @@ namespace Opus.DAO
 
                 return 200;
             }
-            catch (Exception ex)
+            catch
             {
-                System.Diagnostics.Debug.WriteLine(ex);
-
                 return 500;
             }
         }
-
     }
 }

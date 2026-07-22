@@ -1,123 +1,167 @@
-﻿<%@ page title="Carreira - Opus" language="C#" masterpagefile="~/View/Site.Master" autoeventwireup="true" codebehind="Carreira.aspx.cs" inherits="Opus.View.Telas.Autonomo.Carreira" %>
+﻿<%@ Page Title="Carreira - Opus" Language="C#" MasterPageFile="~/View/Site.Master"
+    AutoEventWireup="true"
+    CodeBehind="Carreira.aspx.cs"
+    Inherits="Opus.View.Telas.Autonomo.Carreira" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <center>
-        <h2>Carreira</h2>
+        <h2>Minha Carreira</h2>
+        <p class="text-muted">
+            Escolha os serviços que você oferece e as cidades onde trabalha.
+        </p>
     </center>
 
-    <br />
-
-    <!-- ===================================== SERVIÇO ===================================== -->
-
-    <h5>Opções de serviços para oferecer</h5>
-
-    <br />
-
-    <asp:DropDownList
-        ID="ddlServico"
-        runat="server"
-        CssClass="form-select">
-    </asp:DropDownList>
-
-    <br />
-
-    <asp:Button
-        ID="btnAdicionarServico"
-        runat="server"
-        Text="Adicionar Serviço"
-        CssClass="btn cor-roxa btn-dark"
-        OnClick="btnAdicionarServico_Click" />
-
-    <br />
-    <br />
-
-    <asp:GridView
-        ID="gvServicos"
-        runat="server"
-        AutoGenerateColumns="False"
-        DataKeyNames="ID"
-        CssClass="table table-striped"
-        OnRowDeleting="gvServicos_RowDeleting">
-
-        <columns>
-
-            <asp:BoundField
-                DataField="NomeServico"
-                HeaderText="Serviço" />
-
-            <asp:CommandField
-                ShowDeleteButton="True"
-                DeleteText="Remover" />
-
-        </columns>
-
-    </asp:GridView>
-
-    <br />
     <hr />
-    <br />
 
-    <!-- ===================================== REGIÃO ===================================== -->
+    <!-- ========================================================= -->
+    <!-- SERVIÇOS -->
+    <!-- ========================================================= -->
 
-    <h5>Opções de regiões para atender</h5>
+    <div class="card mb-4">
 
-    <br />
+        <div class="card-header">
+            <strong>Serviços oferecidos</strong>
+        </div>
 
-    <asp:DropDownList
-        ID="ddlEstado"
-        runat="server"
-        CssClass="form-select"
-        AutoPostBack="true"
-        OnSelectedIndexChanged="ddlEstado_SelectedIndexChanged">
-    </asp:DropDownList>
+        <div class="card-body">
 
-    <br />
+            <div class="row">
 
-    <asp:DropDownList
-        ID="ddlCidade"
-        runat="server"
-        CssClass="form-select"
-        Enabled="false">
-    </asp:DropDownList>
+                <div class="col-md-9">
 
-    <br />
+                    <asp:DropDownList
+                        ID="ddlServico"
+                        runat="server"
+                        CssClass="form-select">
+                    </asp:DropDownList>
 
-    <asp:Button
-        ID="btnSalvarCidade"
-        runat="server"
-        Text="Adicionar"
-        CssClass="btn cor-roxa"
-        OnClick="btnSalvarCidade_Click" />
+                </div>
 
-    <br />
+                <div class="col-md-3">
 
-    <asp:GridView
-        ID="gvRegiao"
-        runat="server"
-        AutoGenerateColumns="False"
-        DataKeyNames="ID"
-        CssClass="table table-striped"
-        OnRowDeleting="gvRegiao_RowDeleting">
+                    <asp:Button
+                        ID="btnAdicionarServico"
+                        runat="server"
+                        Text="Adicionar"
+                        CssClass="btn cor-roxa w-100"
+                        OnClick="btnAdicionarServico_Click" />
 
-        <columns>
+                </div>
 
-            <asp:BoundField
-                DataField="NomeEstado"
-                HeaderText="Estado" />
+            </div>
 
-            <asp:BoundField
-                DataField="NomeCidade"
-                HeaderText="Cidade" />
+            <br />
 
-            <asp:CommandField
-                ShowDeleteButton="True"
-                DeleteText="Remover" />
+            <asp:GridView
+                ID="gvServicos"
+                runat="server"
+                AutoGenerateColumns="False"
+                DataKeyNames="ID"
+                CssClass="table table-striped table-hover table-bordered"
+                OnRowDeleting="gvServicos_RowDeleting">
 
-        </columns>
+                <Columns>
 
-    </asp:GridView>
+                    <asp:BoundField
+                        DataField="NomeServico"
+                        HeaderText="Serviço" />
+
+                    <asp:CommandField
+                        ShowDeleteButton="True"
+                        DeleteText="Remover" />
+
+                </Columns>
+
+            </asp:GridView>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- CIDADES -->
+    <!-- ========================================================= -->
+
+    <div class="card">
+
+        <div class="card-header">
+            <strong>Regiões de atendimento</strong>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <asp:DropDownList
+                        ID="ddlEstado"
+                        runat="server"
+                        CssClass="form-select"
+                        AutoPostBack="true"
+                        OnSelectedIndexChanged="ddlEstado_SelectedIndexChanged">
+                    </asp:DropDownList>
+
+                </div>
+
+                <div class="col-md-5">
+
+                    <asp:DropDownList
+                        ID="ddlCidade"
+                        runat="server"
+                        CssClass="form-select"
+                        Enabled="false">
+                    </asp:DropDownList>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <asp:Button
+                        ID="btnSalvarCidade"
+                        runat="server"
+                        Text="Adicionar"
+                        CssClass="btn cor-roxa w-100"
+                        OnClick="btnSalvarCidade_Click" />
+
+                </div>
+
+            </div>
+
+            <br />
+
+            <asp:GridView
+                ID="gvRegiao"
+                runat="server"
+                AutoGenerateColumns="False"
+                DataKeyNames="ID"
+                CssClass="table table-striped table-hover table-bordered"
+                OnRowDeleting="gvRegiao_RowDeleting">
+
+                <Columns>
+
+                    <asp:BoundField
+                        DataField="NomeEstado"
+                        HeaderText="Estado" />
+
+                    <asp:BoundField
+                        DataField="NomeCidade"
+                        HeaderText="Cidade" />
+
+                    <asp:CommandField
+                        ShowDeleteButton="True"
+                        DeleteText="Remover" />
+
+                </Columns>
+
+            </asp:GridView>
+
+        </div>
+
+    </div>
 
 </asp:Content>

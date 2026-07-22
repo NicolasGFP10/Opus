@@ -6,15 +6,16 @@ namespace Opus.Controller
 {
     public class CidadeController
     {
+        CidadeDAO dao = new CidadeDAO();
+
+        public List<Cidade> ListarCidades(int estado)
+        {
+            return dao.ListarCidades(estado);
+        }
 
         public int ValidarCidade(string nome, int estado)
         {
-            CidadeDAO dao = new CidadeDAO();
-
             if (string.IsNullOrWhiteSpace(nome))
-                return 400;
-
-            if (estado <= 0)
                 return 400;
 
             if (dao.CidadeExiste(nome, estado))
@@ -28,17 +29,8 @@ namespace Opus.Controller
             return dao.CadastrarCidade(cidade);
         }
 
-        public List<Cidade> ListarCidades(int estado)
-        {
-            CidadeDAO dao = new CidadeDAO();
-
-            return dao.ListarCidades(estado);
-        }
-
         public int ExcluirCidade(int id)
         {
-            CidadeDAO dao = new CidadeDAO();
-
             return dao.ExcluirCidade(id);
         }
     }

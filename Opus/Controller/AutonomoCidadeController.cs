@@ -1,5 +1,6 @@
 ﻿using Opus.DAO;
 using Opus.Model;
+using System;
 using System.Collections.Generic;
 using System.Web;
 
@@ -7,44 +8,45 @@ namespace Opus.Controller
 {
     public class AutonomoCidadeController
     {
+        private AutonomoCidadeDAO dao = new AutonomoCidadeDAO();
 
-        public int AdicionarCidade(int cidade)
+        //=========================
+        // Cadastrar cidade
+        //=========================
+
+        public int CadastrarCidadeAutonomo(int cidadeID)
         {
-            AutonomoCidadeDAO dao = new AutonomoCidadeDAO();
+            int autID = Convert.ToInt32(HttpContext.Current.Session["aut_ID"]);
 
-            if (cidade <= 0)
-                return 400;
-
-            int idAutonomo =
-                (int)HttpContext.Current.Session["aut_ID"];
-
-            if (dao.CidadeJaCadastrada(cidade, idAutonomo))
+            if (dao.CidadeJaCadastrada(cidadeID, autID))
                 return 409;
 
-            AutonomoCidade cadastro = new AutonomoCidade();
+            AutonomoCidade cidade = new AutonomoCidade();
 
-            cadastro.CidadeID = cidade;
-            cadastro.AutonomoID = idAutonomo;
+            cidade.CidadeID = cidadeID;
+            cidade.AutonomoID = autID;
 
-            return dao.AdicionarCidade(cadastro);
+            return dao.AdicionarCidade(cidade);
         }
 
-        public List<CidadeView> ListarCidades()
+        //=========================
+        // Listar cidades
+        //=========================
+
+        public List<CidadeView> ListarCidadesAutonomo()
         {
-            AutonomoCidadeDAO dao = new AutonomoCidadeDAO();
+            int autID = Convert.ToInt32(HttpContext.Current.Session["aut_ID"]);
 
-            int idAutonomo =
-                (int)HttpContext.Current.Session["aut_ID"];
-
-            return dao.ListarCidades(idAutonomo);
+            return dao.ListarCidades(autID);
         }
+
+        //=========================
+        // Excluir cidade
+        //=========================
 
         public int ExcluirCidade(int id)
         {
-            AutonomoCidadeDAO dao = new AutonomoCidadeDAO();
-
             return dao.ExcluirCidade(id);
         }
-
     }
 }
