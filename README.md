@@ -2,7 +2,9 @@
 
 ### Introdução
 
-  O avanço das tecnologias digitais alterou a forma como as pessoas contratam e oferecem serviços. A popularização da internet e dos dispositivos móveis, plataformas digitais passaram a desempenhar um papel importante na intermediação do usuário com o profissional, permitindo que serviços sejam encontrados e contratados de maneira mais rápida e simplificada. Este modelo de intermediação digital se tornou presente em diferentes ambientes, como manutenção residencial, serviços técnicos, assistência profissional e atividades autônomas.
+<p style="text-align: justify;">
+
+ O avanço das tecnologias digitais alterou a forma como as pessoas contratam e oferecem serviços. A popularização da internet e dos dispositivos móveis, plataformas digitais passaram a desempenhar um papel importante na intermediação do usuário com o profissional, permitindo que serviços sejam encontrados e contratados de maneira mais rápida e simplificada. Este modelo de intermediação digital se tornou presente em diferentes ambientes, como manutenção residencial, serviços técnicos, assistência profissional e atividades autônomas.
 
   Junto a esse crescimento, observou-se que houve um aumento significativo no número de trabalhadores autônomos no Brasil. Segundo dados do Instituto Brasileiro de Geografia e Estatística (IBGE, 2024), milhões de brasileiros trabalham de forma independente, utilizando meios digitais para divulgar seus serviços e abranger a forma de encontrar novos clientes. Nesse contexto, as plataformas digitais contribuíram significativamente para o crescimento desse cenário ao ampliar a visibilidade desses profissionais e facilitar sua inserção no mercado.
 
@@ -15,3 +17,6 @@ Nesse contexto, surge a dúvida: como desenvolver uma plataforma digital que aju
 
   Para a realização do trabalho, utiliza-se a metodologia ágil Scrum, além de testes de qualidade visual e desempenho, com o intuito de garantir o funcionamento adequado do sistema desenvolvido.
 O presente trabalho está estruturado em quatro capítulos. O primeiro capítulo apresenta a introdução, o segundo a fundamentação teórica do trabalho, o terceiro sobre o desenvolvimento do sistema, e o quarto sobre os resultados obtidos e as considerações finais.
+
+</p>
+ 
