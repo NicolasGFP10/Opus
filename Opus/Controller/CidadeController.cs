@@ -8,6 +8,7 @@ namespace Opus.Controller
     {
         CidadeDAO dao = new CidadeDAO();
 
+
         public List<Cidade> ListarCidades(int estado)
         {
             return dao.ListarCidades(estado);
