@@ -5,20 +5,30 @@
     CodeBehind="Regiao.aspx.cs"
     Inherits="Opus.View.Telas.Moderador.Regiao" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<asp:Content
+    ID="Content1"
+    ContentPlaceHolderID="head"
+    runat="server">
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content
+    ID="Content2"
+    ContentPlaceHolderID="ContentPlaceHolder1"
+    runat="server">
 
     <center>
-        <h2>Cadastro de Estados e Cidades</h2>
+        <h2>Gerenciamento de Regiões</h2>
     </center>
 
-    <hr />
+    <br />
 
-    <!-- ========================= ESTADO ========================= -->
+    <!-- ===================================================== -->
+    <!-- ESTADO -->
+    <!-- ===================================================== -->
 
-    <h4>Cadastrar Estado</h4>
+    <h5>Cadastrar Estado</h5>
+
+    <br />
 
     <div class="mb-3">
 
@@ -34,22 +44,27 @@
 
     </div>
 
-    <asp:Button
-        ID="btnCadastrarEstado"
-        runat="server"
-        Text="Cadastrar Estado"
-        CssClass="btn cor-roxa btn-dark"
-        OnClick="btnCadastrarEstado_Click" />
+    <center>
+
+        <asp:Button
+            ID="btnCadastrarEstado"
+            runat="server"
+            Text="Cadastrar Estado"
+            CssClass="btn cor-roxa btn-dark"
+            OnClick="CadastrarEstado" />
+
+    </center>
 
     <br />
-    <br />
+
+    <!-- GRID DOS ESTADOS -->
 
     <asp:GridView
         ID="gvEstados"
         runat="server"
-        CssClass="table table-striped table-bordered"
         AutoGenerateColumns="False"
         DataKeyNames="ID"
+        CssClass="table table-striped table-bordered"
         OnRowDeleting="gvEstados_RowDeleting">
 
         <Columns>
@@ -71,11 +86,19 @@
 
     </asp:GridView>
 
+    <br />
+
     <hr />
 
-    <!-- ========================= CIDADE ========================= -->
+    <br />
 
-    <h4>Cadastrar Cidade</h4>
+    <!-- ===================================================== -->
+    <!-- CIDADE -->
+    <!-- ===================================================== -->
+
+    <h5>Cadastrar Cidade</h5>
+
+    <br />
 
     <div class="mb-3">
 
@@ -105,22 +128,27 @@
 
     </div>
 
-    <asp:Button
-        ID="btnCadastrarCidade"
-        runat="server"
-        Text="Cadastrar Cidade"
-        CssClass="btn cor-roxa btn-dark"
-        OnClick="btnCadastrarCidade_Click" />
+    <center>
+
+        <asp:Button
+            ID="btnCadastrarCidade"
+            runat="server"
+            Text="Cadastrar Cidade"
+            CssClass="btn cor-roxa btn-dark"
+            OnClick="CadastrarCidade" />
+
+    </center>
 
     <br />
-    <br />
+
+    <!-- GRID DAS CIDADES -->
 
     <asp:GridView
         ID="gvCidades"
         runat="server"
-        CssClass="table table-striped table-bordered"
         AutoGenerateColumns="False"
         DataKeyNames="ID"
+        CssClass="table table-striped table-bordered"
         OnRowDeleting="gvCidades_RowDeleting">
 
         <Columns>

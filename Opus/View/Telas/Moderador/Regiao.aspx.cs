@@ -1,9 +1,5 @@
 ﻿using Opus.Controller;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -18,242 +14,286 @@ namespace Opus.View.Telas.Moderador
                 if (Session["mod_ID"] == null)
                 {
                     Response.Redirect("../Usuario/Entrar.aspx");
+                    return;
                 }
 
                 CarregarEstados();
-
-                ddlCidade.Items.Clear();
-
-                ddlCidade.Items.Add(
-                    new ListItem("Escolha um Estado", "0"));
-
-                ddlCidade.Enabled = false;
+                CarregarGridEstados();
+                CarregarGridCidades();
             }
         }
 
+        // =====================================================
+        // ESTADOS
+        // =====================================================
+
         private void CarregarEstados()
         {
-            EstadoController controller = new EstadoController();
+            EstadoController controller =
+                new EstadoController();
 
-            ddlEstado.DataSource = controller.ListarEstados();
+            ddlEstado.DataSource =
+                controller.ListarEstados();
 
             ddlEstado.DataTextField = "Nome";
-
             ddlEstado.DataValueField = "ID";
 
             ddlEstado.DataBind();
 
-            ddlEstado.Items.Insert(0,
-                new ListItem("Selecione um Estado", "0"));
+            ddlEstado.Items.Insert(
+                0,
+                new ListItem(
+                    "Selecione um Estado",
+                    "0"));
         }
 
-        protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
+        private void CarregarGridEstados()
         {
-            int idEstado = Convert.ToInt32(ddlEstado.SelectedValue);
+            EstadoController controller =
+                new EstadoController();
 
-            CidadeController controller = new CidadeController();
+            gvEstados.DataSource =
+                controller.ListarEstados();
 
-            ddlCidade.DataSource = controller.ListarCidades(idEstado);
-
-            ddlCidade.DataTextField = "Nome";
-
-            ddlCidade.DataValueField = "ID";
-
-            ddlCidade.DataBind();
-
-            ddlCidade.Items.Insert(0,
-                new ListItem("Selecione uma Cidade", "0"));
-
-            ddlCidade.Enabled = true;
+            gvEstados.DataBind();
         }
 
-        private void CarregarGrid()
+        protected void CadastrarEstado(
+            object sender,
+            EventArgs e)
         {
-            RegiaoController controller = new RegiaoController();
+            string estado =
+                tbxEstado.Text.Trim();
 
-            gvRegioes.DataSource = controller.ListarRegioes();
+            EstadoController controller =
+                new EstadoController();
 
-            gvRegioes.DataBind();
-        }
-
-        protected void gvRegioes_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            int id = Convert.ToInt32(gvRegioes.DataKeys[e.RowIndex]["ID"]);
-
-            RegiaoController controller = new RegiaoController();
-
-            controller.ExcluirRegiao(id);
-
-            CarregarGrid();
-        }
-
-        protected void gvRegioes_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            gvRegioes.EditIndex = e.NewEditIndex;
-
-            CarregarGrid();
-        }
-
-        protected void gvRegioes_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            gvRegioes.EditIndex = -1;
-
-            CarregarGrid();
-        }
-
-        protected void gvRegioes_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            int id = Convert.ToInt32(gvRegioes.DataKeys[e.RowIndex].Value);
-
-            GridViewRow linha = gvRegioes.Rows[e.RowIndex];
-
-            string estado = ((TextBox)linha.Cells[1].Controls[0]).Text;
-
-            string cidade = ((TextBox)linha.Cells[2].Controls[0]).Text;
-
-            RegiaoController controller = new RegiaoController();
-
-            int resultado = controller.EditarRegiao(id, estado, cidade);
+            int resultado =
+                controller.ValidarEstado(estado);
 
             switch (resultado)
             {
-
                 case 200:
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Região editada com sucesso!');", true);
+                    tbxEstado.Text = "";
+
+                    CarregarEstados();
+                    CarregarGridEstados();
+
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Sucesso",
+                        "alert('Estado cadastrado com sucesso!');",
+                        true);
 
                     break;
 
                 case 400:
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Preencha todos os campos!');", true);
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Erro",
+                        "alert('Preencha o nome do Estado!');",
+                        true);
 
                     break;
 
                 case 409:
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "Dados já cadastrados", "alert('Região já cadastrada');", true);
-
-                    break;
-
-                case 500:
-
-                    ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Erro",
+                        "alert('Este Estado já está cadastrado!');",
+                        true);
 
                     break;
 
                 default:
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Erro",
+                        "alert('Não foi possível cadastrar o Estado.');",
+                        true);
 
                     break;
             }
-
-            gvRegioes.EditIndex = -1;
-
-            CarregarGrid();
         }
 
-        protected void CadastrarEstado()
+        protected void gvEstados_RowDeleting(
+            object sender,
+            GridViewDeleteEventArgs e)
         {
-            string estado = tbxEstado.Text;
+            int id =
+                Convert.ToInt32(
+                    gvEstados.DataKeys[e.RowIndex].Value);
 
-            EstadoController reg = new EstadoController();
+            EstadoController controller =
+                new EstadoController();
 
-            int resultado = reg.ValidarEstado(estado);
+            int resultado =
+                controller.ExcluirEstado(id);
+
+            if (resultado == 200)
+            {
+                CarregarEstados();
+                CarregarGridEstados();
+                CarregarGridCidades();
+
+                ClientScript.RegisterStartupScript(
+                    GetType(),
+                    "Sucesso",
+                    "alert('Estado excluído com sucesso!');",
+                    true);
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(
+                    GetType(),
+                    "Erro",
+                    "alert('Não foi possível excluir o Estado. Verifique se existem cidades vinculadas a ele.');",
+                    true);
+            }
+        }
+
+        // =====================================================
+        // CIDADES
+        // =====================================================
+
+        private void CarregarGridCidades()
+        {
+            /*
+             * Neste ponto existe uma diferença importante:
+             *
+             * O seu CidadeDAO atual possui:
+             *
+             * ListarCidades(int estado)
+             *
+             * Ou seja, ele só consegue listar cidades
+             * quando recebe um Estado.
+             *
+             * Para o moderador mostrar TODAS as cidades
+             * em um único GridView, precisaremos adicionar
+             * posteriormente um método:
+             *
+             * ListarTodasCidades()
+             *
+             * no CidadeDAO.
+             *
+             * Por enquanto o Grid será preenchido pelo método
+             * que vamos adicionar no próximo ajuste.
+             */
+        }
+
+        protected void CadastrarCidade(
+            object sender,
+            EventArgs e)
+        {
+            if (ddlEstado.SelectedValue == "0")
+            {
+                ClientScript.RegisterStartupScript(
+                    GetType(),
+                    "Erro",
+                    "alert('Selecione um Estado.');",
+                    true);
+
+                return;
+            }
+
+            string cidade =
+                tbxCidade.Text.Trim();
+
+            int estado =
+                Convert.ToInt32(
+                    ddlEstado.SelectedValue);
+
+            CidadeController controller =
+                new CidadeController();
+
+            int resultado =
+                controller.ValidarCidade(
+                    cidade,
+                    estado);
 
             switch (resultado)
             {
                 case 200:
-                    ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Estado cadastrado com sucesso!');", true);
-                    Response.Redirect("Regiao.aspx");
+
+                    tbxCidade.Text = "";
+
+                    CarregarGridCidades();
+
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Sucesso",
+                        "alert('Cidade cadastrada com sucesso!');",
+                        true);
+
                     break;
+
                 case 400:
-                    ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Preencha todos os campos!');", true);
+
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Erro",
+                        "alert('Preencha todos os campos!');",
+                        true);
+
                     break;
+
                 case 409:
-                    ClientScript.RegisterStartupScript(this.GetType(), "Dados já cadastrados", "alert('Estado já cadastrado');", true);
+
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Erro",
+                        "alert('Essa cidade já está cadastrada neste Estado.');",
+                        true);
+
                     break;
-                case 500:
-                    ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
-                    break;
+
                 default:
-                    ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
+
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Erro",
+                        "alert('Não foi possível cadastrar a cidade.');",
+                        true);
+
                     break;
             }
         }
 
-        protected void CadastrarCidade()
+        protected void gvCidades_RowDeleting(
+            object sender,
+            GridViewDeleteEventArgs e)
         {
-            string cidade = tbxCidade.Text;
+            int id =
+                Convert.ToInt32(
+                    gvCidades.DataKeys[e.RowIndex].Value);
 
-            CidadeController reg = new CidadeController();
+            CidadeController controller =
+                new CidadeController();
 
-            int resultado = reg.ValidarCidade(cidade);
+            int resultado =
+                controller.ExcluirCidade(id);
 
-            switch (resultado)
+            if (resultado == 200)
             {
-                case 200:
-                    ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Cidade cadastrada com sucesso!');", true);
-                    Response.Redirect("Regiao.aspx");
-                    break;
-                case 400:
-                    ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Preencha todos os campos!');", true);
-                    break;
-                case 409:
-                    ClientScript.RegisterStartupScript(this.GetType(), "Dados já cadastrados", "alert('Cidade já cadastrada');", true);
-                    break;
-                case 500:
-                    ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
-                    break;
-                default:
-                    ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
-                    break;
+                CarregarGridCidades();
+
+                ClientScript.RegisterStartupScript(
+                    GetType(),
+                    "Sucesso",
+                    "alert('Cidade excluída com sucesso!');",
+                    true);
             }
-        }
-
-        public void CadastrarRegiao(object sender, EventArgs e)
-        {
-            string estado = tbxEstado.Text;
-            string cidade = tbxCidade.Text;
-
-            RegiaoController reg = new RegiaoController();
-
-            int resultado = reg.ValidarRegiao(estado, cidade);
-
-            switch (resultado) 
-            { 
-
-            case 200:
-
-                ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Região cadastrada com sucesso!');", true);
-                Response.Redirect("Regiao.aspx");
-
-                break;
-
-            case 400:
-
-                ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Preencha todos os campos!');", true);
-
-                break;
-
-            case 409:
-
-                ClientScript.RegisterStartupScript(this.GetType(), "Dados já cadastrados", "alert('Região já cadastrada');", true);
-
-                break;
-
-            case 500:
-
-                ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
-
-                break;
-
-            default:
-
-                ClientScript.RegisterStartupScript(this.GetType(), "Erro do sistema", "alert('O sistema não está respondendo no momento, tente novamente mais tarde');", true);
-
-                break;
+            else
+            {
+                ClientScript.RegisterStartupScript(
+                    GetType(),
+                    "Erro",
+                    "alert('Não foi possível excluir a cidade.');",
+                    true);
             }
         }
     }

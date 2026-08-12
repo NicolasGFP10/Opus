@@ -6,7 +6,8 @@ namespace Opus.View.Telas.Autonomo
 {
     public partial class Carreira : System.Web.UI.Page
     {
-        AutonomoServicoController servicoController = new AutonomoServicoController();
+        AutonomoServicoController servicoController =
+            new AutonomoServicoController();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,92 +19,80 @@ namespace Opus.View.Telas.Autonomo
                     return;
                 }
 
+                // =========================
+                // SERVIÇOS
+                // =========================
+
                 CarregarServicos();
                 CarregarGridServicos();
+
+                // =========================
+                // REGIÕES
+                // =========================
 
                 CarregarEstados();
                 CarregarGridCidade();
             }
         }
 
-        private void CarregarEstados()
+        // =====================================================
+        // SERVIÇOS
+        // =====================================================
+
+        private void CarregarServicos()
         {
-            EstadoController controller = new EstadoController();
+            ddlServico.DataSource =
+                servicoController.ListarServicos();
 
-            ddlEstado.DataSource = controller.ListarEstados();
+            ddlServico.DataTextField = "Nome";
+            ddlServico.DataValueField = "ID";
 
-            ddlEstado.DataTextField = "Nome";
-            ddlEstado.DataValueField = "ID";
+            ddlServico.DataBind();
 
-            ddlEstado.DataBind();
-
-            ddlEstado.Items.Insert(0,
-                new ListItem("Selecione um estado", "0"));
-
-            ddlCidade.Items.Clear();
-
-            ddlCidade.Items.Add(
-                new ListItem("Escolha um estado primeiro", "0"));
-
-            ddlCidade.Enabled = false;
+            ddlServico.Items.Insert(
+                0,
+                new ListItem("Selecione um serviço", "0"));
         }
 
-        protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
+        private void CarregarGridServicos()
         {
-            ddlCidade.Items.Clear();
+            gvServicos.DataSource =
+                servicoController.ListarServicosAutonomo();
 
-            if (ddlEstado.SelectedValue == "0")
-            {
-                ddlCidade.Enabled = false;
-
-                ddlCidade.Items.Add(
-                    new ListItem("Escolha um estado primeiro", "0"));
-
-                return;
-            }
-
-            CidadeController controller = new CidadeController();
-
-            ddlCidade.DataSource =
-                controller.ListarPorEstado(
-                    Convert.ToInt32(ddlEstado.SelectedValue));
-
-            ddlCidade.DataTextField = "Nome";
-            ddlCidade.DataValueField = "ID";
-
-            ddlCidade.DataBind();
-
-            ddlCidade.Enabled = true;
+            gvServicos.DataBind();
         }
 
-        protected void btnSalvarCidade_Click(object sender, EventArgs e)
+        protected void btnAdicionarServico_Click(
+            object sender,
+            EventArgs e)
         {
-            if (ddlCidade.SelectedValue == "0")
+            if (ddlServico.SelectedValue == "0")
             {
                 ClientScript.RegisterStartupScript(
                     GetType(),
-                    "erro",
-                    "alert('Escolha uma cidade.');",
+                    "Erro",
+                    "alert('Selecione um serviço.');",
                     true);
 
                 return;
             }
 
-            AutonomoCidadeController controller =
-                new AutonomoCidadeController();
+            int id =
+                Convert.ToInt32(ddlServico.SelectedValue);
 
             int resultado =
-                controller.CadastrarCidadeAutonomo(
-                    Convert.ToInt32(ddlCidade.SelectedValue));
+                servicoController.AdicionarServico(id);
 
             switch (resultado)
             {
                 case 200:
 
+                    CarregarGridServicos();
+
                     ClientScript.RegisterStartupScript(
                         GetType(),
-                        "ok",
-                        "alert('Cidade adicionada.');",
+                        "Sucesso",
+                        "alert('Serviço adicionado com sucesso!');",
                         true);
 
                     break;
@@ -112,8 +101,8 @@ namespace Opus.View.Telas.Autonomo
 
                     ClientScript.RegisterStartupScript(
                         GetType(),
-                        "erro",
-                        "alert('Essa cidade já foi adicionada.');",
+                        "Erro",
+                        "alert('Este serviço já está cadastrado!');",
                         true);
 
                     break;
@@ -122,15 +111,190 @@ namespace Opus.View.Telas.Autonomo
 
                     ClientScript.RegisterStartupScript(
                         GetType(),
-                        "erro",
+                        "Erro",
+                        "alert('Não foi possível adicionar o serviço.');",
+                        true);
+
+                    break;
+            }
+        }
+
+        protected void gvServicos_RowDeleting(
+            object sender,
+            GridViewDeleteEventArgs e)
+        {
+            int id =
+                Convert.ToInt32(
+                    gvServicos.DataKeys[e.RowIndex].Value);
+
+            int resultado =
+                servicoController.ExcluirServico(id);
+
+            if (resultado == 200)
+            {
+                CarregarGridServicos();
+            }
+        }
+
+        // =====================================================
+        // ESTADOS
+        // =====================================================
+
+        private void CarregarEstados()
+        {
+            EstadoController controller =
+                new EstadoController();
+
+            ddlEstado.DataSource =
+                controller.ListarEstados();
+
+            ddlEstado.DataTextField = "Nome";
+            ddlEstado.DataValueField = "ID";
+
+            ddlEstado.DataBind();
+
+            ddlEstado.Items.Insert(
+                0,
+                new ListItem("Selecione um Estado", "0"));
+
+            ddlCidade.Items.Clear();
+
+            ddlCidade.Items.Add(
+                new ListItem(
+                    "Escolha um Estado primeiro",
+                    "0"));
+
+            ddlCidade.Enabled = false;
+        }
+
+        // =====================================================
+        // QUANDO O ESTADO FOR ALTERADO
+        // =====================================================
+
+        protected void ddlEstado_SelectedIndexChanged(
+            object sender,
+            EventArgs e)
+        {
+            ddlCidade.Items.Clear();
+
+            if (ddlEstado.SelectedValue == "0")
+            {
+                ddlCidade.Items.Add(
+                    new ListItem(
+                        "Escolha um Estado primeiro",
+                        "0"));
+
+                ddlCidade.Enabled = false;
+
+                return;
+            }
+
+            int idEstado =
+                Convert.ToInt32(
+                    ddlEstado.SelectedValue);
+
+            CidadeController controller =
+                new CidadeController();
+
+            // IMPORTANTE:
+            // O seu CidadeController usa ListarCidades()
+            // e não ListarPorEstado().
+
+            ddlCidade.DataSource =
+                controller.ListarCidades(idEstado);
+
+            ddlCidade.DataTextField = "Nome";
+            ddlCidade.DataValueField = "ID";
+
+            ddlCidade.DataBind();
+
+            ddlCidade.Items.Insert(
+                0,
+                new ListItem(
+                    "Selecione uma Cidade",
+                    "0"));
+
+            ddlCidade.Enabled = true;
+        }
+
+        // =====================================================
+        // ADICIONAR CIDADE
+        // =====================================================
+
+        protected void btnSalvarCidade_Click(
+            object sender,
+            EventArgs e)
+        {
+            if (ddlCidade.SelectedValue == "0")
+            {
+                ClientScript.RegisterStartupScript(
+                    GetType(),
+                    "Erro",
+                    "alert('Selecione uma cidade.');",
+                    true);
+
+                return;
+            }
+
+            int cidade =
+                Convert.ToInt32(
+                    ddlCidade.SelectedValue);
+
+            AutonomoCidadeController controller =
+                new AutonomoCidadeController();
+
+            int resultado =
+                controller.CadastrarCidadeAutonomo(cidade);
+
+            switch (resultado)
+            {
+                case 200:
+
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Sucesso",
+                        "alert('Cidade adicionada com sucesso!');",
+                        true);
+
+                    CarregarGridCidade();
+
+                    break;
+
+                case 409:
+
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Erro",
+                        "alert('Essa cidade já foi adicionada.');",
+                        true);
+
+                    break;
+
+                case 400:
+
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Erro",
+                        "alert('Cidade inválida.');",
+                        true);
+
+                    break;
+
+                default:
+
+                    ClientScript.RegisterStartupScript(
+                        GetType(),
+                        "Erro",
                         "alert('Erro ao adicionar cidade.');",
                         true);
 
                     break;
             }
-
-            CarregarGridCidade();
         }
+
+        // =====================================================
+        // GRID DE CIDADES
+        // =====================================================
 
         private void CarregarGridCidade()
         {
@@ -138,138 +302,41 @@ namespace Opus.View.Telas.Autonomo
                 new AutonomoCidadeController();
 
             gvRegiao.DataSource =
-                controller.ListarCidades();
+                controller.ListarCidadesAutonomo();
 
             gvRegiao.DataBind();
         }
 
-        protected void gvRegiao_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        // =====================================================
+        // EXCLUIR CIDADE
+        // =====================================================
+
+        protected void gvRegiao_RowDeleting(
+            object sender,
+            GridViewDeleteEventArgs e)
         {
-            int id = Convert.ToInt32(
-                gvRegiao.DataKeys[e.RowIndex].Value);
+            int id =
+                Convert.ToInt32(
+                    gvRegiao.DataKeys[e.RowIndex].Value);
 
             AutonomoCidadeController controller =
                 new AutonomoCidadeController();
 
-            controller.ExcluirCidade(id);
+            int resultado =
+                controller.ExcluirCidade(id);
 
-            CarregarGridCidade();
-        }
-
-        protected void btnAdicionar_Click(object sender, EventArgs e)
-        {
-            int cidade = Convert.ToInt32(ddlCidade.SelectedValue);
-
-            AutonomoCidadeController controller = new AutonomoCidadeController();
-
-            int resultado = controller.CadastrarCidade(cidade);
-
-            switch (resultado)
+            if (resultado == 200)
             {
-                case 200:
-
-                    CarregarGrid();
-
-                    break;
-
-                case 409:
-
-                    ClientScript.RegisterStartupScript(
-                        this.GetType(),
-                        "Erro",
-                        "alert('Essa cidade já foi cadastrada.');",
-                        true);
-
-                    break;
-
-                default:
-
-                    ClientScript.RegisterStartupScript(
-                        this.GetType(),
-                        "Erro",
-                        "alert('Erro ao cadastrar cidade.');",
-                        true);
-
-                    break;
+                CarregarGridCidade();
             }
-        }
-
-        private void CarregarGrid()
-        {
-            AutonomoCidadeController controller = new AutonomoCidadeController();
-
-            gvRegiao.DataSource = controller.ListarCidades();
-
-            gvRegiao.DataBind();
-        }
-
-        protected void gvCidades_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            int id = Convert.ToInt32(gvRegiao.DataKeys[e.RowIndex].Value);
-
-            AutonomoCidadeController controller = new AutonomoCidadeController();
-
-            controller.ExcluirCidade(id);
-
-            CarregarGrid();
-        }
-
-        // ===================================== SERVIÇO =====================================
-
-        void CarregarDropDownServico()
-        {
-            ddlServico.DataSource = servicoController.ListarServicos();
-
-            ddlServico.DataTextField = "Nome";
-            ddlServico.DataValueField = "ID";
-
-            ddlServico.DataBind();
-        }
-
-        void CarregarGridServico()
-        {
-            gvServicos.DataSource = servicoController.ListarServicosAutonomo();
-            gvServicos.DataBind();
-        }
-
-        protected void btnAdicionarServico_Click(object sender, EventArgs e)
-        {
-            int id = Convert.ToInt32(ddlServico.SelectedValue);
-
-            int resultado = servicoController.AdicionarServico(id);
-
-            if (resultado == 409)
+            else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "Serviço já existe", "alert('Este serviço já está cadastrado!');", true);
+                ClientScript.RegisterStartupScript(
+                    GetType(),
+                    "Erro",
+                    "alert('Não foi possível remover a cidade.');",
+                    true);
             }
-            CarregarGridServico();
-        }
-
-        protected void gvServicos_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
-        {
-            int id = Convert.ToInt32(gvServicos.DataKeys[e.RowIndex].Value);
-
-            servicoController.ExcluirServico(id);
-
-            CarregarGridServico();
-        }
-
-        // ===================================== REGIÃO =====================================
-
-        
-
-        protected void btnSalvarCidade_Click(object sender, EventArgs e)
-        {
-            if (ddlCidade.SelectedValue == "0")
-                return;
-
-            AutonomoCidadeController controller =
-                new AutonomoCidadeController();
-
-            controller.CadastrarCidade(
-                Convert.ToInt32(ddlCidade.SelectedValue));
-
-            Response.Redirect(Request.RawUrl);
         }
     }
 }
