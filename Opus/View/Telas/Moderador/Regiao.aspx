@@ -1,9 +1,9 @@
-﻿<%@ Page Title="Regiões - Opus"
-    Language="C#"
-    MasterPageFile="~/View/Site.Master"
-    AutoEventWireup="true"
-    CodeBehind="Regiao.aspx.cs"
-    Inherits="Opus.View.Telas.Moderador.Regiao" %>
+﻿<%@ page title="Regiões - Opus"
+    language="C#"
+    masterpagefile="~/View/Site.Master"
+    autoeventwireup="true"
+    codebehind="Regiao.aspx.cs"
+    inherits="Opus.View.Telas.Moderador.Regiao" %>
 
 <asp:Content
     ID="Content1"
@@ -67,7 +67,7 @@
         CssClass="table table-striped table-bordered"
         OnRowDeleting="gvEstados_RowDeleting">
 
-        <Columns>
+        <columns>
 
             <asp:BoundField
                 DataField="ID"
@@ -77,12 +77,21 @@
                 DataField="Nome"
                 HeaderText="Estado" />
 
-            <asp:CommandField
-                ShowDeleteButton="True"
-                DeleteText="Excluir"
-                ButtonType="Button" />
+            <asp:TemplateField HeaderText="Ações">
+                <itemtemplate>
 
-        </Columns>
+                    <asp:Button
+                        ID="btnExcluirEstado"
+                        runat="server"
+                        Text="Excluir"
+                        CssClass="btn btn-danger btn-sm"
+                        CommandName="Delete"
+                        OnClientClick="return confirm('Deseja excluir esta cidade?');" />
+
+                </itemtemplate>
+            </asp:TemplateField>
+
+        </columns>
 
     </asp:GridView>
 
@@ -151,7 +160,7 @@
         CssClass="table table-striped table-bordered"
         OnRowDeleting="gvCidades_RowDeleting">
 
-        <Columns>
+        <columns>
 
             <asp:BoundField
                 DataField="ID"
@@ -165,12 +174,21 @@
                 DataField="Cidade"
                 HeaderText="Cidade" />
 
-            <asp:CommandField
-                ShowDeleteButton="True"
-                DeleteText="Excluir"
-                ButtonType="Button" />
+            <asp:TemplateField HeaderText="Ações">
+                <itemtemplate>
 
-        </Columns>
+                    <asp:Button
+                        ID="btnExcluirCidade"
+                        runat="server"
+                        Text="Excluir"
+                        CssClass="btn btn-danger btn-sm"
+                        CommandName="Delete"
+                        OnClientClick="return confirm('Deseja excluir esta cidade?');" />
+
+                </itemtemplate>
+            </asp:TemplateField>
+
+        </columns>
 
     </asp:GridView>
 

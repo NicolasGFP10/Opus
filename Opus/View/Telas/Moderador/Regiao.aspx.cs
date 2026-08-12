@@ -162,27 +162,11 @@ namespace Opus.View.Telas.Moderador
 
         private void CarregarGridCidades()
         {
-            /*
-             * Neste ponto existe uma diferença importante:
-             *
-             * O seu CidadeDAO atual possui:
-             *
-             * ListarCidades(int estado)
-             *
-             * Ou seja, ele só consegue listar cidades
-             * quando recebe um Estado.
-             *
-             * Para o moderador mostrar TODAS as cidades
-             * em um único GridView, precisaremos adicionar
-             * posteriormente um método:
-             *
-             * ListarTodasCidades()
-             *
-             * no CidadeDAO.
-             *
-             * Por enquanto o Grid será preenchido pelo método
-             * que vamos adicionar no próximo ajuste.
-             */
+            CidadeController controller = new CidadeController();
+
+            gvCidades.DataSource = controller.ListarTodasCidades();
+
+            gvCidades.DataBind();
         }
 
         protected void CadastrarCidade(
@@ -271,11 +255,9 @@ namespace Opus.View.Telas.Moderador
                 Convert.ToInt32(
                     gvCidades.DataKeys[e.RowIndex].Value);
 
-            CidadeController controller =
-                new CidadeController();
+            CidadeController controller = new CidadeController();
 
-            int resultado =
-                controller.ExcluirCidade(id);
+            int resultado = controller.ExcluirCidade(id);
 
             if (resultado == 200)
             {
