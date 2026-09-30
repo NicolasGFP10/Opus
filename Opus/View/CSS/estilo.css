@@ -39,7 +39,6 @@ body {
 }
 
 /* ============================================= BORDA ============================================= */
-
 .borda-redonda {
     border-radius: 20px;
 }
@@ -57,4 +56,12 @@ body {
 .cor-roxa {
     background-color: #8e2dcf;
     border-color: #8e2dcf;
+}
+
+/* ============================================= FONTE ============================================= */
+
+/* Cor vermelha */
+
+.fonte-vermelha{
+    color: red;
 }

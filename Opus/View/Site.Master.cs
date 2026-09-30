@@ -33,6 +33,10 @@ namespace Opus.View
 
                 if (Session["usu_ID"] != null && Session["mod_ID"] != null)
                 {
+                    lbtSobre.Visible = false;
+                    lbtSuporte.Visible = false;
+                    lbtServicos.Visible = false;
+                    lbtAvaliacao.Visible = false;
                     lbtMensagem.Visible = true;
                     lbtDenuncias.Visible = true;
                     lbtContas.Visible = true;

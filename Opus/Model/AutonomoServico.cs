@@ -13,6 +13,6 @@ namespace Opus.Model
 
         public int ServicoID { get; set; }
 
-        public string NomeServico { get; set; } // Opção para não ter que chamar o objeto serviço inteiro
+        public string Nome { get; set; } // Opção para não ter que chamar o objeto serviço inteiro
     }
 }

@@ -42,7 +42,7 @@ namespace Opus.View.Telas.Autonomo
         private void CarregarServicos()
         {
             ddlServico.DataSource =
-                servicoController.ListarServicos();
+            servicoController.ListarServicos();
 
             ddlServico.DataTextField = "Nome";
             ddlServico.DataValueField = "ID";

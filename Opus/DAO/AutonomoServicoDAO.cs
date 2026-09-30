@@ -119,8 +119,7 @@ namespace Opus.DAO
                     AutonomoServico item = new AutonomoServico();
 
                     item.ID = reader.GetInt32("aus_ID");
-                    item.ServicoID = reader.GetInt32("ser_ID");
-                    item.NomeServico = reader.GetString("ser_nome");
+                    item.Nome = reader.GetString("ser_nome");
 
                     lista.Add(item);
                 }
