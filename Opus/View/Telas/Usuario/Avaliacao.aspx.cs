@@ -1,4 +1,5 @@
 ﻿using Opus.Controller;
+using Opus.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -127,21 +128,16 @@ namespace Opus.View.Telas.Usuario
                     }
                 }
 
-                // 5 - Monta a avaliação
-                Avaliacao avaliacao = new Avaliacao();
+                string titulo = tbxTitulo.Text.Trim();
+                string  descricao = tbxDescricao.Text.Trim();
+                int usuario = usuarioID;
+                int autonomo = autonomoID;
+                int codigo = Convert.ToInt32(tbxCodigoAvaliacao.Text);
 
-                avaliacao.Titulo = tbxTitulo.Text.Trim();
-                avaliacao.Descricao = tbxDescricao.Text.Trim();
-                avaliacao.Nota = nota;
-                avaliacao.UsuarioID = usuarioID;
-                avaliacao.AutonomoID = autonomoID;
-
-                // 6 - Cadastra a avaliação
                 AvaliacaoController controller = new AvaliacaoController();
 
-                int avaliacaoID = controller.Cadastrar(avaliacao);
+                int avaliacaoID = controller.Cadastrar(titulo, descricao, nota, usuario, autonomo, codigo);
 
-                // 7 - Salva as imagens
                 SalvarImagens(avaliacaoID);
 
                 // Depois colocaremos aqui:
@@ -153,8 +149,8 @@ namespace Opus.View.Telas.Usuario
             {
                 // Exiba a mensagem da maneira que você já utiliza no projeto
                 // Exemplo:
-                lblMensagem.Text = ex.Message;
-                lblMensagem.Visible = true;
+                lblErroCodigo.Text = ex.Message;
+                lblErroCodigo.Visible = true;
 
                 // Reabre o modal porque ocorreu PostBack
                 AbrirModalAvaliacao();
@@ -207,6 +203,52 @@ namespace Opus.View.Telas.Usuario
                 throw new Exception(
                     "Cada imagem deve possuir no máximo 5 MB."
                 );
+            }
+        }
+
+        private void SalvarImagens(int avaliacaoID)
+        {
+            FotoAvaliacaoController controller =
+                new FotoAvaliacaoController();
+
+            foreach (HttpPostedFile arquivo in fuFotos.PostedFiles)
+            {
+                if (arquivo.ContentLength <= 0)
+                    continue;
+
+                // Cria um nome único para a imagem
+                string extensao =
+                    Path.GetExtension(arquivo.FileName).ToLower();
+
+                string nomeArquivo =
+                    Guid.NewGuid().ToString() + extensao;
+
+                // Caminho físico
+                string pasta =
+                    Server.MapPath("~/Uploads/Avaliacao/");
+
+                // Garante que a pasta exista
+                if (!Directory.Exists(pasta))
+                {
+                    Directory.CreateDirectory(pasta);
+                }
+
+                string caminhoFisico =
+                    Path.Combine(pasta, nomeArquivo);
+
+                // Salva a imagem
+                arquivo.SaveAs(caminhoFisico);
+
+                // Caminho que será armazenado no banco
+                string caminhoBanco =
+                    "~/Uploads/Avaliacao/" + nomeArquivo;
+
+                FotoAvaliacao foto = new FotoAvaliacao();
+
+                foto.Imagem = caminhoBanco;
+                foto.AvaliacaoID = avaliacaoID;
+
+                controller.Cadastrar(foto);
             }
         }
     }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace Opus.Model
 {
@@ -22,7 +24,6 @@ namespace Opus.Model
 
         public int CodigoID { get; set; }
 
-        public List<FotoAvaliacao> Fotos { get; set; }
-            = new List<FotoAvaliacao>();
+        public List<FotoAvaliacao> Fotos { get; set; } = new List<FotoAvaliacao>();
     }
 }
