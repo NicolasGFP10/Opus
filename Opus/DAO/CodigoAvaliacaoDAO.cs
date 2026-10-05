@@ -32,6 +32,27 @@ namespace Opus.DAO
             }
         }
 
+        // para avaliar se o autônomo está se avaliando
+        public int ValidarCodigoAutonomo(int token)
+        {
+            using (MySqlConnection conexao = Conexao.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = @"SELECT COUNT(*)
+                               FROM codigo_avaliacao
+                               WHERE aut_id = @id";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
+                cmd.Parameters.AddWithValue("@id", HttpContext.Current.Session["aut_id"]);
+
+                int quantidade = Convert.ToInt32(cmd.ExecuteScalar());
+
+                return quantidade > 0 ? 1 : 0;
+            }
+        }
+
         public int GerarCodigoAvaliacao()
         {
             try

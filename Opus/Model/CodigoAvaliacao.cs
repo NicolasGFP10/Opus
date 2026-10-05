@@ -8,14 +8,9 @@ namespace Opus.Model
     public class CodigoAvaliacao
     {
         public int ID { get; set; }
-
         public int Token { get; set; }
-
         public bool Status { get; set; }
-
         public DateTime DataCriacao { get; set; }
-
-        public int IDAutonomo { get; set; }
-
+        public int AutonomoID { get; set; }
     }
 }
