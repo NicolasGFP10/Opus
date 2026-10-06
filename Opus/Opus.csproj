@@ -177,6 +177,7 @@
     <Compile Include="Model\AutonomoCidade.cs" />
     <Compile Include="Model\AutonomoServico.cs" />
     <Compile Include="Model\Avaliacao.cs" />
+    <Compile Include="Model\AvaliacaoView.cs" />
     <Compile Include="Model\Cidade.cs" />
     <Compile Include="Model\CidadeView.cs" />
     <Compile Include="Model\CodigoAvaliacao.cs" />

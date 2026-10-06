@@ -10,7 +10,7 @@ namespace Opus.Controller
     public class AvaliacaoController
     {
 
-        public int Cadastrar(string titulo, string descricao, int nota, int usuario, int autonomo, int codigo)
+        public int Cadastrar(string titulo, string descricao, int nota, int usuario, int token)
         {
             AvaliacaoDAO dao = new AvaliacaoDAO();
 
@@ -35,11 +35,9 @@ namespace Opus.Controller
             avaliacao.Descricao = descricao;
             avaliacao.Nota = nota;
             avaliacao.UsuarioID = usuario;
-            avaliacao.AutonomoID = autonomo;
-            avaliacao.CodigoID = codigo;
+            avaliacao.Token = token;
 
             return dao.Cadastrar(avaliacao);
-
         }
 
         public int GerarCodigoAvaliacao()
@@ -63,6 +61,30 @@ namespace Opus.Controller
             {
                 return false;
             }
+        }
+
+        public List<AvaliacaoView> ListarAvaliacoesAutonomo(int autonomoID)
+        {
+            AvaliacaoDAO avaliacaoDAO =
+                new AvaliacaoDAO();
+
+            FotoAvaliacaoDAO fotoDAO =
+                new FotoAvaliacaoDAO();
+
+            List<AvaliacaoView> avaliacoes =
+                avaliacaoDAO.ListarAvaliacoesAutonomo(
+                    autonomoID
+                );
+
+            foreach (AvaliacaoView avaliacao in avaliacoes)
+            {
+                avaliacao.Fotos =
+                    fotoDAO.ListarPorAvaliacao(
+                        avaliacao.ID
+                    );
+            }
+
+            return avaliacoes;
         }
     }
 }

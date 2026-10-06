@@ -27,6 +27,8 @@ namespace Opus.View.Telas.Usuario
                     lblTexto.Visible = true;
                     lblCodigo.Visible = true;
                     btnGerar.Visible = true;
+
+                    CarregarAvaliacoes();
                 }
             }
         }
@@ -105,21 +107,14 @@ namespace Opus.View.Telas.Usuario
         {
             try
             {
-                // 1 - Recupera os dados necessários
-                int usuarioID = Convert.ToInt32(Session["usu_id"]);
-                int autonomoID = Convert.ToInt32(Session["AvaliacaoAutonomoID"]);
-                int codigoID = Convert.ToInt32(Session["AvaliacaoCodigoID"]);
 
-                // 2 - Descobre a nota selecionada
                 int nota = ObterNota();
 
-                // 3 - Valida quantidade de imagens
                 if (fuFotos.PostedFiles.Count > 5)
                 {
                     throw new Exception("Você pode enviar no máximo 5 imagens.");
                 }
 
-                // 4 - Valida as imagens ANTES de cadastrar
                 foreach (HttpPostedFile arquivo in fuFotos.PostedFiles)
                 {
                     if (arquivo.ContentLength > 0)
@@ -128,22 +123,18 @@ namespace Opus.View.Telas.Usuario
                     }
                 }
 
+                int usuarioID = Convert.ToInt32(Session["usu_id"]);
                 string titulo = tbxTitulo.Text.Trim();
                 string  descricao = tbxDescricao.Text.Trim();
                 int usuario = usuarioID;
-                int autonomo = autonomoID;
-                int codigo = Convert.ToInt32(tbxCodigoAvaliacao.Text);
+                int token = Convert.ToInt32(tbxCodigoAvaliacao.Text);
 
                 AvaliacaoController controller = new AvaliacaoController();
 
-                int avaliacaoID = controller.Cadastrar(titulo, descricao, nota, usuario, autonomo, codigo);
+                int avaliacaoID = controller.Cadastrar(titulo, descricao, nota, usuario, token);
 
                 SalvarImagens(avaliacaoID);
 
-                // Depois colocaremos aqui:
-                // alterar status do código para utilizado
-
-                // Mensagem de sucesso...
             }
             catch (Exception ex)
             {
@@ -233,8 +224,7 @@ namespace Opus.View.Telas.Usuario
                     Directory.CreateDirectory(pasta);
                 }
 
-                string caminhoFisico =
-                    Path.Combine(pasta, nomeArquivo);
+                string caminhoFisico = Path.Combine(pasta, nomeArquivo);
 
                 // Salva a imagem
                 arquivo.SaveAs(caminhoFisico);
@@ -250,6 +240,25 @@ namespace Opus.View.Telas.Usuario
 
                 controller.Cadastrar(foto);
             }
+        }
+
+        private void CarregarAvaliacoes()
+        {
+            if (Session["aut_ID"] == null)
+                return;
+
+            int autonomoID =
+                Convert.ToInt32(Session["aut_ID"]);
+
+            AvaliacaoController controller =
+                new AvaliacaoController();
+
+            rptAvaliacoes.DataSource =
+                controller.ListarAvaliacoesAutonomo(
+                    autonomoID
+                );
+
+            rptAvaliacoes.DataBind();
         }
     }
 }

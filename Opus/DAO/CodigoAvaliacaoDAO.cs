@@ -93,5 +93,23 @@ namespace Opus.DAO
                 return 500;
             }
         }
+
+        public void DesativarToken(int token)
+        {
+            using (MySqlConnection conexao = Conexao.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = @"UPDATE codigo_avaliacao
+                               SET cod_status = 0
+                               WHERE cod_token = @token";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
+                cmd.Parameters.AddWithValue("@token", token);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

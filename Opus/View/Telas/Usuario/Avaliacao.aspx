@@ -73,7 +73,7 @@
                     </div>
 
                     <label class="form-label">
-                        Nota de 0 a 5 para o serviço
+                        Nota de 1 a 5 para o serviço
                     </label>
                     <br />
                     <center>
@@ -124,13 +124,88 @@
 
                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal" style="width: 200px;">Fechar</button>
 
-                    <asp:Button runat="server" ID="btnEnviar" type="button" class="btn btn-dark cor-roxa" Text="Enviar avaliação" Width="200px" />
-                    </center>
+                    <asp:Button runat="server" ID="btnEnviar" type="button" class="btn btn-dark cor-roxa" OnClick="btnEnviar_Click" Text="Enviar avaliação" Width="200px" />
 
                     <br />
                 </div>
             </div>
         </div>
     </div>
+
+    <br />
+    <br />
+
+    <asp:Repeater
+        ID="rptAvaliacoes"
+        runat="server">
+
+        <itemtemplate>
+
+            <div class="card-avaliacao">
+
+                <!-- Cabeçalho -->
+                <div class="avaliacao-cabecalho">
+
+                    <span class="nome-usuario">
+                        <%# Eval("NomeUsuario") %>
+                    </span>
+
+                    <asp:Button
+                        ID="btnDenunciar"
+                        runat="server"
+                        Text="Denunciar"
+                        CssClass="btn btn-danger"
+                        CommandArgument='<%# Eval("ID") %>' />
+
+                </div>
+
+
+                <!-- Título -->
+                <h5 class="titulo-avaliacao">
+                    <%# Eval("Titulo") %>
+                </h5>
+
+
+                <!-- Descrição -->
+                <p class="descricao-avaliacao">
+                    <%# Eval("Descricao") %>
+                </p>
+
+
+                <!-- Nota -->
+                <p>
+                    Nota:
+                <strong>
+                    <%# Eval("Nota") %> / 5
+                </strong>
+                </p>
+
+
+                <!-- Fotos -->
+                <div class="fotos-avaliacao">
+
+                    <asp:Repeater
+                        ID="rptFotos"
+                        runat="server"
+                        DataSource='<%# Eval("Fotos") %>'>
+
+                        <itemtemplate>
+
+                            <asp:Image
+                                runat="server"
+                                CssClass="foto-avaliacao img-thumbnail"
+                                ImageUrl='<%# Eval("Imagem") %>' />
+
+                        </itemtemplate>
+
+                    </asp:Repeater>
+
+                </div>
+
+            </div>
+
+        </itemtemplate>
+
+    </asp:Repeater>
 
 </asp:Content>
