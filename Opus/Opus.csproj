@@ -156,7 +156,9 @@
     <Compile Include="Controller\CidadeController.cs" />
     <Compile Include="Controller\EstadoController.cs" />
     <Compile Include="Controller\FotoAvaliacaoController.cs" />
+    <Compile Include="Controller\FotoPortifolioController.cs" />
     <Compile Include="Controller\ModeradorController.cs" />
+    <Compile Include="Controller\PortifolioController.cs" />
     <Compile Include="Controller\PublicoController.cs" />
     <Compile Include="Controller\ServicoController.cs" />
     <Compile Include="Controller\UsuarioController.cs" />
@@ -168,7 +170,9 @@
     <Compile Include="DAO\CodigoAvaliacaoDAO.cs" />
     <Compile Include="DAO\EstadoDAO.cs" />
     <Compile Include="DAO\FotoAvaliacaoDAO.cs" />
+    <Compile Include="DAO\FotoPortifolioDAO.cs" />
     <Compile Include="DAO\ModeradorDAO.cs" />
+    <Compile Include="DAO\PortifolioDAO.cs" />
     <Compile Include="DAO\PublicDAO.cs" />
     <Compile Include="DAO\ServicoDAO.cs" />
     <Compile Include="DAO\UsuarioDAO.cs" />
@@ -183,8 +187,11 @@
     <Compile Include="Model\CodigoAvaliacao.cs" />
     <Compile Include="Model\Estado.cs" />
     <Compile Include="Model\FotoAvaliacao.cs" />
+    <Compile Include="Model\FotoPortifolio.cs" />
     <Compile Include="Model\Mensagem.cs" />
     <Compile Include="Model\Moderador.cs" />
+    <Compile Include="Model\Portifolio.cs" />
+    <Compile Include="Model\PortifolioView.cs" />
     <Compile Include="Model\Servico.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -320,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Avaliacao\" />
+    <Folder Include="Uploads\Portifolio\" />
     <Folder Include="Uploads\Usuario\" />
   </ItemGroup>
   <PropertyGroup>

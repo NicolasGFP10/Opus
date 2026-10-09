@@ -108,3 +108,54 @@ body {
     object-fit: cover;
     border-radius: 10px;
 }
+
+.card-portifolio {
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.portifolio-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+    .portifolio-cabecalho h5 {
+        margin: 0;
+    }
+
+.portifolio-descricao {
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    margin-bottom: 20px;
+}
+
+.portifolio-fotos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.portifolio-foto {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 576px) {
+    .card-portifolio {
+        padding: 20px;
+    }
+
+    .portifolio-foto {
+        width: 85px;
+        height: 85px;
+    }
+}
