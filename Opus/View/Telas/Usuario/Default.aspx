@@ -9,5 +9,6 @@
     <center>
         <img src="../../Img/Central.png" alt="introdução ao Opus" width="50%"/></center>
     <center>
+        <br />
         <asp:Button ID="Button1" CssClass="btn btn-dark cor-roxa" Width="200px" runat="server" Text="Começar" OnClick="Button1_Click" /></center>
 </asp:Content>

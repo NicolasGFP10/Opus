@@ -38,6 +38,37 @@ body {
     box-sizing: border-box;
 }
 
+.caixa-pesquisa {
+    display: flex;
+    justify-content: center; /* Centraliza na horizontal */
+    align-items: center; /* Centraliza na vertical */
+    height: 20%;
+}
+
+.servico {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.estado {
+    width: 25%;
+    margin: 0 auto;
+}
+
+.cidade {
+    width: 25%;
+    margin: 0 auto;
+}
+
+.pesquisar {
+    width: 5%;
+    margin: 0 auto;
+}
+
+.botao {
+    margin-top: 10px;
+}
+
 /* ============================================= BORDA ============================================= */
 .borda-redonda {
     border-radius: 20px;
@@ -159,3 +190,16 @@ body {
         height: 85px;
     }
 }
+
+.filha {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.pai {
+    display: flex;
+    justify-content: center; /* Centraliza na horizontal */
+    align-items: center; /* Centraliza na vertical */
+    height: 90%;
+}
+

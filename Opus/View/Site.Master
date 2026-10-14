@@ -15,6 +15,9 @@
     <!-- CSS -->
     <link href="CSS/estilo.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cloudflare.com">
+
+
     <title>Opus - </title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -57,6 +60,7 @@
                     </ul>
 
                     <div class="text-end">
+                        
                         <asp:LinkButton ID="lbtEntrar" class="link-neutro padding-lat-10" visible="true" href="../Usuario/Entrar.aspx" runat="server">Entrar</asp:LinkButton>
 
                         <asp:Label ID="labNome" runat="server" class="link-neutro padding-lat-10" Text=""></asp:Label>

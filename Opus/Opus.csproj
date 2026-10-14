@@ -129,6 +129,7 @@
     <Content Include="View\Img\GenericAvatar.png" />
     <Content Include="View\Img\OpusIcone.png" />
     <Content Include="View\Img\OpusIconePagina.png" />
+    <Content Include="View\Img\IconePesquisa.png" />
     <Content Include="View\JS\AjustarCaracteres.js" />
     <Content Include="View\Telas\Autonomo\CadastrarAutonomo.aspx" />
     <Content Include="View\Telas\Autonomo\Carreira.aspx" />
