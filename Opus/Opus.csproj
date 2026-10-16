@@ -180,6 +180,7 @@
     <Compile Include="Data\Conexao.cs" />
     <Compile Include="Model\Autonomo.cs" />
     <Compile Include="Model\AutonomoCidade.cs" />
+    <Compile Include="Model\AutonomoPesquisaView.cs" />
     <Compile Include="Model\AutonomoServico.cs" />
     <Compile Include="Model\Avaliacao.cs" />
     <Compile Include="Model\AvaliacaoView.cs" />

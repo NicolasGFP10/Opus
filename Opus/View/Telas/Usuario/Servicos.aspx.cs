@@ -1,4 +1,5 @@
 ﻿using Opus.Controller;
+using Opus.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +13,20 @@ namespace Opus.View.Telas.Usuario
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usu_ID"] == null)
+            {
+                Response.Redirect("Entrar.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
-                if (Session["usu_ID"] == null)
-                {
-                    Response.Redirect("Entrar.aspx");
-                }
-
                 CarregarServicos();
                 CarregarEstados();
-
+            }
+            else
+            {
+                RecarregarPesquisa();
             }
         }
 
@@ -99,10 +104,6 @@ namespace Opus.View.Telas.Usuario
             CidadeController controller =
                 new CidadeController();
 
-            // IMPORTANTE:
-            // O seu CidadeController usa ListarCidades()
-            // e não ListarPorEstado().
-
             ddlCidade.DataSource =
                 controller.ListarCidades(idEstado);
 
@@ -118,6 +119,152 @@ namespace Opus.View.Telas.Usuario
                     "0"));
 
             ddlCidade.Enabled = true;
+        }
+
+        protected void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            lblMensagemPesquisa.Text = "";
+
+            if (ddlServico.SelectedValue == "0")
+            {
+                lblMensagemPesquisa.Text = "Selecione um serviço.";
+                return;
+            }
+
+            if (ddlEstado.SelectedValue == "0")
+            {
+                lblMensagemPesquisa.Text = "Selecione um estado.";
+                return;
+            }
+
+            if (ddlCidade.SelectedValue == "0")
+            {
+                lblMensagemPesquisa.Text = "Selecione uma cidade.";
+                return;
+            }
+
+            int servicoID = Convert.ToInt32(ddlServico.SelectedValue);
+            int cidadeID = Convert.ToInt32(ddlCidade.SelectedValue);
+
+            AutonomoController controller = new AutonomoController();
+
+            rptAutonomos.DataSource =
+                controller.PesquisarAutonomos(servicoID, cidadeID);
+
+            rptAutonomos.DataBind();
+
+            ViewState["ServicoPesquisa"] = servicoID;
+            ViewState["CidadePesquisa"] = cidadeID;
+        }
+
+        protected void rptAutonomos_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Detalhes")
+            {
+                int autonomoID = Convert.ToInt32(e.CommandArgument);
+
+                try
+                {
+                    CarregarPerfilAutonomo(autonomoID);
+
+                    AbrirModalAutonomo();
+                }
+                catch (Exception ex)
+                {
+                    lblMensagemPesquisa.Text =
+                        Server.HtmlEncode(ex.Message);
+                }
+            }
+        }
+
+        private void AbrirModalAutonomo()
+        {
+            string script = @"
+        var modal = new bootstrap.Modal(
+            document.getElementById('modalAutonomo')
+        );
+
+        modal.show();
+    ";
+
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "AbrirModalAutonomo",
+                script,
+                true
+            );
+        }
+
+        private void CarregarPerfilAutonomo(int autonomoID)
+        { 
+            AutonomoController autonomoController =
+                new AutonomoController();
+
+            PortifolioController portifolioController =
+                new PortifolioController();
+
+            AvaliacaoController avaliacaoController =
+                new AvaliacaoController();
+
+            // Dados principais do profissional
+            AutonomoPesquisaView autonomo =
+                autonomoController.BuscarPerfil(autonomoID);
+
+            if (autonomo == null)
+            {
+                throw new Exception("Profissional não encontrado.");
+            }
+
+            if (autonomo.QuantidadeAvaliacoes == 0)
+            {
+                lblNotaAutonomo.Text = "Ainda não possui avaliações.";
+            }
+            else
+            {
+                lblNotaAutonomo.Text =
+                    $"Nota: {autonomo.NotaMedia:N1} / 5 " +
+                    $"({autonomo.QuantidadeAvaliacoes} avaliações)";
+            }
+
+            lblNomeAutonomo.Text = autonomo.Nome;
+            lblDescricaoAutonomo.Text = Server.HtmlEncode(autonomo.Descricao);
+
+            imgPerfil.ImageUrl = "~/Uploads/Usuario/" + autonomo.Foto;
+
+            // Portfólios cadastrados
+            rptPortifoliosPerfil.DataSource =
+                portifolioController.ListarPortifolios(autonomoID);
+
+            rptPortifoliosPerfil.DataBind();
+
+            // Avaliações recebidas
+            rptAvaliacoesPerfil.DataSource =
+                avaliacaoController.ListarAvaliacoesAutonomo(autonomoID);
+
+            rptAvaliacoesPerfil.DataBind();
+        }
+
+        private void RecarregarPesquisa()
+        {
+            if (ViewState["ServicoPesquisa"] == null ||
+                ViewState["CidadePesquisa"] == null)
+            {
+                return;
+            }
+
+            int servicoID =
+                Convert.ToInt32(ViewState["ServicoPesquisa"]);
+
+            int cidadeID =
+                Convert.ToInt32(ViewState["CidadePesquisa"]);
+
+            AutonomoController controller = new AutonomoController();
+
+            rptAutonomos.DataSource =
+                controller.PesquisarAutonomos(servicoID, cidadeID);
+
+            rptAutonomos.DataBind();
         }
     }
 }

@@ -93,7 +93,7 @@ body {
 
 /* Cor vermelha */
 
-.fonte-vermelha{
+.fonte-vermelha {
     color: red;
 }
 
@@ -203,3 +203,39 @@ body {
     height: 90%;
 }
 
+.card-autonomo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.foto-autonomo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dados-autonomo {
+    flex: 1;
+}
+
+    .dados-autonomo h5 {
+        margin-bottom: 8px;
+    }
+
+    .dados-autonomo p {
+        margin: 0;
+    }
+
+@media (max-width: 576px) {
+    .card-autonomo {
+        flex-direction: column;
+        text-align: center;
+    }
+}

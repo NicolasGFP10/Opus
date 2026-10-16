@@ -22,7 +22,7 @@ namespace Opus.DAO
                        WHERE aut_cnpj = @cnpj
                           OR aut_email_corp = @email
                           OR aut_telefone_corp = @telefone;";
-                          
+
 
                 MySqlCommand cmd = new MySqlCommand(sql, conexao);
 
@@ -180,6 +180,143 @@ namespace Opus.DAO
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
+        }
+
+        public List<AutonomoPesquisaView> PesquisarAutonomos(int servicoID, int cidadeID)
+        {
+            List<AutonomoPesquisaView> lista = new List<AutonomoPesquisaView>();
+
+            using (MySqlConnection conexao = Conexao.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = @"
+            SELECT
+                a.aut_ID,
+                u.usu_nome,
+                u.usu_imagem,
+
+                COALESCE(AVG(av.ava_nota), 0) AS nota_media,
+                COUNT(av.ava_ID) AS quantidade_avaliacoes
+
+            FROM autonomo a
+
+            INNER JOIN usuario u
+                ON a.usu_ID = u.usu_ID
+
+            LEFT JOIN avaliacao av
+                ON av.aut_ID = a.aut_ID
+
+            WHERE a.aut_status = 1
+              AND u.usu_status = 1
+
+              AND EXISTS (
+                  SELECT 1
+                  FROM autonomo_servico ats
+                  WHERE ats.aut_ID = a.aut_ID
+                    AND ats.ser_ID = @servico
+              )
+
+              AND EXISTS (
+                  SELECT 1
+                  FROM autonomo_cidade atc
+                  WHERE atc.aut_ID = a.aut_ID
+                    AND atc.cid_ID = @cidade
+              )
+
+            GROUP BY
+                a.aut_ID,
+                u.usu_nome,
+                u.usu_imagem
+
+            ORDER BY nota_media DESC, quantidade_avaliacoes DESC;";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@servico", servicoID);
+                    cmd.Parameters.AddWithValue("@cidade", cidadeID);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            AutonomoPesquisaView autonomo =
+                                new AutonomoPesquisaView();
+
+                            autonomo.ID =
+                                Convert.ToInt32(reader["aut_ID"]);
+
+                            autonomo.Nome =
+                                reader["usu_nome"].ToString();
+
+                            autonomo.Foto = "~/Uploads/Usuario/" + reader["usu_imagem"].ToString();
+
+                            autonomo.NotaMedia =
+                                Convert.ToDecimal(reader["nota_media"]);
+
+                            autonomo.QuantidadeAvaliacoes =
+                                Convert.ToInt32(reader["quantidade_avaliacoes"]);
+
+                            lista.Add(autonomo);
+                        }
+                    }
+                }
+            }
+
+            return lista;
+        }
+
+        public AutonomoPesquisaView BuscarPerfil(int autonomoID)
+        {
+            using (MySqlConnection conexao = Conexao.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = @"
+            SELECT
+                a.aut_ID,
+                a.aut_descricao,
+                u.usu_nome,
+                u.usu_imagem,
+                COALESCE(AVG(av.ava_nota), 0) AS nota_media,
+                COUNT(av.ava_ID) AS quantidade_avaliacoes
+            FROM autonomo a
+            INNER JOIN usuario u
+                ON a.usu_ID = u.usu_ID
+            LEFT JOIN avaliacao av
+                ON av.aut_ID = a.aut_ID
+            WHERE a.aut_ID = @autonomo
+              AND a.aut_status = 1
+              AND u.usu_status = 1
+            GROUP BY
+                a.aut_ID,
+                a.aut_descricao,
+                u.usu_nome,
+                u.usu_imagem;";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@autonomo", autonomoID);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new AutonomoPesquisaView
+                            {
+                                ID = Convert.ToInt32(reader["aut_ID"]),
+                                Nome = reader["usu_nome"].ToString(),
+                                Foto = reader["usu_imagem"].ToString(),
+                                Descricao = reader["aut_descricao"].ToString(),
+                                NotaMedia = Convert.ToDecimal(reader["nota_media"]),
+                                QuantidadeAvaliacoes = Convert.ToInt32(reader["quantidade_avaliacoes"])
+                            };
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -108,5 +108,28 @@ namespace Opus.Controller
             return aut.EditarAutonomo(autonomo);
         }
 
+        public List<AutonomoPesquisaView> PesquisarAutonomos(int servicoID, int cidadeID)
+        {
+            if (servicoID <= 0 || cidadeID <= 0)
+            {
+                return new List<AutonomoPesquisaView>();
+            }
+
+            AutonomoDAO dao = new AutonomoDAO();
+
+            return dao.PesquisarAutonomos(servicoID, cidadeID);
+        }
+
+        public AutonomoPesquisaView BuscarPerfil(int autonomoID)
+        {
+            if (autonomoID <= 0)
+                return null;
+
+            AutonomoDAO dao = new AutonomoDAO();
+
+            return dao.BuscarPerfil(autonomoID);
+        }
+
+
     }
 }
