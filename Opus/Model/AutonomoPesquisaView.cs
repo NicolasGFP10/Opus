@@ -12,6 +12,9 @@ namespace Opus.Model
         public string Foto { get; set; }
         public string Descricao { get; set; }
         public decimal NotaMedia { get; set; }
+
+        public string Telefone { get; set; }
+        public string Email { get; set; }
         public int QuantidadeAvaliacoes { get; set; }
     }
 }

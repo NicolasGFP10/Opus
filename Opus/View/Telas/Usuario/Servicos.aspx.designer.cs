@@ -96,6 +96,24 @@ namespace Opus.View.Telas.Usuario
         protected global::System.Web.UI.WebControls.Label lblNotaAutonomo;
 
         /// <summary>
+        /// Controle lblTelefone.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTelefone;
+
+        /// <summary>
+        /// Controle lblEmail.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmail;
+
+        /// <summary>
         /// Controle lblDescricaoAutonomo.
         /// </summary>
         /// <remarks>

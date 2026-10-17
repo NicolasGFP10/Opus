@@ -84,7 +84,7 @@
 
             <asp:Image
             runat="server"
-            ImageUrl="~/Img/IconePesquisa.png" />
+            ImageUrl="../../Img/IconePesquisa.png" />
 
             </asp:LinkButton>
 
@@ -188,17 +188,39 @@
                                 CssClass="text-secondary" />
                         </p>
 
+                        <p class="mt-2">
+                            <asp:Label
+                                ID="lblTelefone"
+                                runat="server"
+                                CssClass="text-secondary" />
+                        </p>
+
+                        <p class="mt-2">
+                            <asp:Label
+                                ID="lblEmail"
+                                runat="server"
+                                CssClass="text-secondary" />
+                        </p>
+
+                        <br />
+
                         <asp:Label
                             ID="lblDescricaoAutonomo"
                             runat="server" />
 
                     </div>
 
-                    <hr />
+                    <div class="card-titulo">
 
-                    <!-- SERVIÇOS -->
+                        <hr />
 
-                    <h5>Serviços oferecidos</h5>
+                        <!-- SERVIÇOS -->
+
+                        <h5>Serviços oferecidos</h5>
+
+                    </div>
+
+
 
                     <asp:Repeater
                         ID="rptServicosPerfil"
@@ -212,11 +234,15 @@
 
                     </asp:Repeater>
 
-                    <hr />
+                    <div class="card-titulo">
 
-                    <!-- REGIÕES -->
+                        <hr />
 
-                    <h5>Regiões de atendimento</h5>
+                        <!-- REGIÕES -->
+
+                        <h5>Regiões de atendimento</h5>
+
+                    </div>
 
                     <asp:Repeater
                         ID="rptRegioesPerfil"
@@ -233,11 +259,16 @@
 
                     </asp:Repeater>
 
-                    <hr />
+                    <div class="card-titulo">
 
-                    <!-- PORTFÓLIOS -->
+                        <hr />
 
-                    <h5>Portfólios</h5>
+                        <!-- PORTFÓLIOS -->
+
+                        <h5>Portfólios</h5>
+
+                    </div>
+
 
                     <asp:Repeater
                         ID="rptPortifoliosPerfil"
@@ -276,11 +307,15 @@
 
                     </asp:Repeater>
 
-                    <hr />
+                    <div class="card-titulo">
 
-                    <!-- AVALIAÇÕES -->
+                        <hr />
 
-                    <h5>Avaliações recebidas</h5>
+                        <!-- AVALIAÇÕES -->
+
+                        <h5>Avaliações recebidas</h5>
+
+                    </div>
 
                     <asp:Repeater
                         ID="rptAvaliacoesPerfil"

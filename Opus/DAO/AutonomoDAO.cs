@@ -278,14 +278,20 @@ namespace Opus.DAO
                 a.aut_descricao,
                 u.usu_nome,
                 u.usu_imagem,
+                a.aut_telefone_corp,
+                a.aut_email_corp,
+                u.usu_telefone,
+
                 COALESCE(AVG(av.ava_nota), 0) AS nota_media,
-                COUNT(av.ava_ID) AS quantidade_avaliacoes
-            FROM autonomo a
-            INNER JOIN usuario u
+                COUNT(av.ava_ID) AS quantidade_avaliacoes FROM autonomo a
+            
+                INNER JOIN usuario u
                 ON a.usu_ID = u.usu_ID
-            LEFT JOIN avaliacao av
+                
+                LEFT JOIN avaliacao av
                 ON av.aut_ID = a.aut_ID
-            WHERE a.aut_ID = @autonomo
+            
+                WHERE a.aut_ID = @autonomo
               AND a.aut_status = 1
               AND u.usu_status = 1
             GROUP BY
@@ -302,6 +308,21 @@ namespace Opus.DAO
                     {
                         if (reader.Read())
                         {
+
+                            string telefone;
+
+                            if (reader["aut_telefone_corp"].ToString() != null)
+                            {
+
+                                telefone = reader["aut_telefone_corp"].ToString();
+
+                            } else
+                            {
+
+                                telefone = reader["usu_telefone"].ToString();
+
+                            }
+
                             return new AutonomoPesquisaView
                             {
                                 ID = Convert.ToInt32(reader["aut_ID"]),
@@ -309,7 +330,10 @@ namespace Opus.DAO
                                 Foto = reader["usu_imagem"].ToString(),
                                 Descricao = reader["aut_descricao"].ToString(),
                                 NotaMedia = Convert.ToDecimal(reader["nota_media"]),
-                                QuantidadeAvaliacoes = Convert.ToInt32(reader["quantidade_avaliacoes"])
+                                QuantidadeAvaliacoes = Convert.ToInt32(reader["quantidade_avaliacoes"]),
+                                Telefone = telefone,
+                                Email = reader["aut_email_corp"].ToString()
+
                             };
                         }
                     }

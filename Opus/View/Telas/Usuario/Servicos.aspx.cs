@@ -30,15 +30,12 @@ namespace Opus.View.Telas.Usuario
             }
         }
 
-        AutonomoServicoController servicoController =
-            new AutonomoServicoController();
+        AutonomoServicoController servicoController = new AutonomoServicoController();
 
         private void CarregarServicos()
         {
 
-
-            ddlServico.DataSource =
-            servicoController.ListarServicos();
+            ddlServico.DataSource = servicoController.ListarServicos();
 
             ddlServico.DataTextField = "Nome";
             ddlServico.DataValueField = "ID";
@@ -50,27 +47,20 @@ namespace Opus.View.Telas.Usuario
 
         private void CarregarEstados()
         {
-            EstadoController controller =
-                new EstadoController();
+            EstadoController controller = new EstadoController();
 
-            ddlEstado.DataSource =
-                controller.ListarEstados();
+            ddlEstado.DataSource = controller.ListarEstados();
 
             ddlEstado.DataTextField = "Nome";
             ddlEstado.DataValueField = "ID";
 
             ddlEstado.DataBind();
 
-            ddlEstado.Items.Insert(
-                0,
-                new ListItem("Selecione um Estado", "0"));
+            ddlEstado.Items.Insert(0, new ListItem("Selecione um Estado", "0"));
 
             ddlCidade.Items.Clear();
 
-            ddlCidade.Items.Add(
-                new ListItem(
-                    "Escolha um Estado primeiro",
-                    "0"));
+            ddlCidade.Items.Add(new ListItem("Escolha um Estado primeiro","0"));
 
             ddlCidade.Enabled = false;
         }
@@ -79,44 +69,31 @@ namespace Opus.View.Telas.Usuario
         // QUANDO O ESTADO FOR ALTERADO
         // =====================================================
 
-        protected void ddlEstado_SelectedIndexChanged(
-            object sender,
-            EventArgs e)
+        protected void ddlEstado_SelectedIndexChanged(object sender,EventArgs e)
         {
             ddlCidade.Items.Clear();
 
             if (ddlEstado.SelectedValue == "0")
             {
-                ddlCidade.Items.Add(
-                    new ListItem(
-                        "Escolha um Estado primeiro",
-                        "0"));
+                ddlCidade.Items.Add(new ListItem("Escolha um Estado primeiro","0"));
 
                 ddlCidade.Enabled = false;
 
                 return;
             }
 
-            int idEstado =
-                Convert.ToInt32(
-                    ddlEstado.SelectedValue);
+            int idEstado = Convert.ToInt32(ddlEstado.SelectedValue);
 
-            CidadeController controller =
-                new CidadeController();
+            CidadeController controller = new CidadeController();
 
-            ddlCidade.DataSource =
-                controller.ListarCidades(idEstado);
+            ddlCidade.DataSource = controller.ListarCidades(idEstado);
 
             ddlCidade.DataTextField = "Nome";
             ddlCidade.DataValueField = "ID";
 
             ddlCidade.DataBind();
 
-            ddlCidade.Items.Insert(
-                0,
-                new ListItem(
-                    "Selecione uma Cidade",
-                    "0"));
+            ddlCidade.Items.Insert(0, new ListItem("Selecione uma Cidade", "0"));
 
             ddlCidade.Enabled = true;
         }
@@ -148,8 +125,7 @@ namespace Opus.View.Telas.Usuario
 
             AutonomoController controller = new AutonomoController();
 
-            rptAutonomos.DataSource =
-                controller.PesquisarAutonomos(servicoID, cidadeID);
+            rptAutonomos.DataSource = controller.PesquisarAutonomos(servicoID, cidadeID);
 
             rptAutonomos.DataBind();
 
@@ -180,36 +156,27 @@ namespace Opus.View.Telas.Usuario
         private void AbrirModalAutonomo()
         {
             string script = @"
-        var modal = new bootstrap.Modal(
-            document.getElementById('modalAutonomo')
-        );
 
-        modal.show();
-    ";
+                var modal = new bootstrap.Modal(
+                document.getElementById('modalAutonomo')
+                );
 
-            ScriptManager.RegisterStartupScript(
-                this,
-                GetType(),
-                "AbrirModalAutonomo",
-                script,
-                true
-            );
+                modal.show();";
+
+            ScriptManager.RegisterStartupScript(this,GetType(),"AbrirModalAutonomo",script,true);
+
         }
 
         private void CarregarPerfilAutonomo(int autonomoID)
         { 
-            AutonomoController autonomoController =
-                new AutonomoController();
+            AutonomoController autonomoController = new AutonomoController();
 
-            PortifolioController portifolioController =
-                new PortifolioController();
+            PortifolioController portifolioController = new PortifolioController();
 
-            AvaliacaoController avaliacaoController =
-                new AvaliacaoController();
+            AvaliacaoController avaliacaoController = new AvaliacaoController();
 
             // Dados principais do profissional
-            AutonomoPesquisaView autonomo =
-                autonomoController.BuscarPerfil(autonomoID);
+            AutonomoPesquisaView autonomo = autonomoController.BuscarPerfil(autonomoID);
 
             if (autonomo == null)
             {
@@ -228,19 +195,36 @@ namespace Opus.View.Telas.Usuario
             }
 
             lblNomeAutonomo.Text = autonomo.Nome;
+
+            string telefoneLimpo = autonomo.Telefone;
+
+            if (telefoneLimpo.Length == 11)
+            {
+                lblTelefone.Text = long.Parse(telefoneLimpo).ToString(@"(##) #####-####");
+            }
+            else if (telefoneLimpo.Length == 10)
+            {
+                lblTelefone.Text = long.Parse(telefoneLimpo).ToString(@"(##) ####-####");
+            }
+            else
+            {
+                lblTelefone.Text = telefoneLimpo; // Caso venha fora do padrão, exibe original
+            }
+
+
+            lblEmail.Text = autonomo.Email;
+
             lblDescricaoAutonomo.Text = Server.HtmlEncode(autonomo.Descricao);
 
             imgPerfil.ImageUrl = "~/Uploads/Usuario/" + autonomo.Foto;
 
             // Portfólios cadastrados
-            rptPortifoliosPerfil.DataSource =
-                portifolioController.ListarPortifolios(autonomoID);
+            rptPortifoliosPerfil.DataSource = portifolioController.ListarPortifolios(autonomoID);
 
             rptPortifoliosPerfil.DataBind();
 
             // Avaliações recebidas
-            rptAvaliacoesPerfil.DataSource =
-                avaliacaoController.ListarAvaliacoesAutonomo(autonomoID);
+            rptAvaliacoesPerfil.DataSource = avaliacaoController.ListarAvaliacoesAutonomo(autonomoID);
 
             rptAvaliacoesPerfil.DataBind();
         }
@@ -253,16 +237,13 @@ namespace Opus.View.Telas.Usuario
                 return;
             }
 
-            int servicoID =
-                Convert.ToInt32(ViewState["ServicoPesquisa"]);
+            int servicoID = Convert.ToInt32(ViewState["ServicoPesquisa"]);
 
-            int cidadeID =
-                Convert.ToInt32(ViewState["CidadePesquisa"]);
+            int cidadeID = Convert.ToInt32(ViewState["CidadePesquisa"]);
 
             AutonomoController controller = new AutonomoController();
 
-            rptAutonomos.DataSource =
-                controller.PesquisarAutonomos(servicoID, cidadeID);
+            rptAutonomos.DataSource = controller.PesquisarAutonomos(servicoID, cidadeID);
 
             rptAutonomos.DataBind();
         }

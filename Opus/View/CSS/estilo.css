@@ -105,6 +105,13 @@ body {
     min-height: 300px;
 }
 
+.card-titulo {
+    background-color: white;
+    border-radius: 0 0 35px 35px;
+    padding-left: 45px;
+    padding-right: 45px;
+}
+
 .avaliacao-cabecalho {
     display: flex;
     align-items: center;
@@ -143,7 +150,9 @@ body {
 .card-portifolio {
     background-color: white;
     border-radius: 20px;
-    padding: 30px;
+    padding: 45px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin-bottom: 25px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
