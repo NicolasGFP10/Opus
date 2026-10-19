@@ -155,6 +155,7 @@
     <Compile Include="Controller\AutonomoServicoController.cs" />
     <Compile Include="Controller\AvaliacaoController.cs" />
     <Compile Include="Controller\CidadeController.cs" />
+    <Compile Include="Controller\DenunciaController.cs" />
     <Compile Include="Controller\EstadoController.cs" />
     <Compile Include="Controller\FotoAvaliacaoController.cs" />
     <Compile Include="Controller\FotoPortifolioController.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="DAO\AvaliacaoDAO.cs" />
     <Compile Include="DAO\CidadeDAO.cs" />
     <Compile Include="DAO\CodigoAvaliacaoDAO.cs" />
+    <Compile Include="DAO\DenunciaDAO.cs" />
     <Compile Include="DAO\EstadoDAO.cs" />
     <Compile Include="DAO\FotoAvaliacaoDAO.cs" />
     <Compile Include="DAO\FotoPortifolioDAO.cs" />
@@ -187,6 +189,7 @@
     <Compile Include="Model\Cidade.cs" />
     <Compile Include="Model\CidadeView.cs" />
     <Compile Include="Model\CodigoAvaliacao.cs" />
+    <Compile Include="Model\Denuncia.cs" />
     <Compile Include="Model\Estado.cs" />
     <Compile Include="Model\FotoAvaliacao.cs" />
     <Compile Include="Model\FotoPortifolio.cs" />

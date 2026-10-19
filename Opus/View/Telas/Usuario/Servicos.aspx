@@ -170,6 +170,8 @@
 
                     <div class="text-center mb-4">
 
+
+
                         <br />
 
                         <asp:Image
@@ -383,11 +385,13 @@
 
         <div class="modal-footer">
 
-            <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal">
-                Fechar
+            <asp:LinkButton
+                ID="btnDenunciar"
+                runat="server"
+                Text="Denunciar"
+                CssClass="btn btn-danger"
+                CommandName="Detalhes"
+                CommandArgument='<%# Eval("ID") %>' />
 
             </button>
 
