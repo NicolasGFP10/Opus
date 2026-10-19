@@ -13,11 +13,6 @@ body {
 
 /* ============================================= AJUSTES ============================================= */
 
-.padding-lat-10 {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
 /* Área roxa */
 
 .central {
@@ -69,11 +64,45 @@ body {
     margin-top: 10px;
 }
 
+.container-informacao {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+}
+
+.informacao {
+    color: white;
+    border-radius: 10px;
+    width: fit-content;
+    padding: 10px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* ============================================= BORDA ============================================= */
+
 .borda-redonda {
     border-radius: 20px;
 }
 
+/* ============================================= PADDING ============================================= */
+
+.padding-top-10{
+    padding-top: 10px;
+}
+
+.padding-top-20{
+    margin-top: 20px;
+}
+
+.padding-lat-10 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
 /* ============================================= CORES ============================================= */
 
 .cor-branca {
@@ -155,6 +184,15 @@ body {
     padding-bottom: 20px;
     margin-bottom: 25px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card-portifolio-mais {
+    background-color: white;
+    border-radius: 20px;
+    padding: 45px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .portifolio-cabecalho {

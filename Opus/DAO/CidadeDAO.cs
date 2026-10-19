@@ -1,6 +1,7 @@
 ﻿using MySqlConnector;
 using Opus.Data;
 using Opus.Model;
+using Opus.View.Telas.Usuario;
 using System;
 using System.Collections.Generic;
 

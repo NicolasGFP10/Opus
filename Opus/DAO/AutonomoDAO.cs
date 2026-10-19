@@ -243,19 +243,15 @@ namespace Opus.DAO
                             AutonomoPesquisaView autonomo =
                                 new AutonomoPesquisaView();
 
-                            autonomo.ID =
-                                Convert.ToInt32(reader["aut_ID"]);
+                            autonomo.ID = Convert.ToInt32(reader["aut_ID"]);
 
-                            autonomo.Nome =
-                                reader["usu_nome"].ToString();
+                            autonomo.Nome = reader["usu_nome"].ToString();
 
                             autonomo.Foto = "~/Uploads/Usuario/" + reader["usu_imagem"].ToString();
 
-                            autonomo.NotaMedia =
-                                Convert.ToDecimal(reader["nota_media"]);
+                            autonomo.NotaMedia = Convert.ToDecimal(reader["nota_media"]);
 
-                            autonomo.QuantidadeAvaliacoes =
-                                Convert.ToInt32(reader["quantidade_avaliacoes"]);
+                            autonomo.QuantidadeAvaliacoes = Convert.ToInt32(reader["quantidade_avaliacoes"]);
 
                             lista.Add(autonomo);
                         }

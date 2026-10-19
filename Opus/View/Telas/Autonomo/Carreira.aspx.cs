@@ -313,7 +313,7 @@ namespace Opus.View.Telas.Autonomo
                 new AutonomoCidadeController();
 
             gvRegiao.DataSource =
-                controller.ListarCidadesAutonomo();
+                controller.ListarCidadesAutonomo(Convert.ToInt32(Session["aut_id"]));
 
             gvRegiao.DataBind();
         }

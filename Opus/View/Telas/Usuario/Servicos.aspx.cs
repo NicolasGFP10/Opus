@@ -175,6 +175,8 @@ namespace Opus.View.Telas.Usuario
 
             AvaliacaoController avaliacaoController = new AvaliacaoController();
 
+            AutonomoCidadeController cidadeController = new AutonomoCidadeController();
+
             // Dados principais do profissional
             AutonomoPesquisaView autonomo = autonomoController.BuscarPerfil(autonomoID);
 
@@ -227,6 +229,11 @@ namespace Opus.View.Telas.Usuario
             rptAvaliacoesPerfil.DataSource = avaliacaoController.ListarAvaliacoesAutonomo(autonomoID);
 
             rptAvaliacoesPerfil.DataBind();
+
+            // Cidades atendidas
+            rptRegioesPerfil.DataSource = cidadeController.ListarCidadesAutonomo(autonomoID);
+
+            rptRegioesPerfil.DataBind();
         }
 
         private void RecarregarPesquisa()

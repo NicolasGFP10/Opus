@@ -33,11 +33,9 @@ namespace Opus.Controller
         // Listar cidades
         //=========================
 
-        public List<CidadeView> ListarCidadesAutonomo()
+        public List<CidadeView> ListarCidadesAutonomo(int id)
         {
-            int autID = Convert.ToInt32(HttpContext.Current.Session["aut_ID"]);
-
-            return dao.ListarCidades(autID);
+            return dao.ListarCidades(id);
         }
 
         //=========================
