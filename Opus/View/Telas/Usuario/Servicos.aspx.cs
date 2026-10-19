@@ -177,8 +177,9 @@ namespace Opus.View.Telas.Usuario
 
             AutonomoCidadeController cidadeController = new AutonomoCidadeController();
 
-            // Dados principais do profissional
             AutonomoPesquisaView autonomo = autonomoController.BuscarPerfil(autonomoID);
+
+            AutonomoServicoController servicoController = new AutonomoServicoController();
 
             if (autonomo == null)
             {
@@ -234,6 +235,12 @@ namespace Opus.View.Telas.Usuario
             rptRegioesPerfil.DataSource = cidadeController.ListarCidadesAutonomo(autonomoID);
 
             rptRegioesPerfil.DataBind();
+
+            // Serviços a prestar
+            rptServicosPerfil.DataSource = servicoController.ListarServicosAutonomo(autonomoID);
+
+            rptServicosPerfil.DataBind();
+
         }
 
         private void RecarregarPesquisa()

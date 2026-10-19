@@ -67,15 +67,12 @@ namespace Opus.View.Telas.Autonomo
 
         private void CarregarGridServicos()
         {
-            gvServicos.DataSource =
-                servicoController.ListarServicosAutonomo();
+            gvServicos.DataSource = servicoController.ListarServicosAutonomo(Convert.ToInt32(Session["aut_id"]));
 
             gvServicos.DataBind();
         }
 
-        protected void btnAdicionarServico_Click(
-            object sender,
-            EventArgs e)
+        protected void btnAdicionarServico_Click(object sender, EventArgs e)
         {
             if (ddlServico.SelectedValue == "0")
             {

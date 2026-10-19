@@ -14,11 +14,9 @@ namespace Opus.Controller
             return dao.ListarServicos();
         }
 
-        public List<AutonomoServico> ListarServicosAutonomo()
+        public List<AutonomoServico> ListarServicosAutonomo(int id)
         {
-            int autID = (int)HttpContext.Current.Session["aut_ID"];
-
-            return dao.ListarServicosAutonomo(autID);
+            return dao.ListarServicosAutonomo(id);
         }
 
         public int AdicionarServico(int servicoID)

@@ -220,29 +220,9 @@
 
                         <h5>Serviços oferecidos</h5>
 
-                    </div>
-
-                    <asp:Repeater
-                        ID="rptServicosPerfil"
-                        runat="server">
-
-                        <itemtemplate>
-                            <span class="badge bg-secondary me-2 mb-2">
-                                <%#: Eval("Nome") %>
-                            </span>
-                        </itemtemplate>
-
-                    </asp:Repeater>
-
-                    <div class="card-titulo">
-
-                        <hr />
-
-                        <!-- REGIÕES -->
-
-                        <h5>Regiões de atendimento</h5>
-
-                        <asp:Repeater ID="rptRegioesPerfil" runat="server">
+                        <asp:Repeater
+                            ID="rptServicosPerfil"
+                            runat="server">
 
                             <headertemplate>
                                 <div class="container-informacao padding-top-20">
@@ -250,140 +230,170 @@
 
                             <itemtemplate>
                                 <div class="informacao cor-roxa">
-                                    <%#: Eval("Cidade") %> - <%#: Eval("Estado") %>
+                                    <%#: Eval("Nome") %>
                                 </div>
                             </itemtemplate>
 
                             <footertemplate>
-                                </div>
-                            </FooterTemplate>
+                    </div>
+                    </FooterTemplate>
+
+                    </asp:Repeater>
+
+                </div>
+
+
+
+                <div class="card-titulo">
+
+                    <hr />
+
+                    <!-- REGIÕES -->
+
+                    <h5>Regiões de atendimento</h5>
+
+                    <asp:Repeater ID="rptRegioesPerfil" runat="server">
+
+                        <headertemplate>
+                            <div class="container-informacao padding-top-20">
+                        </headertemplate>
+
+                        <itemtemplate>
+                            <div class="informacao cor-roxa">
+                                <%#: Eval("Cidade") %> - <%#: Eval("Estado") %>
+                            </div>
+                        </itemtemplate>
+
+                        <footertemplate>
+                </div>
+                </FooterTemplate>
 
                         </asp:Repeater>
 
-                        </div>
+            </div>
 
-                <div class="card-titulo">
+            <div class="card-titulo">
 
-                    <hr />
+                <hr />
 
-                    <!-- PORTFÓLIOS -->
+                <!-- PORTFÓLIOS -->
 
-                    <h5>Portfólios</h5>
-
-                </div>
-
-
-                <asp:Repeater
-                    ID="rptPortifoliosPerfil"
-                    runat="server">
-
-                    <itemtemplate>
-
-                        <div class="card-portifolio-mais">
-
-                            <p>
-                                <%#: Eval("Descricao") %>
-                            </p>
-
-                            <div class="portifolio-fotos">
-
-                                <asp:Repeater
-                                    runat="server"
-                                    DataSource='<%# Eval("Fotos") %>'>
-
-                                    <itemtemplate>
-
-                                        <asp:Image
-                                            runat="server"
-                                            CssClass="portifolio-foto"
-                                            ImageUrl='<%# Eval("Caminho") %>' />
-
-                                    </itemtemplate>
-
-                                </asp:Repeater>
-
-                            </div>
-
-                        </div>
-
-                    </itemtemplate>
-
-                </asp:Repeater>
-
-                <div class="card-titulo">
-
-                    <hr />
-
-                    <!-- AVALIAÇÕES -->
-
-                    <h5>Avaliações recebidas</h5>
-
-                </div>
-
-                <asp:Repeater
-                    ID="rptAvaliacoesPerfil"
-                    runat="server">
-
-                    <itemtemplate>
-
-                        <div class="card-avaliacao">
-
-                            <strong>
-                                <%#: Eval("NomeUsuario") %>
-                            </strong>
-
-                            <h6 class="mt-3">
-                                <%#: Eval("Titulo") %>
-                            </h6>
-
-                            <p>
-                                <%#: Eval("Descricao") %>
-                            </p>
-
-                            <p>
-                                Nota: <%# Eval("Nota") %> / 5
-                            </p>
-
-                            <div class="fotos-avaliacao">
-
-                                <asp:Repeater
-                                    runat="server"
-                                    DataSource='<%# Eval("Fotos") %>'>
-
-                                    <itemtemplate>
-
-                                        <asp:Image
-                                            runat="server"
-                                            CssClass="foto-avaliacao"
-                                            ImageUrl='<%# Eval("Imagem") %>' />
-
-                                    </itemtemplate>
-
-                                </asp:Repeater>
-
-                            </div>
-
-                        </div>
-
-                    </itemtemplate>
-
-                </asp:Repeater>
+                <h5>Portfólios</h5>
 
             </div>
 
-            <div class="modal-footer">
 
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal">
-                    Fechar
+            <asp:Repeater
+                ID="rptPortifoliosPerfil"
+                runat="server">
 
-                </button>
+                <itemtemplate>
+
+                    <div class="card-portifolio-mais">
+
+                        <p>
+                            <%#: Eval("Descricao") %>
+                        </p>
+
+                        <div class="portifolio-fotos">
+
+                            <asp:Repeater
+                                runat="server"
+                                DataSource='<%# Eval("Fotos") %>'>
+
+                                <itemtemplate>
+
+                                    <asp:Image
+                                        runat="server"
+                                        CssClass="portifolio-foto"
+                                        ImageUrl='<%# Eval("Caminho") %>' />
+
+                                </itemtemplate>
+
+                            </asp:Repeater>
+
+                        </div>
+
+                    </div>
+
+                </itemtemplate>
+
+            </asp:Repeater>
+
+            <div class="card-titulo">
+
+                <hr />
+
+                <!-- AVALIAÇÕES -->
+
+                <h5>Avaliações recebidas</h5>
 
             </div>
+
+            <asp:Repeater
+                ID="rptAvaliacoesPerfil"
+                runat="server">
+
+                <itemtemplate>
+
+                    <div class="card-avaliacao">
+
+                        <strong>
+                            <%#: Eval("NomeUsuario") %>
+                        </strong>
+
+                        <h6 class="mt-3">
+                            <%#: Eval("Titulo") %>
+                        </h6>
+
+                        <p>
+                            <%#: Eval("Descricao") %>
+                        </p>
+
+                        <p>
+                            Nota: <%# Eval("Nota") %> / 5
+                        </p>
+
+                        <div class="fotos-avaliacao">
+
+                            <asp:Repeater
+                                runat="server"
+                                DataSource='<%# Eval("Fotos") %>'>
+
+                                <itemtemplate>
+
+                                    <asp:Image
+                                        runat="server"
+                                        CssClass="foto-avaliacao"
+                                        ImageUrl='<%# Eval("Imagem") %>' />
+
+                                </itemtemplate>
+
+                            </asp:Repeater>
+
+                        </div>
+
+                    </div>
+
+                </itemtemplate>
+
+            </asp:Repeater>
 
         </div>
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal">
+                Fechar
+
+            </button>
+
+        </div>
+
+    </div>
 
     </div>
 
