@@ -60,7 +60,7 @@ namespace Opus.View.Telas.Usuario
 
             ddlCidade.Items.Clear();
 
-            ddlCidade.Items.Add(new ListItem("Escolha um Estado primeiro","0"));
+            ddlCidade.Items.Add(new ListItem("Escolha um Estado primeiro", "0"));
 
             ddlCidade.Enabled = false;
         }
@@ -69,13 +69,13 @@ namespace Opus.View.Telas.Usuario
         // QUANDO O ESTADO FOR ALTERADO
         // =====================================================
 
-        protected void ddlEstado_SelectedIndexChanged(object sender,EventArgs e)
+        protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlCidade.Items.Clear();
 
             if (ddlEstado.SelectedValue == "0")
             {
-                ddlCidade.Items.Add(new ListItem("Escolha um Estado primeiro","0"));
+                ddlCidade.Items.Add(new ListItem("Escolha um Estado primeiro", "0"));
 
                 ddlCidade.Enabled = false;
 
@@ -156,19 +156,46 @@ namespace Opus.View.Telas.Usuario
         private void AbrirModalAutonomo()
         {
             string script = @"
+        var modal = bootstrap.Modal.getOrCreateInstance(
+            document.getElementById('modalAutonomo')
+        );
 
-                var modal = new bootstrap.Modal(
-                document.getElementById('modalAutonomo')
-                );
+        modal.show();
+    ";
 
-                modal.show();";
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "AbrirModalAutonomo",
+                script,
+                true
+            );
+        }
 
-            ScriptManager.RegisterStartupScript(this,GetType(),"AbrirModalAutonomo",script,true);
+        private void AbrirModalDenunciaAutonomo()
+        {
+            string script = @"
+        var elemento = document.getElementById('modalDenunciaAutonomo');
 
+        if (elemento) {
+            var modal = bootstrap.Modal.getOrCreateInstance(elemento);
+            modal.show();
+        } else {
+            console.error('Modal de denúncia não encontrado!');
+        }
+    ";
+
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "AbrirModalDenunciaAutonomo",
+                script,
+                true
+            );
         }
 
         private void CarregarPerfilAutonomo(int autonomoID)
-        { 
+        {
             AutonomoController autonomoController = new AutonomoController();
 
             PortifolioController portifolioController = new PortifolioController();
@@ -185,6 +212,8 @@ namespace Opus.View.Telas.Usuario
             {
                 throw new Exception("Profissional não encontrado.");
             }
+
+            hfUsuarioDenunciadoID.Value = autonomo.UsuarioID.ToString();
 
             if (autonomo.QuantidadeAvaliacoes == 0)
             {
@@ -260,6 +289,25 @@ namespace Opus.View.Telas.Usuario
             rptAutonomos.DataSource = controller.PesquisarAutonomos(servicoID, cidadeID);
 
             rptAutonomos.DataBind();
+        }
+
+        protected void btnDenunciar_Click(object sender, EventArgs e)
+        {
+            int usuarioDenunciadoID;
+
+            if (!int.TryParse(
+                hfUsuarioDenunciadoID.Value,
+                out usuarioDenunciadoID)
+                || usuarioDenunciadoID <= 0)
+            {
+                lblMensagemPesquisa.Text =
+                    "Não foi possível identificar o usuário denunciado.";
+
+                return;
+            }
+
+            // Abrimos o modal de denúncia
+            AbrirModalDenunciaAutonomo();
         }
     }
 }

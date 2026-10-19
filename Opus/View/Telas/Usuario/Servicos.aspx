@@ -141,6 +141,10 @@
 
     </asp:Repeater>
 
+    <asp:HiddenField
+        ID="hfUsuarioDenunciadoID"
+        runat="server" />
+
     <div class="modal fade"
         id="modalAutonomo"
         tabindex="-1"
@@ -169,8 +173,6 @@
                     <!-- DADOS PRINCIPAIS -->
 
                     <div class="text-center mb-4">
-
-
 
                         <br />
 
@@ -379,27 +381,64 @@
 
                 </itemtemplate>
 
-            </asp:Repeater>
+                        </asp:Repeater>
+
+                </div> <!-- Fecha modal-body -->
+
+                <div class="modal-footer">
+
+                    <asp:LinkButton
+                        ID="btnDenunciar"
+                        runat="server"
+                        Text="Denunciar"
+                        CssClass="btn btn-danger"
+                        OnClick="btnDenunciar_Click" />
+
+                </div> <!-- Fecha modal-footer -->
+
+            </div> <!-- Fecha modal-content -->
+
+        </div> <!-- Fecha modal-dialog -->
+
+    </div> <!-- Fecha modalAutonomo -->
+
+
+    <!-- MODAL DE DENÚNCIA -->
+
+    <div class="modal fade"
+        id="modalDenunciaAutonomo"
+        tabindex="-1"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Gerar denúncia
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar">
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+                    <!-- Formulário da denúncia -->
+                </div>
+
+                <div class="modal-footer">
+                </div>
+
+            </div>
 
         </div>
-
-        <div class="modal-footer">
-
-            <asp:LinkButton
-                ID="btnDenunciar"
-                runat="server"
-                Text="Denunciar"
-                CssClass="btn btn-danger"
-                CommandName="Detalhes"
-                CommandArgument='<%# Eval("ID") %>' />
-
-            </button>
-
-        </div>
-
-    </div>
-
-    </div>
 
     </div>
 
