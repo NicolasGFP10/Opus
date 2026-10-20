@@ -13,11 +13,11 @@ namespace Opus.Controller
 
         public int ValidarDenuncia(string titulo, string descricao, int categoria, int denunciante, int denunciado)
         {
-            if (string.IsNullOrWhiteSpace(titulo)) return -400; // Título vazio
-            if (string.IsNullOrWhiteSpace(descricao)) return -400; // Descrição vazia
-            if (categoria <= 0) return -400; // Categoria inválida
-            if (denunciante <= 0) return -400; // Denunciante inválido
-            if (denunciado <= 0) return -400; // Denunciado inválido
+            if (string.IsNullOrWhiteSpace(titulo)) return -400;
+            if (string.IsNullOrWhiteSpace(descricao)) return -400;
+            if (categoria <= 0) return -400;
+            if (denunciante <= 0) return -400;
+            if (denunciado <= 0) return -400;
 
             Denuncia denuncia = new Denuncia();
 

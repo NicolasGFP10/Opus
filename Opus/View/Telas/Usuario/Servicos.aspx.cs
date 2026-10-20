@@ -33,7 +33,7 @@ namespace Opus.View.Telas.Usuario
 
         AutonomoServicoController servicoController = new AutonomoServicoController();
 
-        private int autonomoID;
+        public int autonomoID;
 
         private void CarregarServicos()
         {
@@ -316,7 +316,13 @@ namespace Opus.View.Telas.Usuario
             string descricao = tbxDescricao.Text;
             int categoria = Convert.ToInt32(ddlCategoria.SelectedValue);
 
-            int denunciado = autonomoID;
+            if (!int.TryParse(hfUsuarioDenunciadoID.Value, out int denunciado) || denunciado <= 0)
+            {
+                lblMensagemPesquisa.Text = "Não foi possível identificar o usuário denunciado.";
+
+                return;
+            }
+
             int denunciante = Convert.ToInt32(Session["usu_ID"]);
 
             var arquivos = fuFotos.PostedFiles
@@ -358,19 +364,31 @@ namespace Opus.View.Telas.Usuario
 
                     if (resultado <= 0)
                     {
-
                         ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('O sistema não está funcionando no momento, tente novamente mais tarde');", true);
 
+                        return;
                     }
 
-                    if (fuFotos.PostedFile.ContentLength != 0)
+                    if (arquivos.Count > 0)
                     {
-
                         SalvarImagens(resultado);
-
                     }
 
-                break;
+                    if (arquivos.Count == 0)
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Denúncia enviada com sucesso');", true);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Denúncia enviada com sucesso, as fotos foram anexadas');", true);
+                    }
+
+                    tbxTitulo.Text = "";
+                    tbxDescricao.Text = "";
+                    ddlCategoria.SelectedIndex = 0;
+                    fuFotos.Attributes.Clear();
+
+                    break;
             }
         }
 
@@ -425,6 +443,7 @@ namespace Opus.View.Telas.Usuario
                 foto.DenunciaID = resultado;
 
                 controller.Cadastrar(foto);
+
             }
         }
     }

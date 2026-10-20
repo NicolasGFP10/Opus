@@ -492,7 +492,7 @@
                             accept=".jpg,.jpeg,.png,.webp" />
 
                             <div class="padding-top-20 text-end">
-                                <asp:Button runat="server" Text="Enviar" CssClass="btn btn-dark cor-roxa" />
+                                <asp:Button runat="server" Text="Enviar" CssClass="btn btn-dark cor-roxa" OnClick="btnEnviarDenuncia_Click"/>
                             </div>
                     </div>
 
