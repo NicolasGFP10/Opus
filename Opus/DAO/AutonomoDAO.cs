@@ -308,16 +308,16 @@ namespace Opus.DAO
 
                             string telefone;
 
-                            if (reader["aut_telefone_corp"].ToString() != null)
-                            {
-
-                                telefone = reader["aut_telefone_corp"].ToString();
-
-                            } else
+                            if (string.IsNullOrEmpty(reader["aut_telefone_corp"].ToString()))
                             {
 
                                 telefone = reader["usu_telefone"].ToString();
 
+                            } else
+                            {
+                                
+                                telefone = reader["aut_telefone_corp"].ToString();
+                                
                             }
 
                             return new AutonomoPesquisaView

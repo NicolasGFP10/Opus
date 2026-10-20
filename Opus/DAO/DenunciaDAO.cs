@@ -20,7 +20,7 @@ namespace Opus.DAO
                 {
                     conexao.Open();
 
-                    string sql = @"INSERT INTO Denuncias (Titulo, Descricao, Categoria, Status, Denunciante, Denunciado, Data) 
+                    string sql = @"INSERT INTO Denuncia (Titulo, Descricao, Categoria, Status, Denunciante, Denunciado, Data) 
                                    VALUES (@Titulo, @Descricao, @Categoria, @Status, @Denunciante, @Denunciado, @Data);";
 
                     MySqlCommand cmd = new MySqlCommand(sql, conexao);
@@ -33,14 +33,14 @@ namespace Opus.DAO
                     cmd.Parameters.AddWithValue("@Denunciado", denuncia.Denunciado);
                     cmd.Parameters.AddWithValue("@Data", denuncia.Data);
 
-                    cmd.ExecuteNonQuery();
+                    int denunciaID = Convert.ToInt32(cmd.LastInsertedId);
 
-                    return 200;
+                    return denunciaID;
                 }
             }
             catch
             {
-                return 500;
+                return -500;
             }
         }
 

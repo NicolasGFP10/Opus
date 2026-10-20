@@ -406,10 +406,7 @@ namespace Opus.View.Telas.Autonomo
 
                 PortifolioController controller = new PortifolioController();
 
-                int portifolioID = controller.CadastrarPortifolio(
-                    autonomoID,
-                    descricao
-                );
+                int portifolioID = controller.CadastrarPortifolio(autonomoID, descricao);
 
                 switch (portifolioID)
                 {
@@ -423,6 +420,7 @@ namespace Opus.View.Telas.Autonomo
                         throw new Exception("Erro ao cadastrar o portfólio no banco.");
 
                     default:
+
                         if (portifolioID <= 0)
                         {
                             throw new Exception("ID do portfólio inválido.");

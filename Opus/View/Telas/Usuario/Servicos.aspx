@@ -381,26 +381,31 @@
 
                 </itemtemplate>
 
-                        </asp:Repeater>
+            </asp:Repeater>
 
-                </div> <!-- Fecha modal-body -->
+        </div>
+        <!-- Fecha modal-body -->
 
-                <div class="modal-footer">
+        <div class="modal-footer">
 
-                    <asp:LinkButton
-                        ID="btnDenunciar"
-                        runat="server"
-                        Text="Denunciar"
-                        CssClass="btn btn-danger"
-                        OnClick="btnDenunciar_Click" />
+            <asp:LinkButton
+                ID="btnDenunciar"
+                runat="server"
+                Text="Denunciar"
+                CssClass="btn btn-danger"
+                OnClick="btnDenunciar_Click" />
 
-                </div> <!-- Fecha modal-footer -->
+        </div>
+        <!-- Fecha modal-footer -->
 
-            </div> <!-- Fecha modal-content -->
+    </div>
+    <!-- Fecha modal-content -->
 
-        </div> <!-- Fecha modal-dialog -->
+    </div>
+    <!-- Fecha modal-dialog -->
 
-    </div> <!-- Fecha modalAutonomo -->
+    </div>
+    <!-- Fecha modalAutonomo -->
 
 
     <!-- MODAL DE DENÚNCIA -->
@@ -416,8 +421,7 @@
 
                 <div class="modal-header">
 
-                    <h5 class="modal-title">
-                        Gerar denúncia
+                    <h5 class="modal-title">Gerar denúncia
                     </h5>
 
                     <button
@@ -430,7 +434,68 @@
                 </div>
 
                 <div class="modal-body">
-                    <!-- Formulário da denúncia -->
+                    <div class="card-titulo">
+                        <p>
+                            (Após enviar a denuncia, fique atento ao seu e-mail, pois você receberá um retorno da nossa equipe de suporte)
+                        </p>
+                    </div>
+
+                    <!-- Assunto -->
+
+                    <div class="card-titulo">
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Título</label>
+                            <asp:TextBox ID="tbxTitulo" type="text" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label for="exampleFormControlInput1" class="form-label">Escolha o que aconteceu</label>
+
+                            <asp:DropDownList id="ddlCategoria"
+                                AutoPostBack="false"
+                                runat="server"
+                                CssClass="form-select">
+
+                                <asp:ListItem Selected="True" Value="0">Escolha uma opção abaixo </asp:ListItem>
+                                <asp:ListItem Value="1">Assédio sexual </asp:ListItem>
+                                <asp:ListItem Value="2">Discriminação </asp:ListItem>
+                                <asp:ListItem Value="3">Ameaças ou violência</asp:ListItem>
+                                <asp:ListItem Value="4">Linguagem ofensiva </asp:ListItem>
+                                <asp:ListItem Value="5">Fraude ou golpe</asp:ListItem>
+                                <asp:ListItem Value="6">Não fornecimento do código de avaliação</asp:ListItem>
+                                <asp:ListItem Value="7">Perfil falso ou informações enganosas</asp:ListItem>
+                                <asp:ListItem Value="8">Cobrança indevida </asp:ListItem>
+                                <asp:ListItem Value="9">Uso indevido de dados pessoais </asp:ListItem>
+                                <asp:ListItem Value="10">Spam ou publicidade indevida</asp:ListItem>
+                                <asp:ListItem Value="11">Outro</asp:ListItem>
+
+                            </asp:DropDownList>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Descreva o que aconteceu</label>
+                            <asp:TextBox ID="tbxDescricao" TextMode="MultiLine" Rows="3" type="text" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+
+                        <label class="form-label">
+                            Fotos de prova (opcional)
+                        </label>
+
+                        <asp:FileUpload
+                            ID="fuFotos"
+                            runat="server"
+                            AllowMultiple="true"
+                            CssClass="form-control"
+                            accept=".jpg,.jpeg,.png,.webp" />
+
+                            <div class="padding-top-20 text-end">
+                                <asp:Button runat="server" Text="Enviar" CssClass="btn btn-dark cor-roxa" />
+                            </div>
+                    </div>
+
                 </div>
 
                 <div class="modal-footer">

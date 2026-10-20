@@ -2,6 +2,7 @@
 using Opus.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -31,6 +32,8 @@ namespace Opus.View.Telas.Usuario
         }
 
         AutonomoServicoController servicoController = new AutonomoServicoController();
+
+        private int autonomoID;
 
         private void CarregarServicos()
         {
@@ -137,7 +140,7 @@ namespace Opus.View.Telas.Usuario
         {
             if (e.CommandName == "Detalhes")
             {
-                int autonomoID = Convert.ToInt32(e.CommandArgument);
+                autonomoID = Convert.ToInt32(e.CommandArgument);
 
                 try
                 {
@@ -295,19 +298,134 @@ namespace Opus.View.Telas.Usuario
         {
             int usuarioDenunciadoID;
 
-            if (!int.TryParse(
-                hfUsuarioDenunciadoID.Value,
-                out usuarioDenunciadoID)
-                || usuarioDenunciadoID <= 0)
+            if (!int.TryParse(hfUsuarioDenunciadoID.Value, out usuarioDenunciadoID) || usuarioDenunciadoID <= 0)
             {
-                lblMensagemPesquisa.Text =
-                    "Não foi possível identificar o usuário denunciado.";
+                lblMensagemPesquisa.Text = "Não foi possível identificar o usuário denunciado.";
 
                 return;
             }
 
             // Abrimos o modal de denúncia
             AbrirModalDenunciaAutonomo();
+        }
+
+        protected void btnEnviarDenuncia_Click(object sender, EventArgs e)
+        {
+
+            string titulo = tbxTitulo.Text;
+            string descricao = tbxDescricao.Text;
+            int categoria = Convert.ToInt32(ddlCategoria.SelectedValue);
+
+            int denunciado = autonomoID;
+            int denunciante = Convert.ToInt32(Session["usu_ID"]);
+
+            var arquivos = fuFotos.PostedFiles
+                    .Cast<HttpPostedFile>()
+                    .Where(a => a.ContentLength > 0)
+                    .ToList();
+
+            if (arquivos.Count > 5)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Cadastre apenas 5 fotos');", true);
+
+                return;
+            }
+
+            foreach (HttpPostedFile arquivo in arquivos)
+            {
+                ValidarImagem(arquivo);
+            }
+
+            DenunciaController controller = new DenunciaController();
+
+            int resultado = controller.ValidarDenuncia(titulo, descricao, categoria, denunciante, denunciado);
+
+            switch (resultado)
+            {
+                case -400:
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Preencha os dados corretamente');", true);
+
+                    break;
+
+                case -500:
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('O sistema não está funcionando no momento, tente novamente mais tarde');", true);
+
+                    break;
+
+                default:
+
+                    if (resultado <= 0)
+                    {
+
+                        ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('O sistema não está funcionando no momento, tente novamente mais tarde');", true);
+
+                    }
+
+                    if (fuFotos.PostedFile.ContentLength != 0)
+                    {
+
+                        SalvarImagens(resultado);
+
+                    }
+
+                break;
+            }
+        }
+
+        private void ValidarImagem(HttpPostedFile arquivo)
+        {
+            string extensao = Path.GetExtension(arquivo.FileName).ToLowerInvariant();
+
+            string[] extensoesPermitidas =
+            {
+                ".jpg", ".jpeg", ".png", ".webp"
+            };
+
+            if (!extensoesPermitidas.Contains(extensao))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Formato inválido. Utilize JPG, JPEG, PNG ou WEBP');", true);
+            }
+
+            int tamanhoMaximo = 5 * 1024 * 1024;
+
+            if (arquivo.ContentLength > tamanhoMaximo)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Cada imagem deve possuir no máximo 5 MB.');", true);
+            }
+        }
+
+        private void SalvarImagens(int resultado)
+        {
+            FotoDenunciaController controller = new FotoDenunciaController();
+
+            foreach (HttpPostedFile arquivo in fuFotos.PostedFiles)
+            {
+                string extensao = Path.GetExtension(arquivo.FileName).ToLower();
+
+                string nomeArquivo = Guid.NewGuid().ToString() + extensao;
+
+                string pasta = Server.MapPath("~/Uploads/Denuncia/");
+
+                if (!Directory.Exists(pasta))
+                {
+                    Directory.CreateDirectory(pasta);
+                }
+
+                string caminhoFisico = Path.Combine(pasta, nomeArquivo);
+
+                arquivo.SaveAs(caminhoFisico);
+
+                string caminhoBanco = "~/Uploads/Denuncia/" + nomeArquivo;
+
+                FotoDenuncia foto = new FotoDenuncia();
+
+                foto.CaminhoFoto = caminhoBanco;
+                foto.DenunciaID = resultado;
+
+                controller.Cadastrar(foto);
+            }
         }
     }
 }
