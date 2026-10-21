@@ -192,6 +192,7 @@
     <Compile Include="Model\CidadeView.cs" />
     <Compile Include="Model\CodigoAvaliacao.cs" />
     <Compile Include="Model\Denuncia.cs" />
+    <Compile Include="Model\DenunciaView.cs" />
     <Compile Include="Model\Estado.cs" />
     <Compile Include="Model\FotoAvaliacao.cs" />
     <Compile Include="Model\FotoDenuncia.cs" />

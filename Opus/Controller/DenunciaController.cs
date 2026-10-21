@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using Opus.DAO;
 using Opus.Model;
+using System.Reflection.Emit;
 
 namespace Opus.Controller
 {
@@ -31,8 +32,34 @@ namespace Opus.Controller
 
             DenunciaDAO dao = new DenunciaDAO();
 
-            return dao.CadastrarDenuncia(denuncia);
+            int result = dao.CadastrarDenuncia(denuncia);
+
+            return result;
         }
+
+        public List<DenunciaView> ListarDenuncias(int filtro)
+        {
+            if (filtro < 0 || filtro > 2) return null;
+
+            DenunciaDAO dao = new DenunciaDAO();
+
+            return dao.ListarDenuncias(filtro);
+        }
+
+        public int AlterarStatus(int id, string status)
+        {
+            if (id < 0) return 400;
+
+            DenunciaDAO dao = new DenunciaDAO();
+
+            int valor;
+
+            if (status == "Pendente") valor = 1;
+            else valor = 0;
+
+            return dao.AlterarStatus(id, valor);
+        }
+
 
     }
 }
