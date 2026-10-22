@@ -65,16 +65,11 @@ namespace Opus.Controller
 
         public List<AvaliacaoView> ListarAvaliacoesAutonomo(int autonomoID)
         {
-            AvaliacaoDAO avaliacaoDAO =
-                new AvaliacaoDAO();
+            AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
 
-            FotoAvaliacaoDAO fotoDAO =
-                new FotoAvaliacaoDAO();
+            FotoAvaliacaoDAO fotoDAO = new FotoAvaliacaoDAO();
 
-            List<AvaliacaoView> avaliacoes =
-                avaliacaoDAO.ListarAvaliacoesAutonomo(
-                    autonomoID
-                );
+            List<AvaliacaoView> avaliacoes = avaliacaoDAO.ListarAvaliacoesAutonomo(autonomoID);
 
             foreach (AvaliacaoView avaliacao in avaliacoes)
             {

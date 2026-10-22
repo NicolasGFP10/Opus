@@ -12,6 +12,9 @@ namespace Opus.View.Telas.Usuario
 {
     public partial class Servicos : System.Web.UI.Page
     {
+
+        public int idDenunciado;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usu_ID"] == null)
@@ -182,10 +185,11 @@ namespace Opus.View.Telas.Usuario
 
         private void AbrirModalDenunciaAutonomo()
         {
-            string script = @"
-        var elemento = document.getElementById('modalDenunciaAutonomo');
 
-        if (elemento) {
+            string script = @"
+                var elemento = document.getElementById('modalDenunciaAutonomo');
+
+            if (elemento) {
             var modal = bootstrap.Modal.getOrCreateInstance(elemento);
             modal.show();
         } else {
@@ -251,7 +255,6 @@ namespace Opus.View.Telas.Usuario
                 lblTelefone.Text = telefoneLimpo; // Caso venha fora do padrão, exibe original
             }
 
-
             lblEmail.Text = autonomo.Email;
 
             lblDescricaoAutonomo.Text = Server.HtmlEncode(autonomo.Descricao);
@@ -299,18 +302,34 @@ namespace Opus.View.Telas.Usuario
             rptAutonomos.DataBind();
         }
 
+        protected void DenunciarUsuario_Click(object sender, EventArgs e)
+        {
+            LinkButton botao = (LinkButton)sender;
+
+            if (!int.TryParse(botao.CommandArgument, out int usuarioID)
+                || usuarioID <= 0)
+            {
+                lblMensagemPesquisa.Text = "Usuário inválido.";
+                return;
+            }
+
+            // Armazena o ID do autor da avaliação
+            hfDenunciadoSelecionado.Value = usuarioID.ToString();
+
+            AbrirModalDenunciaAutonomo();
+        }
+
         protected void btnDenunciar_Click(object sender, EventArgs e)
         {
-            int usuarioDenunciadoID;
-
-            if (!int.TryParse(hfUsuarioDenunciadoID.Value, out usuarioDenunciadoID) || usuarioDenunciadoID <= 0)
+            if (!int.TryParse( hfUsuarioDenunciadoID.Value, out int usuarioDenunciadoID) || usuarioDenunciadoID <= 0)
             {
                 lblMensagemPesquisa.Text = "Não foi possível identificar o usuário denunciado.";
 
                 return;
             }
 
-            // Abrimos o modal de denúncia
+            hfDenunciadoSelecionado.Value = usuarioDenunciadoID.ToString();
+
             AbrirModalDenunciaAutonomo();
         }
 
@@ -319,11 +338,12 @@ namespace Opus.View.Telas.Usuario
 
             string titulo = tbxTitulo.Text;
             string descricao = tbxDescricao.Text;
+
             int categoria = Convert.ToInt32(ddlCategoria.SelectedValue);
 
-            if (!int.TryParse(hfUsuarioDenunciadoID.Value, out int denunciado) || denunciado <= 0)
+            if (!int.TryParse(hfDenunciadoSelecionado.Value, out int denunciado) || denunciado <= 0)
             {
-                lblMensagemPesquisa.Text = "Não foi possível identificar o usuário denunciado.";
+                ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Não foi possível identificar o usuário denunciado.');", true);
 
                 return;
             }

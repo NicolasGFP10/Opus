@@ -334,6 +334,10 @@
 
             </div>
 
+            <asp:HiddenField
+                ID="hfDenunciadoSelecionado"
+                runat="server" />
+
             <asp:Repeater
                 ID="rptAvaliacoesPerfil"
                 runat="server">
@@ -342,9 +346,19 @@
 
                     <div class="card-avaliacao">
 
+                        <asp:LinkButton
+                            ID="lbtDenunciarUsuario"
+                            runat="server"
+                            Text="Denunciar"
+                            CssClass="btn btn-danger"
+                            CommandArgument='<%# Eval("UsuarioID") %>'
+                            OnClick="DenunciarUsuario_Click" />
+
                         <strong>
                             <%#: Eval("NomeUsuario") %>
                         </strong>
+
+
 
                         <h6 class="mt-3">
                             <%#: Eval("Titulo") %>
@@ -491,9 +505,9 @@
                             CssClass="form-control"
                             accept=".jpg,.jpeg,.png,.webp" />
 
-                            <div class="padding-top-20 text-end">
-                                <asp:Button runat="server" Text="Enviar" CssClass="btn btn-dark cor-roxa" OnClick="btnEnviarDenuncia_Click"/>
-                            </div>
+                        <div class="padding-top-20 text-end">
+                            <asp:Button runat="server" Text="Enviar" CssClass="btn btn-dark cor-roxa" OnClick="btnEnviarDenuncia_Click" />
+                        </div>
                     </div>
 
                 </div>

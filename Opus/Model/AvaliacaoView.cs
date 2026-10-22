@@ -21,7 +21,6 @@ namespace Opus.Model
 
         public int AutonomoID { get; set; }
 
-        public List<FotoAvaliacao> Fotos { get; set; }
-            = new List<FotoAvaliacao>();
+        public List<FotoAvaliacao> Fotos { get; set; } = new List<FotoAvaliacao>();
     }
 }
