@@ -150,6 +150,15 @@ namespace Opus.View.Telas.Usuario
         protected global::System.Web.UI.WebControls.Button btnEnviar;
 
         /// <summary>
+        /// Controle hfDenunciadoSelecionado.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfDenunciadoSelecionado;
+
+        /// <summary>
         /// Controle rptAvaliacoes.
         /// </summary>
         /// <remarks>
@@ -157,5 +166,41 @@ namespace Opus.View.Telas.Usuario
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptAvaliacoes;
+
+        /// <summary>
+        /// Controle tbxTituloDenuncia.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbxTituloDenuncia;
+
+        /// <summary>
+        /// Controle ddlCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
+
+        /// <summary>
+        /// Controle tbxDescricaoDenuncia.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbxDescricaoDenuncia;
+
+        /// <summary>
+        /// Controle fuDenuncia.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fuDenuncia;
     }
 }

@@ -125,7 +125,7 @@ namespace Opus.View.Telas.Usuario
 
                 int usuarioID = Convert.ToInt32(Session["usu_id"]);
                 string titulo = tbxTitulo.Text.Trim();
-                string  descricao = tbxDescricao.Text.Trim();
+                string descricao = tbxDescricao.Text.Trim();
                 int usuario = usuarioID;
                 int token = Convert.ToInt32(tbxCodigoAvaliacao.Text);
 
@@ -259,6 +259,186 @@ namespace Opus.View.Telas.Usuario
                 );
 
             rptAvaliacoes.DataBind();
+        }
+
+        // DENUNCIA
+
+        protected void DenunciarUsuario_Click(object sender, EventArgs e)
+        {
+            LinkButton botao = (LinkButton)sender;
+
+            if (!int.TryParse(botao.CommandArgument, out int usuarioID) || usuarioID <= 0)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Usuário inválido.');", true);
+
+                return;
+            }
+
+            hfDenunciadoSelecionado.Value = usuarioID.ToString();
+
+            AbrirModalDenunciaAutonomo();
+        }
+
+        private void AbrirModalDenunciaAutonomo()
+        {
+
+            string script = @"
+                var elemento = document.getElementById('modalDenunciaAutonomo');
+
+            if (elemento) {
+            var modal = bootstrap.Modal.getOrCreateInstance(elemento);
+            modal.show();
+        } else {
+            console.error('Modal de denúncia não encontrado!');
+        }
+    ";
+
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "AbrirModalDenunciaAutonomo",
+                script,
+                true
+            );
+        }
+
+        protected void btnEnviarDenuncia_Click(object sender, EventArgs e)
+        {
+
+            string titulo = tbxTituloDenuncia.Text;
+            string descricao = tbxDescricaoDenuncia.Text;
+
+            int categoria = Convert.ToInt32(ddlCategoria.SelectedValue);
+
+            if (!int.TryParse(hfDenunciadoSelecionado.Value, out int denunciado) || denunciado <= 0)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Não foi possível identificar o usuário denunciado.');", true);
+
+                return;
+            }
+
+            int denunciante = Convert.ToInt32(Session["usu_ID"]);
+
+            var arquivos = fuDenuncia.PostedFiles
+                    .Cast<HttpPostedFile>()
+                    .Where(a => a.ContentLength > 0)
+                    .ToList();
+
+            if (arquivos.Count > 5)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Cadastre apenas 5 fotos');", true);
+
+                return;
+            }
+
+            foreach (HttpPostedFile arquivo in arquivos)
+            {
+                ValidarImagemDenuncia(arquivo);
+            }
+
+            DenunciaController controller = new DenunciaController();
+
+            int resultado = controller.ValidarDenuncia(titulo, descricao, categoria, denunciante, denunciado);
+
+            switch (resultado)
+            {
+                case -400:
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Preencha os dados corretamente');", true);
+
+                    break;
+
+                case -500:
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('O sistema não está funcionando no momento, tente novamente mais tarde');", true);
+
+                    break;
+
+                default:
+
+                    if (resultado <= 0)
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('O sistema não está funcionando no momento, tente novamente mais tarde');", true);
+
+                        return;
+                    }
+
+                    if (arquivos.Count > 0)
+                    {
+                        SalvarImagensDenuncia(resultado);
+                    }
+
+                    if (arquivos.Count == 0)
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Denúncia enviada com sucesso');", true);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Denúncia enviada com sucesso, as fotos foram anexadas');", true);
+                    }
+
+                    tbxTitulo.Text = "";
+                    tbxDescricao.Text = "";
+                    ddlCategoria.SelectedIndex = 0;
+                    fuDenuncia.Attributes.Clear();
+
+                    break;
+            }
+        }
+
+        private void ValidarImagemDenuncia(HttpPostedFile arquivo)
+        {
+            string extensao = Path.GetExtension(arquivo.FileName).ToLowerInvariant();
+
+            string[] extensoesPermitidas =
+            {
+                ".jpg", ".jpeg", ".png", ".webp"
+            };
+
+            if (!extensoesPermitidas.Contains(extensao))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Formato inválido. Utilize JPG, JPEG, PNG ou WEBP');", true);
+            }
+
+            int tamanhoMaximo = 5 * 1024 * 1024;
+
+            if (arquivo.ContentLength > tamanhoMaximo)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Cada imagem deve possuir no máximo 5 MB.');", true);
+            }
+        }
+
+        private void SalvarImagensDenuncia(int resultado)
+        {
+            FotoDenunciaController controller = new FotoDenunciaController();
+
+            foreach (HttpPostedFile arquivo in fuDenuncia.PostedFiles)
+            {
+                string extensao = Path.GetExtension(arquivo.FileName).ToLower();
+
+                string nomeArquivo = Guid.NewGuid().ToString() + extensao;
+
+                string pasta = Server.MapPath("~/Uploads/Denuncia/");
+
+                if (!Directory.Exists(pasta))
+                {
+                    Directory.CreateDirectory(pasta);
+                }
+
+                string caminhoFisico = Path.Combine(pasta, nomeArquivo);
+
+                arquivo.SaveAs(caminhoFisico);
+
+                string caminhoBanco = "~/Uploads/Denuncia/" + nomeArquivo;
+
+                FotoDenuncia foto = new FotoDenuncia();
+
+                foto.CaminhoFoto = caminhoBanco;
+                foto.DenunciaID = resultado;
+
+                controller.Cadastrar(foto);
+
+            }
         }
     }
 }
