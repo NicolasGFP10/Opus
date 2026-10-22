@@ -25,7 +25,7 @@
 <body class="cor-roxa">
     <form id="form1" runat="server">
 
-        <header class="p-3 mb-3 border-bottom cor-branca">
+        <header class="p-3 mb-3 border-bottom cor-branca fixed-top">
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
@@ -73,7 +73,7 @@
             </div>
         </header>
 
-        <div class="central">
+        <div class="central" style="padding-top: 150px;">
 
             <div class="card-central">
 

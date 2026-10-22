@@ -69,7 +69,7 @@
             <asp:CommandField
                 ShowDeleteButton="True"
                 DeleteText="Remover"
-                ButtonType="Button" />
+                ButtonType="Button"/>
 
         </columns>
 
@@ -174,9 +174,9 @@
     <hr />
     <br />
 
-    <center>
-        <h1>Portifólio</h1>
-    </center>
+        <h5>Portifólio</h5>
+
+    <br />
 
     <asp:Button
         ID="buttonEnviar"
@@ -233,7 +233,7 @@
 
     <!-- PORTIFÓLIOS CADASTRADOS -->
 
-    <h4 class="mt-4 mb-3">Meus portfólios</h4>
+    <h5 class="mt-4 mb-3">Meus portfólios</h5>
 
     <asp:Repeater
         ID="rptPortifolios"
@@ -242,24 +242,22 @@
 
         <itemtemplate>
 
-            <div class="card-portifolio">
+            <div class="card-portifolio padding-top-20">
 
                 <div class="portifolio-cabecalho">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
                         <asp:LinkButton
                             ID="btnExcluirPortifolio"
                             runat="server"
-                            CssClass="btn btn-danger"
+                            CssClass="btn btn-danger float"
                             Text="Excluir"
                             CommandName="Excluir"
                             CommandArgument='<%# Eval("ID") %>'
                             OnClientClick="return confirm('Deseja realmente excluir este portfólio?');" />
                     </div>
-
-
                 </div>
 
-                <p class="portifolio-descricao">
+                <p class="padding-top-20">
                     <%#: Eval("Descricao") %>
                 </p>
 

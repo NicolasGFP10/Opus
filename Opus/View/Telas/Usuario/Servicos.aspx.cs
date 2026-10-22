@@ -20,6 +20,11 @@ namespace Opus.View.Telas.Usuario
                 return;
             }
 
+            if (Session["mod_id"] != null)
+            {
+                Response.Redirect("../Moderador/Denuncia.aspx");
+            }
+
             if (!IsPostBack)
             {
                 CarregarServicos();

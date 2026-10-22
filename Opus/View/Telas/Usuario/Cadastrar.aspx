@@ -39,7 +39,7 @@
     </div>
 
     <center>
-        <asp:Button runat="server" ID="btnEnviar" type="button" class="btn cor-roxa" OnClick="CadastrarUsuario" Text="Cadastrar" />
+        <asp:Button runat="server" ID="btnEnviar" type="button" class="btn cor-roxa btn-dark" OnClick="CadastrarUsuario" Text="Cadastrar" />
     </center>
     <br />
 
