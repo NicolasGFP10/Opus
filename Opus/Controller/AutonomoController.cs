@@ -35,6 +35,18 @@ namespace Opus.Controller
             return cnpj.EndsWith(d1.ToString() + d2.ToString());
         }
 
+        public int ValidarConsultaAutonomo(int id)
+        {
+            if (id <= 0)
+            {
+                return -400;
+            } 
+            else
+            {
+                return ValidarConsultaAutonomo(id);
+            }
+        }
+
         public int ValidarCadastro(string cnpj, string email, string telefone, string descricao)
         {
             AutonomoDAO aut = new AutonomoDAO();

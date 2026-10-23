@@ -10,7 +10,6 @@ namespace Opus.DAO
 {
     public class AutonomoDAO
     {
-
         public bool AutonomoExiste(string cnpj, string email, string telefone)
         {
             using (MySqlConnection conexao = Conexao.ObterConexao())
@@ -33,6 +32,33 @@ namespace Opus.DAO
                 int quantidade = Convert.ToInt32(cmd.ExecuteScalar());
 
                 return quantidade > 0;
+            }
+        }
+
+        public int ConsultarAutonomo(int id)
+        {
+            using (MySqlConnection conexao = Conexao.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = @"SELECT aut_ID
+                               FROM autonomo
+                               WHERE usu_ID = @id;";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
+                cmd.Parameters.AddWithValue("@id", id);
+
+                object result = cmd.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
+                {
+                    return Convert.ToInt32(result);
+                }
+                else
+                {
+                    return -404;
+                }
             }
         }
 
@@ -172,12 +198,14 @@ namespace Opus.DAO
                     cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();
+
+                    HttpContext.Current.Session["aut_ID"] = null;
+                    HttpContext.Current.Session["usu_ID"] = null;
                 }
 
             }
             catch (Exception ex)
             {
-
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
         }
