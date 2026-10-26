@@ -116,7 +116,7 @@ namespace Opus.Controller
             return dao.EditarUsuario(usuario, imagem);
         }
 
-        public int BuscarUsuarioID(int id)
+        /*public int BuscarUsuarioID(int id)
         {
             UsuarioDAO dao = new UsuarioDAO();
 
@@ -126,6 +126,6 @@ namespace Opus.Controller
             }
 
             return dao.BuscarUsuarioID(id);
-        }
+        } */
     }
 }

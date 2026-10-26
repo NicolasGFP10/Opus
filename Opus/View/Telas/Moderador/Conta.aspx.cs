@@ -33,7 +33,7 @@ namespace Opus.View.Telas.Moderador
 
                 try
                 {
-                    CarregarPerfilUsuario(id);
+                    //CarregarPerfilUsuario(id);
 
                     int resultado = aut.ValidarConsultaAutonomo(id);
 
@@ -74,7 +74,7 @@ namespace Opus.View.Telas.Moderador
         // CARREGAR USUÁRIO
         // ===================================================================================================
 
-        private void CarregarPerfilUsuario(int usuarioID)
+        /*private void CarregarPerfilUsuario(int usuarioID)
         {
             UsuarioController usuarioController = new UsuarioController();
 
@@ -86,7 +86,7 @@ namespace Opus.View.Telas.Moderador
             {
                 lblMensagemPesquisa.Text = "Usuário não encontrado.";
             }
-        }
+        }*/
 
         // ===================================================================================================
         // CARREGAR AUTÔNOMO
