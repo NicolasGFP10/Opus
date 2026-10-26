@@ -41,11 +41,12 @@ namespace Opus.DAO
 
                 string sql = @"SELECT COUNT(*)
                                FROM codigo_avaliacao
-                               WHERE aut_id = @id";
+                               WHERE aut_id = @id AND cod_token = @token";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conexao);
 
                 cmd.Parameters.AddWithValue("@id", HttpContext.Current.Session["aut_id"]);
+                cmd.Parameters.AddWithValue("@token", token);
 
                 int quantidade = Convert.ToInt32(cmd.ExecuteScalar());
 

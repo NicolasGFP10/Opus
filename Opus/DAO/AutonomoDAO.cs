@@ -357,6 +357,7 @@ namespace Opus.DAO
                                 NotaMedia = Convert.ToDecimal(reader["nota_media"]),
                                 QuantidadeAvaliacoes = Convert.ToInt32(reader["quantidade_avaliacoes"]),
                                 Telefone = telefone,
+                                TelefoneCorp = reader["aut_telefone_corp"].ToString(),
                                 Email = reader["aut_email_corp"].ToString(),
                                 UsuarioID = Convert.ToInt32(reader["usu_ID"]),
 

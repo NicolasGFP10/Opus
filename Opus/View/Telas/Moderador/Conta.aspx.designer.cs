@@ -15,6 +15,33 @@ namespace Opus.View.Telas.Moderador
     {
 
         /// <summary>
+        /// Controle tbxPesquisa.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbxPesquisa;
+
+        /// <summary>
+        /// Controle ddlFiltro.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFiltro;
+
+        /// <summary>
+        /// Controle btnPesquisar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnPesquisar;
+
+        /// <summary>
         /// Controle lblMensagemPesquisa.
         /// </summary>
         /// <remarks>
@@ -42,22 +69,49 @@ namespace Opus.View.Telas.Moderador
         protected global::System.Web.UI.WebControls.HiddenField hfUsuarioDenunciadoID;
 
         /// <summary>
-        /// Controle imgPerfil.
+        /// Controle imgPerfilUsuario.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPerfil;
+        protected global::System.Web.UI.WebControls.Image imgPerfilUsuario;
 
         /// <summary>
-        /// Controle lblNomeAutonomo.
+        /// Controle lblNomeUsuario.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNomeAutonomo;
+        protected global::System.Web.UI.WebControls.Label lblNomeUsuario;
+
+        /// <summary>
+        /// Controle lblEmailUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmailUsuario;
+
+        /// <summary>
+        /// Controle lblTelefoneUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTelefoneUsuario;
+
+        /// <summary>
+        /// Controle lblStatusUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStatusUsuario;
 
         /// <summary>
         /// Controle lblNotaAutonomo.
@@ -69,22 +123,22 @@ namespace Opus.View.Telas.Moderador
         protected global::System.Web.UI.WebControls.Label lblNotaAutonomo;
 
         /// <summary>
-        /// Controle lblTelefone.
+        /// Controle lblTelefoneCorp.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTelefone;
+        protected global::System.Web.UI.WebControls.Label lblTelefoneCorp;
 
         /// <summary>
-        /// Controle lblEmail.
+        /// Controle lblEmailCorp.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmail;
+        protected global::System.Web.UI.WebControls.Label lblEmailCorp;
 
         /// <summary>
         /// Controle lblDescricaoAutonomo.
@@ -96,6 +150,15 @@ namespace Opus.View.Telas.Moderador
         protected global::System.Web.UI.WebControls.Label lblDescricaoAutonomo;
 
         /// <summary>
+        /// Controle lblServico.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblServico;
+
+        /// <summary>
         /// Controle rptServicosPerfil.
         /// </summary>
         /// <remarks>
@@ -103,6 +166,15 @@ namespace Opus.View.Telas.Moderador
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptServicosPerfil;
+
+        /// <summary>
+        /// Controle lblRegioes.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRegioes;
 
         /// <summary>
         /// Controle rptRegioesPerfil.
@@ -114,6 +186,15 @@ namespace Opus.View.Telas.Moderador
         protected global::System.Web.UI.WebControls.Repeater rptRegioesPerfil;
 
         /// <summary>
+        /// Controle lblPortifolio.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPortifolio;
+
+        /// <summary>
         /// Controle rptPortifoliosPerfil.
         /// </summary>
         /// <remarks>
@@ -121,6 +202,15 @@ namespace Opus.View.Telas.Moderador
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptPortifoliosPerfil;
+
+        /// <summary>
+        /// Controle lblAvaliacoes.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAvaliacoes;
 
         /// <summary>
         /// Controle hfDenunciadoSelecionado.

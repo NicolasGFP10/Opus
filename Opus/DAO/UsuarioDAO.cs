@@ -2,6 +2,7 @@
 using Opus.Data;
 using Opus.Model;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 
@@ -140,7 +141,7 @@ namespace Opus.DAO
                         HttpContext.Current.Session["usu_ID"] = id;
                         HttpContext.Current.Session["usu_nome"] = nome;
                         HttpContext.Current.Session["usu_imagem"] = imagem;
-                        HttpContext.Current.Session["usu_email"] = emailUsuario;     
+                        HttpContext.Current.Session["usu_email"] = emailUsuario;
                         HttpContext.Current.Session["usu_telefone"] = telefone;
                         HttpContext.Current.Session["usu_senha"] = senhaU;
 
@@ -261,12 +262,132 @@ namespace Opus.DAO
 
                 return 200;
 
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 return 500;
 
             }
         }
+
+        public List<Usuario> PesquisarUsuario(string pesquisa, int filtro)
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+
+            using (MySqlConnection conexao = Conexao.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = @"
+            SELECT
+                usu_ID,
+                usu_nome,
+                usu_imagem,
+                usu_email,
+                usu_telefone
+            FROM usuario
+            WHERE ";
+
+                switch (filtro)
+                {
+                    case 0:
+                        sql += "usu_nome LIKE @pesquisa";
+                        break;
+
+                    case 1:
+                        sql += "usu_email LIKE @pesquisa";
+                        break;
+
+                    case 2:
+                        sql += "usu_telefone LIKE @pesquisa";
+                        break;
+
+                    default:
+                        return usuarios;
+                }
+
+                sql += " ORDER BY usu_nome ASC;";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue(
+                        "@pesquisa",
+                        "%" + pesquisa + "%"
+                    );
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string telefone = reader["usu_telefone"].ToString();
+
+                            if (telefone.Length == 11)
+                            {
+                                telefone = $"({telefone.Substring(0, 2)}) " +
+                                           $"{telefone.Substring(2, 5)}-" +
+                                           $"{telefone.Substring(7, 4)}";
+                            }
+                            else if (telefone.Length == 10)
+                            {
+                                telefone = $"({telefone.Substring(0, 2)}) " +
+                                           $"{telefone.Substring(2, 4)}-" +
+                                           $"{telefone.Substring(6, 4)}";
+                            }
+
+                            Usuario usuario = new Usuario
+                            {
+                                Id = Convert.ToInt32(reader["usu_ID"]),
+                                Nome = reader["usu_nome"].ToString(),
+                                Imagem = "~/Uploads/Usuario/" + reader["usu_imagem"].ToString(),
+                                Email = reader["usu_email"].ToString(),
+                                Telefone = telefone
+                            };
+
+                            usuarios.Add(usuario);
+                        }
+                    }
+                }
+            }
+
+            return usuarios;
+        }
+
+        public Usuario DadosUsuario(int id)
+        {
+            using (MySqlConnection conexao = Conexao.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = @"SELECT *
+                       FROM usuario
+                       WHERE usu_id = @id";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
+                cmd.Parameters.AddWithValue("@id", id);
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                Usuario usu = new Usuario();
+
+                if (reader.Read())
+                {
+
+                    usu.Id = Convert.ToInt32(reader["usu_ID"]);
+                    usu.Nome = reader["usu_nome"].ToString();
+                    usu.Imagem = reader["usu_imagem"].ToString();
+                    usu.Telefone = reader["usu_telefone"].ToString();
+                    usu.Email = reader["usu_email"].ToString();
+                    usu.Status = Convert.ToBoolean(reader["usu_status"]);
+
+                    reader.Close();
+                }
+
+                return usu;
+            }
+        }
+
     }
 }

@@ -10,8 +10,61 @@
     <br />
     <br />
 
+    <div class="caixa-pesquisa">
+
+        <div class="servico">
+
+            <div class="mb-3">
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Pesquisa</label>
+                    <asp:TextBox ID="tbxPesquisa" type="text" class="form-control" runat="server"></asp:TextBox>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="estado">
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Filtro de pesquisa
+                </label>
+
+                <asp:DropDownList id="ddlFiltro"
+                    AutoPostBack="false"
+                    runat="server"
+                    CssClass="form-select">
+
+                    <asp:ListItem Selected="True" Value="0">Nome</asp:ListItem>
+                    <asp:ListItem Value="1">E-mail</asp:ListItem>
+                    <asp:ListItem Value="2">Telefone</asp:ListItem>
+
+                </asp:DropDownList>
+
+            </div>
+        </div>
+
+        <div class="pesquisar">
+
+            <asp:LinkButton
+                ID="btnPesquisar"
+                runat="server"
+                CssClass="btn btn-dark cor-roxa botao"
+                OnClick="btnPesquisar_Click">
+
+                <asp:Image
+                    runat="server"
+                    ImageUrl="../../Img/IconePesquisa.png" />
+
+            </asp:LinkButton>
+
+        </div>
+    </div>
+
     <asp:Label ID="lblMensagemPesquisa" CssClass="fonte-vermelha" runat="server"></asp:Label>
 
+    <!-- REPEATER DADOS -->
     <asp:Repeater
         ID="rptDados"
         runat="server"
@@ -25,7 +78,7 @@
                     ID="imgDado"
                     runat="server"
                     CssClass="foto-autonomo"
-                    ImageUrl='<%# Eval("Foto") %>' />
+                    ImageUrl='<%# Eval("Imagem") %>' />
 
                 <div class="dados-autonomo">
 
@@ -34,6 +87,9 @@
                     </h5>
                     <p>
                         <%#: Eval("Email") %>
+                    </p>
+                    <p>
+                        <%#: Eval("Telefone") %>
                     </p>
 
                 </div>
@@ -44,7 +100,7 @@
                     Text="Saiba mais"
                     CssClass="btn btn-dark cor-roxa"
                     CommandName="Detalhes"
-                    CommandArgument='<%# Eval("ID") %>' />
+                    CommandArgument='<%# Eval("Id") %>' />
 
             </div>
 
@@ -67,7 +123,7 @@
 
                 <div class="modal-header">
 
-                    <h5 class="modal-title">Conta do u suário
+                    <h5 class="modal-title">Conta do usuário
                     </h5>
 
                     <button
@@ -81,22 +137,50 @@
 
                 <div class="modal-body">
 
-                    <!-- DADOS PRINCIPAIS -->
+                    <!-- DADOS DE USUÁRIO -->
 
                     <div class="text-center mb-4">
 
                         <br />
-
                         <asp:Image
-                            ID="imgPerfil"
+                            ID="imgPerfilUsuario"
                             runat="server"
                             CssClass="foto-autonomo" />
 
                         <h4 class="mt-3">
                             <asp:Label
-                                ID="lblNomeAutonomo"
+                                ID="lblNomeUsuario"
                                 runat="server" />
                         </h4>
+
+                        <p class="mt-2">
+                            <asp:Label
+                                ID="lblEmailUsuario"
+                                runat="server"
+                                CssClass="text-secondary" />
+                        </p>
+
+                        <p class="mt-2">
+                            <asp:Label
+                                ID="lblTelefoneUsuario"
+                                runat="server"
+                                CssClass="text-secondary" />
+                        </p>
+
+                        <p class="mt-2">
+                            <asp:Label
+                                ID="lblStatusUsuario"
+                                runat="server"
+                                CssClass="text-secondary" />
+                        </p>
+
+                    </div>
+
+                    <!-- DADOS DE AUTÔNOMO -->
+
+                    <!-- DADOS PRINCIPAIS -->
+
+                    <div class="text-center mb-4">
 
                         <p class="mt-2">
                             <asp:Label
@@ -107,14 +191,14 @@
 
                         <p class="mt-2">
                             <asp:Label
-                                ID="lblTelefone"
+                                ID="lblTelefoneCorp"
                                 runat="server"
                                 CssClass="text-secondary" />
                         </p>
 
                         <p class="mt-2">
                             <asp:Label
-                                ID="lblEmail"
+                                ID="lblEmailCorp"
                                 runat="server"
                                 CssClass="text-secondary" />
                         </p>
@@ -129,11 +213,15 @@
 
                     <div class="card-titulo">
 
-                        <hr />
-
                         <!-- SERVIÇOS -->
 
-                        <h5>Serviços oferecidos</h5>
+                        <asp:Label ID="lblServico" runat="server" Text="">
+
+                            <hr />
+
+                            <h5>Serviços oferecidos</h5>
+
+                        </asp:Label>
 
                         <asp:Repeater
                             ID="rptServicosPerfil"
@@ -157,15 +245,17 @@
 
                 </div>
 
-
-
                 <div class="card-titulo">
-
-                    <hr />
 
                     <!-- REGIÕES -->
 
-                    <h5>Regiões de atendimento</h5>
+                    <asp:Label ID="lblRegioes" runat="server" Text="">
+
+                        <hr />
+
+                        <h5>Regiões de atendimento</h5>
+
+                    </asp:Label>
 
                     <asp:Repeater ID="rptRegioesPerfil" runat="server">
 
@@ -189,14 +279,17 @@
 
             <div class="card-titulo">
 
-                <hr />
-
                 <!-- PORTFÓLIOS -->
 
-                <h5>Portfólios</h5>
+                <asp:Label ID="lblPortifolio" runat="server" Text="">
+
+                    <hr />
+
+                    <h5>Portfólios</h5>
+
+                </asp:Label>
 
             </div>
-
 
             <asp:Repeater
                 ID="rptPortifoliosPerfil"
@@ -236,12 +329,18 @@
             </asp:Repeater>
 
             <div class="card-titulo">
-
-                <hr />
-
+                
                 <!-- AVALIAÇÕES -->
 
-                <h5>Avaliações recebidas</h5>
+                <asp:Label ID="lblAvaliacoes" runat="server" Text="">
+
+                    <hr />
+
+                    <h5>Avaliações recebidas</h5>
+
+                </asp:Label>
+
+                
 
             </div>
 
@@ -256,14 +355,6 @@
                 <itemtemplate>
 
                     <div class="card-avaliacao">
-
-                        <asp:LinkButton
-                            ID="lbtDenunciarUsuario"
-                            runat="server"
-                            Text="Denunciar"
-                            CssClass="btn btn-danger"
-                            CommandArgument='<%# Eval("UsuarioID") %>'
-                            OnClick="DenunciarUsuario_Click" />
 
                         <strong>
                             <%#: Eval("NomeUsuario") %>
@@ -309,4 +400,7 @@
             </asp:Repeater>
 
         </div>
+    </div>
+
+
 </asp:Content>

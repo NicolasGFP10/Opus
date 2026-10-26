@@ -43,7 +43,9 @@ namespace Opus.Controller
             } 
             else
             {
-                return ValidarConsultaAutonomo(id);
+                AutonomoDAO dao = new AutonomoDAO();
+
+                return dao.ConsultarAutonomo(id);
             }
         }
 
@@ -141,7 +143,5 @@ namespace Opus.Controller
 
             return dao.BuscarPerfil(autonomoID);
         }
-
-
     }
 }
