@@ -145,6 +145,8 @@
         ID="hfUsuarioDenunciadoID"
         runat="server" />
 
+
+    <!-- MODAL DE PERFIL DO AUTÔNOMO -->
     <div class="modal fade"
         id="modalAutonomo"
         tabindex="-1"
@@ -423,7 +425,6 @@
 
 
     <!-- MODAL DE DENÚNCIA -->
-
     <div class="modal fade"
         id="modalDenunciaAutonomo"
         tabindex="-1"

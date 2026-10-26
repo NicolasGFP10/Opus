@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -14,6 +15,7 @@ namespace Opus.Model
         public decimal NotaMedia { get; set; }
         public int UsuarioID { get; set; }
         public string Telefone { get; set; }
+        public string TelefoneCorp { get; set; }
         public string Email { get; set; }
         public int QuantidadeAvaliacoes { get; set; }
     }

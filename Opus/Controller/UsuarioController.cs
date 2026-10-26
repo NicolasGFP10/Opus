@@ -116,16 +116,24 @@ namespace Opus.Controller
             return dao.EditarUsuario(usuario, imagem);
         }
 
-        /*public int BuscarUsuarioID(int id)
+        public List<Usuario> PesquisarUsuario(string pesquisa, int filtro)
+        {
+            if (string.IsNullOrWhiteSpace(pesquisa))
+                return new List<Usuario>();
+
+            if (filtro < 0 || filtro > 2)
+                return new List<Usuario>();
+
+            UsuarioDAO dao = new UsuarioDAO();
+
+            return dao.PesquisarUsuario(pesquisa.Trim(), filtro);
+        }
+
+        public Usuario DadosUsuario(int id)
         {
             UsuarioDAO dao = new UsuarioDAO();
 
-            if (id <= 0)
-            {
-                return -400;
-            }
-
-            return dao.BuscarUsuarioID(id);
-        } */
+            return dao.DadosUsuario(id);
+        }
     }
 }
