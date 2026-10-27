@@ -81,5 +81,21 @@ namespace Opus.Controller
 
             return avaliacoes;
         }
+
+        public List<AvaliacaoView> ListarAvaliacoesUsuario(int usuarioID)
+        {
+            AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+
+            FotoAvaliacaoDAO fotoDAO = new FotoAvaliacaoDAO();
+
+            List<AvaliacaoView> avaliacoes = avaliacaoDAO.ListarAvaliacoesUsuario(usuarioID);
+
+            foreach (AvaliacaoView avaliacao in avaliacoes)
+            {
+                avaliacao.Fotos = fotoDAO.ListarPorAvaliacao(avaliacao.ID);
+            }
+
+            return avaliacoes;
+        }
     }
 }

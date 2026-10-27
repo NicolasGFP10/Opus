@@ -158,5 +158,63 @@ namespace Opus.DAO
 
             return lista;
         }
+
+        public List<AvaliacaoView> ListarAvaliacoesUsuario(int usuarioID)
+        {
+            List<AvaliacaoView> lista = new List<AvaliacaoView>();
+
+            using (MySqlConnection conexao = Conexao.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = @"
+                    SELECT
+                        a.ava_ID,
+                        a.ava_titulo,
+                        a.ava_descricao,
+                        a.ava_nota,
+                        a.usu_ID,
+                        a.aut_ID,
+                        u.usu_nome
+                    FROM avaliacao a
+
+                    INNER JOIN usuario u
+
+                    ON a.usu_ID = u.usu_ID
+
+                    WHERE u.usu_ID = @usuario
+
+                    ORDER BY u.usu_ID DESC;";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
+                cmd.Parameters.AddWithValue("@usuario", usuarioID);
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        AvaliacaoView avaliacao = new AvaliacaoView();
+
+                        avaliacao.ID = Convert.ToInt32(reader["ava_ID"]);
+
+                        avaliacao.Titulo = reader["ava_titulo"].ToString();
+
+                        avaliacao.Descricao = reader["ava_descricao"].ToString();
+
+                        avaliacao.Nota = Convert.ToInt32(reader["ava_nota"]);
+
+                        avaliacao.UsuarioID = Convert.ToInt32(reader["usu_ID"]);
+
+                        avaliacao.NomeUsuario = reader["usu_nome"].ToString();
+
+                        avaliacao.AutonomoID = Convert.ToInt32(reader["aut_ID"]);
+
+                        lista.Add(avaliacao);
+                    }
+                }   
+            }
+            return lista;
+        }
     }
 }

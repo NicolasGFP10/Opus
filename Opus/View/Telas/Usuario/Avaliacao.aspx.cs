@@ -22,8 +22,12 @@ namespace Opus.View.Telas.Usuario
                     Response.Redirect("Entrar.aspx");
                 }
 
+                CarregarAvaliacoesUsuario();
+
                 if (Session["aut_ID"] != null)
                 {
+                    lblTituloAutonomo.Visible = true;
+
                     lblTexto.Visible = true;
                     lblCodigo.Visible = true;
                     btnGerar.Visible = true;
@@ -244,21 +248,26 @@ namespace Opus.View.Telas.Usuario
 
         private void CarregarAvaliacoes()
         {
-            if (Session["aut_ID"] == null)
-                return;
+            if (Session["aut_ID"] == null) return;
 
-            int autonomoID =
-                Convert.ToInt32(Session["aut_ID"]);
+            int autonomoID = Convert.ToInt32(Session["aut_ID"]);
 
-            AvaliacaoController controller =
-                new AvaliacaoController();
+            AvaliacaoController controller = new AvaliacaoController();
 
-            rptAvaliacoes.DataSource =
-                controller.ListarAvaliacoesAutonomo(
-                    autonomoID
-                );
+            rptAvaliacoes.DataSource = controller.ListarAvaliacoesAutonomo(autonomoID);
 
             rptAvaliacoes.DataBind();
+        }
+
+        private void CarregarAvaliacoesUsuario()
+        {
+            int usuarioID = Convert.ToInt32(Session["usu_ID"]);
+
+            AvaliacaoController controller = new AvaliacaoController();
+
+            rptAvaliacoesUsuario.DataSource = controller.ListarAvaliacoesUsuario(usuarioID);
+
+            rptAvaliacoesUsuario.DataBind();
         }
 
         // DENUNCIA

@@ -1,4 +1,4 @@
-﻿<%@ page title="Avaliações - Opus" language="C#" masterpagefile="~/View/Site.Master" autoeventwireup="true" codebehind="Avaliacao.aspx.cs" inherits="Opus.View.Telas.Usuario.Avaliacao" %>
+﻿<%@ Page Title="Avaliações - Opus" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Avaliacao.aspx.cs" Inherits="Opus.View.Telas.Usuario.Avaliacao" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -45,6 +45,70 @@
             CssClass="btn cor-roxa btn-dark"
             OnClick="btnAvaliar_Click" />
     </center>
+
+    <br />
+
+    <hr />
+
+    <br />
+
+    <!-- REPEATER DAS AVALIAÇÕES DO USUÁRIO -->
+
+    <h5>Avaliações que você fez</h5>
+
+    <asp:Repeater
+        ID="rptAvaliacoesUsuario"
+        runat="server">
+
+        <ItemTemplate>
+
+            <div class="card-avaliacao">
+
+                <!-- Título -->
+                <h5 class="titulo-avaliacao">
+                    <%# Eval("Titulo") %>
+                </h5>
+
+
+                <!-- Descrição -->
+                <p class="descricao-avaliacao">
+                    <%# Eval("Descricao") %>
+                </p>
+
+                <!-- Nota -->
+                <p>
+                    Nota:
+            <strong>
+                <%# Eval("Nota") %> / 5
+            </strong>
+                </p>
+
+                <!-- Fotos -->
+                <div class="fotos-avaliacao">
+
+                    <asp:Repeater
+                        ID="rptFotos"
+                        runat="server"
+                        DataSource='<%# Eval("Fotos") %>'>
+
+                        <ItemTemplate>
+
+                            <asp:Image
+                                runat="server"
+                                CssClass="foto-avaliacao img-thumbnail"
+                                ImageUrl='<%# Eval("Imagem") %>' />
+
+                        </ItemTemplate>
+
+                    </asp:Repeater>
+
+                </div>
+
+            </div>
+
+        </ItemTemplate>
+
+    </asp:Repeater>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -139,11 +203,21 @@
         ID="hfDenunciadoSelecionado"
         runat="server" />
 
+    <asp:Label ID="lblTituloAutonomo" Visible="false" runat="server" Text="">
+
+        <br />
+        <hr />
+        <br />
+
+        <h5>Avaliações que você recebeu</h5>
+
+    </asp:Label>
+
     <asp:Repeater
         ID="rptAvaliacoes"
         runat="server">
 
-        <itemtemplate>
+        <ItemTemplate>
 
             <div class="card-avaliacao">
 
@@ -193,14 +267,14 @@
                         runat="server"
                         DataSource='<%# Eval("Fotos") %>'>
 
-                        <itemtemplate>
+                        <ItemTemplate>
 
                             <asp:Image
                                 runat="server"
                                 CssClass="foto-avaliacao img-thumbnail"
                                 ImageUrl='<%# Eval("Imagem") %>' />
 
-                        </itemtemplate>
+                        </ItemTemplate>
 
                     </asp:Repeater>
 
@@ -208,7 +282,7 @@
 
             </div>
 
-        </itemtemplate>
+        </ItemTemplate>
 
     </asp:Repeater>
 
@@ -257,7 +331,7 @@
 
                             <label for="exampleFormControlInput1" class="form-label">Escolha o que aconteceu</label>
 
-                            <asp:DropDownList id="ddlCategoria"
+                            <asp:DropDownList ID="ddlCategoria"
                                 AutoPostBack="false"
                                 runat="server"
                                 CssClass="form-select">
