@@ -17,8 +17,6 @@
 
     <link rel="stylesheet" href="https://cloudflare.com">
 
-
-    <title>Opus - </title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -61,13 +59,22 @@
 
                     <div class="text-end">
                         
-                        <asp:LinkButton ID="lbtEntrar" class="link-neutro padding-lat-10" visible="true" href="../Usuario/Entrar.aspx" runat="server">Entrar</asp:LinkButton>
+                        <asp:LinkButton ID="lbtEntrar" class="link-neutro padding-lat-10" visible="true" href="../Usuario/Entrar.aspx" runat="server">
+                            
+                            <asp:Label runat="server" class="link-neutro padding-lat-20">Entrar</asp:Label>
 
-                        <asp:Label ID="labNome" runat="server" class="link-neutro padding-lat-10" Text=""></asp:Label>
+                            <asp:Image ID="imgDeslogado" runat="server" src="../../Img/GenericAvatar.png" alt="avatar" width="32" height="32" class="rounded-circle"/>
 
-                        <asp:Image ID="imgDeslogado" runat="server" src="../../Img/GenericAvatar.png" alt="avatar" width="32" height="32" class="rounded-circle"/>
+                        </asp:LinkButton>
 
-                        <asp:ImageButton ID="imgUsuario" alt="avatar" width="32" height="32" class="rounded-circle" runat="server" Visible="false" OnClick="imgUsuario_Click"/>
+                        <asp:LinkButton runat="server" ID="lbtConfiguracao" CssClass="link-neutro" OnClick="imgUsuario_Click" Visible="false">
+
+                            <asp:Label ID="labNome" runat="server" class="link-neutro padding-lat-10"></asp:Label>
+
+                            <asp:Image ID="imgUsuario" alt="avatar" width="32" height="32" class="rounded-circle" runat="server" Visible="false"></asp:Image>
+
+                        </asp:LinkButton>
+
                     </div>
                 </div>
             </div>

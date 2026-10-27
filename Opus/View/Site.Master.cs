@@ -21,9 +21,11 @@ namespace Opus.View
                     lbtEntrar.Visible = false;
                     imgDeslogado.Visible = false;
 
+                    lbtConfiguracao.Visible = true;
                     labNome.Text = Session["usu_nome"].ToString();
-                    imgUsuario.Visible = true;
                     imgUsuario.ImageUrl = "~/Uploads/Usuario/" + Session["usu_imagem"].ToString();
+                    imgUsuario.Visible = true;
+
                 }
 
                 if (Session["aut_ID"] != null && Session["usu_ID"] != null)
@@ -46,7 +48,7 @@ namespace Opus.View
             }
         }
 
-        protected void imgUsuario_Click(object sender, ImageClickEventArgs e)
+        protected void imgUsuario_Click(object sender, EventArgs e)
         {
             Response.Redirect("../Usuario/Configuracao.aspx");
         }

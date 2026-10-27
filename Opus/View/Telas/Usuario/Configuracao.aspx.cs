@@ -15,15 +15,11 @@ namespace Opus.View.Telas.Usuario
         {
             if(!IsPostBack)
             {
-                if(Session["usu_ID"] == null)
-                {
-                    Response.Redirect("Entrar.aspx");
-                }
+                if(Session["usu_ID"] == null) Response.Redirect("Entrar.aspx");
 
-                if (Session["aut_ID"] != null)
-                {
-                    btnAuto.Visible = false; 
-                }
+                if (Session["aut_ID"] != null) btnAuto.Visible = false;
+
+                if (Session["mod_ID"] != null) btnAuto.Visible = false;
             }
         }
 

@@ -114,15 +114,6 @@ namespace Opus.View.Telas.Moderador
         protected global::System.Web.UI.WebControls.Label lblStatusUsuario;
 
         /// <summary>
-        /// Controle rptAvaliacoesUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptAvaliacoesUsuario;
-
-        /// <summary>
         /// Controle lblNotaAutonomo.
         /// </summary>
         /// <remarks>
@@ -157,6 +148,15 @@ namespace Opus.View.Telas.Moderador
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDescricaoAutonomo;
+
+        /// <summary>
+        /// Controle rptAvaliacoesUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptAvaliacoesUsuario;
 
         /// <summary>
         /// Controle lblServico.

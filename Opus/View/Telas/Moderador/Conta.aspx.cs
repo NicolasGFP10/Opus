@@ -178,11 +178,11 @@ namespace Opus.View.Telas.Moderador
 
             if (usu.Status == true)
             {
-                lblStatusUsuario.Text = "Ativo";
+                lblStatusUsuario.Text = "Usuário Ativo";
             }
             else
             {
-                lblStatusUsuario.Text = "Inativo";
+                lblStatusUsuario.Text = "Usuário Inativo";
             }
 
             // Limpar dados
@@ -298,7 +298,7 @@ namespace Opus.View.Telas.Moderador
 
             int id = Convert.ToInt32(hfUsuarioDadoID.Value);
 
-            int status = lblStatusUsuario.Text == "Ativo" ? 1 : 0;
+            int status = lblStatusUsuario.Text == "Usuário Ativo" ? 1 : 0;
 
             UsuarioController controller = new UsuarioController();
 

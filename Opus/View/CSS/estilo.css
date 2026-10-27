@@ -18,7 +18,11 @@ body {
 .central {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     padding: 50px 20px;
+    min-height: 100vh;
+    height: auto;
+    box-sizing: border-box;
 }
 
 /* Caixa branca */
@@ -27,7 +31,8 @@ body {
     background: #fff;
     width: 90%;
     max-width: 1250px;
-    min-height: 70vh;
+    min-height: 75vh;
+    height: auto;
     border-radius: 35px;
     padding: 20px;
     box-sizing: border-box;
@@ -72,6 +77,14 @@ body {
     width: 100%;
 }
 
+.container-resultados {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    padding: 20px 0;
+}
+
 .informacao {
     color: white;
     border-radius: 10px;
@@ -103,6 +116,22 @@ body {
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.padding-lat-20 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.padding-lat-45 {
+    padding-left: 45px;
+    padding-right: 45px;
+}
+
+.padding-lat-0 {
+    padding-left: 62px;
+    padding-right: 62px;
+}
+
 /* ============================================= CORES ============================================= */
 
 .cor-branca {
@@ -239,6 +268,7 @@ body {
 }
 
 .filha {
+    padding-top: 18%;
     width: 80%;
     margin: 0 auto;
 }

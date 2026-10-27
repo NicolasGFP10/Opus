@@ -54,7 +54,7 @@
 
     <!-- REPEATER DAS AVALIAÇÕES DO USUÁRIO -->
 
-    <h5>Avaliações que você fez</h5>
+    <h5 class="padding-lat-45">Avaliações que você fez</h5>
 
     <asp:Repeater
         ID="rptAvaliacoesUsuario"
