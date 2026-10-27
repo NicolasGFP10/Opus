@@ -389,5 +389,36 @@ namespace Opus.DAO
             }
         }
 
+        public int AlterarStatus(int id, int status)
+        {
+            try
+            {
+
+                using (MySqlConnection conexao = Conexao.ObterConexao())
+                {
+                    conexao.Open();
+
+                    string sql = @"UPDATE usuario
+                               SET usu_status = @status
+                               WHERE usu_id = @id;";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conexao);
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@status", status);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                return 200;
+
+            }
+            catch
+            {
+
+                return 500;
+
+            }
+        }
     }
 }

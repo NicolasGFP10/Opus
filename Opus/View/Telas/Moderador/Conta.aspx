@@ -1,4 +1,4 @@
-﻿<%@ page title="Contas - Opus" language="C#" masterpagefile="~/View/Site.Master" autoeventwireup="true" codebehind="Conta.aspx.cs" inherits="Opus.View.Telas.Moderador.Conta" %>
+﻿<%@ Page Title="Contas - Opus" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Conta.aspx.cs" Inherits="Opus.View.Telas.Moderador.Conta" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -31,7 +31,7 @@
                     Filtro de pesquisa
                 </label>
 
-                <asp:DropDownList id="ddlFiltro"
+                <asp:DropDownList ID="ddlFiltro"
                     AutoPostBack="false"
                     runat="server"
                     CssClass="form-select">
@@ -70,7 +70,7 @@
         runat="server"
         OnItemCommand="rptDados_ItemCommand">
 
-        <itemtemplate>
+        <ItemTemplate>
 
             <div class="card-autonomo">
 
@@ -104,12 +104,12 @@
 
             </div>
 
-        </itemtemplate>
+        </ItemTemplate>
 
     </asp:Repeater>
 
     <asp:HiddenField
-        ID="hfUsuarioDenunciadoID"
+        ID="hfUsuarioDadoID"
         runat="server" />
 
     <div class="modal fade"
@@ -136,6 +136,10 @@
                 </div>
 
                 <div class="modal-body">
+
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#alterarStatus">
+                        Alterar o Status
+                    </button>
 
                     <!-- DADOS DE USUÁRIO -->
 
@@ -227,180 +231,248 @@
                             ID="rptServicosPerfil"
                             runat="server">
 
-                            <headertemplate>
+                            <HeaderTemplate>
                                 <div class="container-informacao padding-top-20">
-                            </headertemplate>
+                            </HeaderTemplate>
 
-                            <itemtemplate>
+                            <ItemTemplate>
                                 <div class="informacao cor-roxa">
                                     <%#: Eval("Nome") %>
                                 </div>
-                            </itemtemplate>
+                            </ItemTemplate>
 
-                            <footertemplate>
+                            <FooterTemplate>
+                                </div>
+                            </FooterTemplate>
+
+                        </asp:Repeater>
+
                     </div>
-                    </FooterTemplate>
 
-                </asp:Repeater>
+                    <div class="card-titulo">
 
-                </div>
+                        <!-- REGIÕES -->
 
-                <div class="card-titulo">
-
-                    <!-- REGIÕES -->
-
-                    <asp:Label ID="lblRegioes" runat="server" Text="">
+                        <asp:Label ID="lblRegioes" runat="server" Text="">
 
                         <hr />
 
                         <h5>Regiões de atendimento</h5>
 
-                    </asp:Label>
+                        </asp:Label>
 
-                    <asp:Repeater ID="rptRegioesPerfil" runat="server">
+                        <asp:Repeater ID="rptRegioesPerfil" runat="server">
 
-                        <headertemplate>
-                            <div class="container-informacao padding-top-20">
-                        </headertemplate>
+                            <HeaderTemplate>
+                                <div class="container-informacao padding-top-20">
+                            </HeaderTemplate>
 
-                        <itemtemplate>
-                            <div class="informacao cor-roxa">
-                                <%#: Eval("Cidade") %> - <%#: Eval("Estado") %>
-                            </div>
-                        </itemtemplate>
+                            <ItemTemplate>
+                                <div class="informacao cor-roxa">
+                                    <%#: Eval("Cidade") %> - <%#: Eval("Estado") %>
+                                </div>
+                            </ItemTemplate>
 
-                        <footertemplate>
-                </div>
-                </FooterTemplate>
+                            <FooterTemplate>
+                                </div>
+                            </FooterTemplate>
 
-                    </asp:Repeater>
+                        </asp:Repeater>
 
-            </div>
+                    </div>
 
-            <div class="card-titulo">
+                    <div class="card-titulo">
 
-                <!-- PORTFÓLIOS -->
+                        <!-- PORTFÓLIOS -->
 
-                <asp:Label ID="lblPortifolio" runat="server" Text="">
+                        <asp:Label ID="lblPortifolio" runat="server" Text="">
 
                     <hr />
 
                     <h5>Portfólios</h5>
 
-                </asp:Label>
-
-            </div>
-
-            <asp:Repeater
-                ID="rptPortifoliosPerfil"
-                runat="server">
-
-                <itemtemplate>
-
-                    <div class="card-portifolio-mais">
-
-                        <p>
-                            <%#: Eval("Descricao") %>
-                        </p>
-
-                        <div class="portifolio-fotos">
-
-                            <asp:Repeater
-                                runat="server"
-                                DataSource='<%# Eval("Fotos") %>'>
-
-                                <itemtemplate>
-
-                                    <asp:Image
-                                        runat="server"
-                                        CssClass="portifolio-foto"
-                                        ImageUrl='<%# Eval("Caminho") %>' />
-
-                                </itemtemplate>
-
-                            </asp:Repeater>
-
-                        </div>
+                        </asp:Label>
 
                     </div>
 
-                </itemtemplate>
+                    <asp:Repeater
+                        ID="rptPortifoliosPerfil"
+                        runat="server">
 
-            </asp:Repeater>
+                        <ItemTemplate>
 
-            <div class="card-titulo">
-                
-                <!-- AVALIAÇÕES -->
+                            <div class="card-portifolio-mais">
 
-                <asp:Label ID="lblAvaliacoes" runat="server" Text="">
+                                <p>
+                                    <%#: Eval("Descricao") %>
+                                </p>
+
+                                <div class="portifolio-fotos">
+
+                                    <asp:Repeater
+                                        runat="server"
+                                        DataSource='<%# Eval("Fotos") %>'>
+
+                                        <ItemTemplate>
+
+                                            <asp:Image
+                                                runat="server"
+                                                CssClass="portifolio-foto"
+                                                ImageUrl='<%# Eval("Caminho") %>' />
+
+                                        </ItemTemplate>
+
+                                    </asp:Repeater>
+
+                                </div>
+
+                            </div>
+
+                        </ItemTemplate>
+
+                    </asp:Repeater>
+
+                    <div class="card-titulo">
+
+                        <!-- AVALIAÇÕES -->
+
+                        <asp:Label ID="lblAvaliacoes" runat="server" Text="">
 
                     <hr />
 
                     <h5>Avaliações recebidas</h5>
 
-                </asp:Label>
-
-                
-
-            </div>
-
-            <asp:HiddenField
-                ID="hfDenunciadoSelecionado"
-                runat="server" />
-
-            <asp:Repeater
-                ID="rptAvaliacoesPerfil"
-                runat="server">
-
-                <itemtemplate>
-
-                    <div class="card-avaliacao">
-
-                        <strong>
-                            <%#: Eval("NomeUsuario") %>
-                        </strong>
+                        </asp:Label>
 
 
-
-                        <h6 class="mt-3">
-                            <%#: Eval("Titulo") %>
-                        </h6>
-
-                        <p>
-                            <%#: Eval("Descricao") %>
-                        </p>
-
-                        <p>
-                            Nota: <%# Eval("Nota") %> / 5
-                        </p>
-
-                        <div class="fotos-avaliacao">
-
-                            <asp:Repeater
-                                runat="server"
-                                DataSource='<%# Eval("Fotos") %>'>
-
-                                <itemtemplate>
-
-                                    <asp:Image
-                                        runat="server"
-                                        CssClass="foto-avaliacao"
-                                        ImageUrl='<%# Eval("Imagem") %>' />
-
-                                </itemtemplate>
-
-                            </asp:Repeater>
-
-                        </div>
 
                     </div>
 
-                </itemtemplate>
+                    <asp:HiddenField
+                        ID="hfDenunciadoSelecionado"
+                        runat="server" />
 
-            </asp:Repeater>
+                    <asp:Repeater
+                        ID="rptAvaliacoesPerfil"
+                        runat="server">
+
+                        <ItemTemplate>
+
+                            <div class="card-avaliacao">
+
+                                <strong>
+                                    <%#: Eval("NomeUsuario") %>
+                                </strong>
+
+
+
+                                <h6 class="mt-3">
+                                    <%#: Eval("Titulo") %>
+                                </h6>
+
+                                <p>
+                                    <%#: Eval("Descricao") %>
+                                </p>
+
+                                <p>
+                                    Nota: <%# Eval("Nota") %> / 5
+                                </p>
+
+                                <div class="fotos-avaliacao">
+
+                                    <asp:Repeater
+                                        runat="server"
+                                        DataSource='<%# Eval("Fotos") %>'>
+
+                                        <ItemTemplate>
+
+                                            <asp:Image
+                                                runat="server"
+                                                CssClass="foto-avaliacao"
+                                                ImageUrl='<%# Eval("Imagem") %>' />
+
+                                        </ItemTemplate>
+
+                                    </asp:Repeater>
+
+                                </div>
+
+                            </div>
+
+                        </ItemTemplate>
+
+                    </asp:Repeater>
+
+                </div>
+                <!-- Fecha modal-body -->
+
+            </div>
+            <!-- Fecha modal-content -->
 
         </div>
-    </div>
+        <!-- Fecha modal-dialog -->
 
+    </div>
+    <!-- Fecha modalDado -->
+
+
+    <!-- MODAL DE CONFIRMAÇÃO (FORA DO MODAL PRINCIPAL) -->
+
+    <div class="modal fade"
+        id="alterarStatus"
+        tabindex="-1"
+        aria-labelledby="alterarStatusLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h1 class="modal-title fs-5"
+                        id="alterarStatusLabel">Alterar o status
+                    </h1>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar">
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <h6>Você tem certeza que deseja fazer isso?
+                    </h6>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDado">
+                        Não, voltar
+                    </button>
+
+                    <asp:LinkButton
+                        ID="btnGerenciar"
+                        runat="server"
+                        Text="Sim"
+                        CssClass="btn btn-danger"
+                        OnClick="btnGerenciar_Click" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </asp:Content>

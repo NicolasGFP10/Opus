@@ -60,13 +60,13 @@ namespace Opus.View.Telas.Moderador
         protected global::System.Web.UI.WebControls.Repeater rptDados;
 
         /// <summary>
-        /// Controle hfUsuarioDenunciadoID.
+        /// Controle hfUsuarioDadoID.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfUsuarioDenunciadoID;
+        protected global::System.Web.UI.WebControls.HiddenField hfUsuarioDadoID;
 
         /// <summary>
         /// Controle imgPerfilUsuario.
@@ -229,5 +229,14 @@ namespace Opus.View.Telas.Moderador
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptAvaliacoesPerfil;
+
+        /// <summary>
+        /// Controle btnGerenciar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnGerenciar;
     }
 }

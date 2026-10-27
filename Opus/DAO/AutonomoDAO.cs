@@ -369,5 +369,85 @@ namespace Opus.DAO
 
             return null;
         }
+
+        public AutonomoPesquisaView BuscarPerfilCompleto(int autonomoID)
+        {
+            using (MySqlConnection conexao = Conexao.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = @"
+            SELECT
+                a.aut_ID,
+                a.usu_ID,
+                a.aut_descricao,
+                u.usu_nome,
+                u.usu_imagem,
+                a.aut_telefone_corp,
+                a.aut_email_corp,
+                u.usu_telefone,
+
+                COALESCE(AVG(av.ava_nota), 0) AS nota_media,
+                COUNT(av.ava_ID) AS quantidade_avaliacoes FROM autonomo a
+            
+                INNER JOIN usuario u
+                ON a.usu_ID = u.usu_ID
+                
+                LEFT JOIN avaliacao av
+                ON av.aut_ID = a.aut_ID
+            
+                WHERE a.aut_ID = @autonomo
+
+            GROUP BY
+                a.aut_ID,
+                a.aut_descricao,
+                u.usu_nome,
+                u.usu_imagem;";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@autonomo", autonomoID);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+
+                            string telefone;
+
+                            if (string.IsNullOrEmpty(reader["aut_telefone_corp"].ToString()))
+                            {
+
+                                telefone = reader["usu_telefone"].ToString();
+
+                            }
+                            else
+                            {
+
+                                telefone = reader["aut_telefone_corp"].ToString();
+
+                            }
+
+                            return new AutonomoPesquisaView
+                            {
+                                ID = Convert.ToInt32(reader["aut_ID"]),
+                                Nome = reader["usu_nome"].ToString(),
+                                Foto = reader["usu_imagem"].ToString(),
+                                Descricao = reader["aut_descricao"].ToString(),
+                                NotaMedia = Convert.ToDecimal(reader["nota_media"]),
+                                QuantidadeAvaliacoes = Convert.ToInt32(reader["quantidade_avaliacoes"]),
+                                Telefone = telefone,
+                                TelefoneCorp = reader["aut_telefone_corp"].ToString(),
+                                Email = reader["aut_email_corp"].ToString(),
+                                UsuarioID = Convert.ToInt32(reader["usu_ID"]),
+
+                            };
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
     }
 }

@@ -136,12 +136,16 @@ namespace Opus.Controller
 
         public AutonomoPesquisaView BuscarPerfil(int autonomoID)
         {
-            if (autonomoID <= 0)
-                return null;
-
             AutonomoDAO dao = new AutonomoDAO();
 
             return dao.BuscarPerfil(autonomoID);
+        }
+
+        public AutonomoPesquisaView BuscarPerfilCompleto(int autonomoID)
+        {
+            AutonomoDAO dao = new AutonomoDAO();
+
+            return dao.BuscarPerfilCompleto(autonomoID);
         }
     }
 }

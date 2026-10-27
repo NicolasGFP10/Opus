@@ -23,7 +23,7 @@ namespace Opus.View.Telas.Moderador
             }
         }
 
-        protected void btnPesquisar_Click(object sender, EventArgs e)
+        private void CarregarDados()
         {
             try
             {
@@ -53,6 +53,11 @@ namespace Opus.View.Telas.Moderador
 
                 lblMensagemPesquisa.Text = "Não foi possível realizar a pesquisa.";
             }
+        }
+
+        protected void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            CarregarDados();
         }
 
         protected void rptDados_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -148,7 +153,7 @@ namespace Opus.View.Telas.Moderador
 
             usu = usuarioController.DadosUsuario(id);
 
-            hfUsuarioDenunciadoID.Value = id.ToString();
+            hfUsuarioDadoID.Value = id.ToString();
 
             imgPerfilUsuario.ImageUrl = "~/Uploads/Usuario/" + usu.Imagem;
 
@@ -223,7 +228,7 @@ namespace Opus.View.Telas.Moderador
 
             AutonomoCidadeController cidadeController = new AutonomoCidadeController();
 
-            AutonomoPesquisaView autonomo = autonomoController.BuscarPerfil(autonomoID);
+            AutonomoPesquisaView autonomo = autonomoController.BuscarPerfilCompleto(autonomoID);
 
             AutonomoServicoController servicoController = new AutonomoServicoController();
 
@@ -275,6 +280,34 @@ namespace Opus.View.Telas.Moderador
 
             rptServicosPerfil.DataBind();
 
+        }
+
+        protected void btnGerenciar_Click(object sender, EventArgs e)
+        {
+
+            int id = Convert.ToInt32(hfUsuarioDadoID.Value);
+
+            int status = lblStatusUsuario.Text == "Ativo" ? 1 : 0;
+
+            UsuarioController controller = new UsuarioController();
+
+            int resultado = controller.AlterarStatus(id, status);
+
+            switch (resultado)
+            {
+                case 400:
+                    lblMensagemPesquisa.Text = "ID não encontrado";
+                    break;
+
+                case 200:
+                    lblStatusUsuario.Text = "OK";
+                    CarregarDados();
+                    break;
+
+                case 500:
+                    lblStatusUsuario.Text = "Erro interno no servidor";
+                    break;
+            }
         }
     }
 }
