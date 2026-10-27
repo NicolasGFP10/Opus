@@ -180,6 +180,64 @@
 
                     </div>
 
+                    <!-- Avaliações que o usuário fez -->
+
+                    <h5>Avaliações do usuário</h5>
+
+                    <asp:Repeater
+                        ID="rptAvaliacoesUsuario"
+                        runat="server">
+
+                        <ItemTemplate>
+
+                            <div class="card-avaliacao">
+
+                                <!-- Título -->
+                                <h5 class="titulo-avaliacao">
+                                    <%# Eval("Titulo") %>
+                                </h5>
+
+
+                                <!-- Descrição -->
+                                <p class="descricao-avaliacao">
+                                    <%# Eval("Descricao") %>
+                                </p>
+
+                                <!-- Nota -->
+                                <p>
+                                    Nota:
+        <strong>
+            <%# Eval("Nota") %> / 5
+        </strong>
+                                </p>
+
+                                <!-- Fotos -->
+                                <div class="fotos-avaliacao">
+
+                                    <asp:Repeater
+                                        ID="rptFotos"
+                                        runat="server"
+                                        DataSource='<%# Eval("Fotos") %>'>
+
+                                        <ItemTemplate>
+
+                                            <asp:Image
+                                                runat="server"
+                                                CssClass="foto-avaliacao img-thumbnail"
+                                                ImageUrl='<%# Eval("Imagem") %>' />
+
+                                        </ItemTemplate>
+
+                                    </asp:Repeater>
+
+                                </div>
+
+                            </div>
+
+                        </ItemTemplate>
+
+                    </asp:Repeater>
+
                     <!-- DADOS DE AUTÔNOMO -->
 
                     <!-- DADOS PRINCIPAIS -->

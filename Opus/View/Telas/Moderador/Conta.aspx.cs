@@ -212,6 +212,17 @@ namespace Opus.View.Telas.Moderador
 
             rptServicosPerfil.DataBind();
 
+            CarregarAvaliacoesUsuario(id);
+
+        }
+
+        private void CarregarAvaliacoesUsuario(int id)
+        {
+            AvaliacaoController controller = new AvaliacaoController();
+
+            rptAvaliacoesUsuario.DataSource = controller.ListarAvaliacoesUsuario(id);
+
+            rptAvaliacoesUsuario.DataBind();
         }
 
         // ===================================================================================================
