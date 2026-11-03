@@ -67,9 +67,9 @@ namespace Opus.View.Telas.Autonomo
 
         private void CarregarGridServicos()
         {
-            gvServicos.DataSource = servicoController.ListarServicosAutonomo(Convert.ToInt32(Session["aut_id"]));
+            rptServicosOferecidos.DataSource = servicoController.ListarServicosAutonomo(Convert.ToInt32(Session["aut_id"]));
 
-            gvServicos.DataBind();
+            rptServicosOferecidos.DataBind();
         }
 
         protected void btnAdicionarServico_Click(object sender, EventArgs e)
@@ -127,50 +127,26 @@ namespace Opus.View.Telas.Autonomo
             }
         }
 
-        protected void gvServicos_RowDeleting(
-            object sender,
-            GridViewDeleteEventArgs e)
-        {
-            int id =
-                Convert.ToInt32(
-                    gvServicos.DataKeys[e.RowIndex].Value);
-
-            int resultado =
-                servicoController.ExcluirServico(id);
-
-            if (resultado == 200)
-            {
-                CarregarGridServicos();
-            }
-        }
-
         // =====================================================
         // ESTADOS
         // =====================================================
 
         private void CarregarEstados()
         {
-            EstadoController controller =
-                new EstadoController();
+            EstadoController controller = new EstadoController();
 
-            ddlEstado.DataSource =
-                controller.ListarEstados();
+            ddlEstado.DataSource = controller.ListarEstados();
 
             ddlEstado.DataTextField = "Nome";
             ddlEstado.DataValueField = "ID";
 
             ddlEstado.DataBind();
 
-            ddlEstado.Items.Insert(
-                0,
-                new ListItem("Selecione um Estado", "0"));
+            ddlEstado.Items.Insert(0, new ListItem("Selecione um Estado", "0"));
 
             ddlCidade.Items.Clear();
 
-            ddlCidade.Items.Add(
-                new ListItem(
-                    "Escolha um Estado primeiro",
-                    "0"));
+            ddlCidade.Items.Add(new ListItem("Escolha um Estado primeiro","0"));
 
             ddlCidade.Enabled = false;
         }
@@ -179,9 +155,7 @@ namespace Opus.View.Telas.Autonomo
         // QUANDO O ESTADO FOR ALTERADO
         // =====================================================
 
-        protected void ddlEstado_SelectedIndexChanged(
-            object sender,
-            EventArgs e)
+        protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlCidade.Items.Clear();
 
@@ -306,11 +280,9 @@ namespace Opus.View.Telas.Autonomo
 
         private void CarregarGridCidade()
         {
-            AutonomoCidadeController controller =
-                new AutonomoCidadeController();
+            AutonomoCidadeController controller = new AutonomoCidadeController();
 
-            gvRegiao.DataSource =
-                controller.ListarCidadesAutonomo(Convert.ToInt32(Session["aut_id"]));
+            gvRegiao.DataSource = controller.ListarCidadesAutonomo(Convert.ToInt32(Session["aut_id"]));
 
             gvRegiao.DataBind();
         }
@@ -319,9 +291,7 @@ namespace Opus.View.Telas.Autonomo
         // EXCLUIR CIDADE
         // =====================================================
 
-        protected void gvRegiao_RowDeleting(
-            object sender,
-            GridViewDeleteEventArgs e)
+        protected void gvRegiao_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int id = Convert.ToInt32(gvRegiao.DataKeys[e.RowIndex].Value);
 
@@ -335,11 +305,7 @@ namespace Opus.View.Telas.Autonomo
             }
             else
             {
-                ClientScript.RegisterStartupScript(
-                    GetType(),
-                    "Erro",
-                    "alert('Não foi possível remover a cidade.');",
-                    true);
+                ClientScript.RegisterStartupScript(GetType(), "Erro", "alert('Não foi possível remover a cidade.');", true);
             }
         }
 
@@ -529,9 +495,7 @@ namespace Opus.View.Telas.Autonomo
             rptPortifolios.DataBind();
         }
 
-        protected void rptPortifolios_ItemCommand(
-    object source,
-    RepeaterCommandEventArgs e)
+        protected void rptPortifolios_ItemCommand(object source,RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "Excluir")
             {
@@ -564,6 +528,27 @@ namespace Opus.View.Telas.Autonomo
                     lblMensagem.CssClass = "text-danger";
                 }
             }
+        }
+
+        protected void lbtRemoverServico_Click(object sender, EventArgs e)
+        {
+
+            LinkButton botao = (LinkButton)sender;
+
+            if (!int.TryParse(botao.CommandArgument, out int ID) || ID <= 0)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Acesso inválido.');", true);
+
+                return;
+            }
+
+            int resultado = servicoController.ExcluirServico(ID);
+
+            if (resultado == 200)
+            {
+                CarregarGridServicos();
+            }
+
         }
     }
 }

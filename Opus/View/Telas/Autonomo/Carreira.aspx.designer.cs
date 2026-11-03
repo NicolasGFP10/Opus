@@ -33,13 +33,13 @@ namespace Opus.View.Telas.Autonomo
         protected global::System.Web.UI.WebControls.Button btnAdicionarServico;
 
         /// <summary>
-        /// Controle gvServicos.
+        /// Controle rptServicosOferecidos.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvServicos;
+        protected global::System.Web.UI.WebControls.Repeater rptServicosOferecidos;
 
         /// <summary>
         /// Controle ddlEstado.

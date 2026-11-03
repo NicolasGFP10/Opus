@@ -1,9 +1,9 @@
-﻿<%@ page title="Carreira - Opus"
-    language="C#"
-    masterpagefile="~/View/Site.Master"
-    autoeventwireup="true"
-    codebehind="Carreira.aspx.cs"
-    inherits="Opus.View.Telas.Autonomo.Carreira" %>
+﻿<%@ Page Title="Carreira - Opus"
+    Language="C#"
+    MasterPageFile="~/View/Site.Master"
+    AutoEventWireup="true"
+    CodeBehind="Carreira.aspx.cs"
+    Inherits="Opus.View.Telas.Autonomo.Carreira" %>
 
 <asp:Content ID="Content1"
     ContentPlaceHolderID="head"
@@ -52,30 +52,36 @@
     <br />
     <br />
 
-    <asp:GridView
-        ID="gvServicos"
-        runat="server"
-        AutoGenerateColumns="False"
-        DataKeyNames="ID"
-        CssClass="table table-striped table-bordered"
-        OnRowDeleting="gvServicos_RowDeleting">
+    <div class="ajuste">
 
-        <columns>
+        <asp:Repeater ID="rptServicosOferecidos" runat="server">
 
-            <asp:BoundField
-                DataField="Nome"
-                HeaderText="Serviço" />
+            <ItemTemplate>
 
-            <asp:CommandField
-                ShowDeleteButton="True"
-                DeleteText="Remover"
-                ButtonType="Button"/>
+                <div class="informacao cor-roxa">
 
-        </columns>
+                    <asp:Label
+                        ID="lblServico"
+                        runat="server"
+                        Text='<%# Eval("Nome") %>'
+                        Style="padding-right: 10px;">
+                    </asp:Label>
 
-    </asp:GridView>
+                    <asp:LinkButton
+                        ID="lbtRemoverServico"
+                        runat="server"
+                        CssClass="btn-close"
+                        style="color: white;"
+                        CommandArgument='<%# Eval("ID") %>'
+                        OnClick="lbtRemoverServico_Click" />
 
-    <br />
+                </div>
+
+            </ItemTemplate>
+
+        </asp:Repeater>
+
+    </div>
 
     <hr />
 
@@ -148,7 +154,7 @@
         CssClass="table table-striped table-bordered"
         OnRowDeleting="gvRegiao_RowDeleting">
 
-        <columns>
+        <Columns>
 
             <asp:BoundField
                 DataField="Estado"
@@ -163,7 +169,7 @@
                 DeleteText="Remover"
                 ButtonType="Button" />
 
-        </columns>
+        </Columns>
 
     </asp:GridView>
 
@@ -174,7 +180,7 @@
     <hr />
     <br />
 
-        <h5>Portifólio</h5>
+    <h5>Portifólio</h5>
 
     <br />
 
@@ -240,7 +246,7 @@
         runat="server"
         OnItemCommand="rptPortifolios_ItemCommand">
 
-        <itemtemplate>
+        <ItemTemplate>
 
             <div class="card-portifolio padding-top-20">
 
@@ -268,7 +274,7 @@
                         runat="server"
                         DataSource='<%# Eval("Fotos") %>'>
 
-                        <itemtemplate>
+                        <ItemTemplate>
 
                             <asp:Image
                                 ID="imgPortifolio"
@@ -276,7 +282,7 @@
                                 CssClass="foto-avaliacao img-thumbnail"
                                 ImageUrl='<%# Eval("Caminho") %>' />
 
-                        </itemtemplate>
+                        </ItemTemplate>
 
                     </asp:Repeater>
 
@@ -284,7 +290,7 @@
 
             </div>
 
-        </itemtemplate>
+        </ItemTemplate>
 
     </asp:Repeater>
 
