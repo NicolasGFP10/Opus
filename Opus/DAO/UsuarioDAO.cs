@@ -420,5 +420,20 @@ namespace Opus.DAO
 
             }
         }
+
+        public void SairConta()
+        {
+            HttpContext.Current.Session["usu_ID"] = null;
+            HttpContext.Current.Session["usu_nome"] = null;
+            HttpContext.Current.Session["usu_imagem"] = null;
+            HttpContext.Current.Session["usu_email"] = null;
+
+            HttpContext.Current.Session["aut_ID"] = null;
+            HttpContext.Current.Session["aut_email_corp"] = null;
+            HttpContext.Current.Session["aut_telefone_corp"] = null;
+            HttpContext.Current.Session["aut_descricao"] = null;
+
+            HttpContext.Current.Session["mod_ID"] = null;
+        }
     }
 }

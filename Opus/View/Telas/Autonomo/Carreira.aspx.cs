@@ -171,19 +171,15 @@ namespace Opus.View.Telas.Autonomo
                 return;
             }
 
-            int idEstado =
-                Convert.ToInt32(
-                    ddlEstado.SelectedValue);
+            int idEstado = Convert.ToInt32(ddlEstado.SelectedValue);
 
-            CidadeController controller =
-                new CidadeController();
+            CidadeController controller = new CidadeController();
 
             // IMPORTANTE:
             // O seu CidadeController usa ListarCidades()
             // e não ListarPorEstado().
 
-            ddlCidade.DataSource =
-                controller.ListarCidades(idEstado);
+            ddlCidade.DataSource = controller.ListarCidades(idEstado);
 
             ddlCidade.DataTextField = "Nome";
             ddlCidade.DataValueField = "ID";
@@ -203,9 +199,7 @@ namespace Opus.View.Telas.Autonomo
         // ADICIONAR CIDADE
         // =====================================================
 
-        protected void btnSalvarCidade_Click(
-            object sender,
-            EventArgs e)
+        protected void btnSalvarCidade_Click(object sender, EventArgs e)
         {
             if (ddlCidade.SelectedValue == "0")
             {
@@ -282,22 +276,29 @@ namespace Opus.View.Telas.Autonomo
         {
             AutonomoCidadeController controller = new AutonomoCidadeController();
 
-            gvRegiao.DataSource = controller.ListarCidadesAutonomo(Convert.ToInt32(Session["aut_id"]));
+            rptCidadesEscolhidas.DataSource = controller.ListarCidadesAutonomo(Convert.ToInt32(Session["aut_id"]));
 
-            gvRegiao.DataBind();
+            rptCidadesEscolhidas.DataBind();
         }
 
         // =====================================================
         // EXCLUIR CIDADE
         // =====================================================
 
-        protected void gvRegiao_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void lbtRemoverCidade(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(gvRegiao.DataKeys[e.RowIndex].Value);
+            LinkButton botao = (LinkButton)sender;
+
+            if (!int.TryParse(botao.CommandArgument, out int ID) || ID <= 0)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Acesso inválido.');", true);
+
+                return;
+            }
 
             AutonomoCidadeController controller = new AutonomoCidadeController();
 
-            int resultado = controller.ExcluirCidade(id);
+            int resultado = controller.ExcluirCidade(ID);
 
             if (resultado == 200)
             {
@@ -310,7 +311,7 @@ namespace Opus.View.Telas.Autonomo
         }
 
         // =====================================================
-        // EXCLUIR CIDADE
+        // 
         // =====================================================
 
         protected void AbrirModal(object sender, EventArgs e)

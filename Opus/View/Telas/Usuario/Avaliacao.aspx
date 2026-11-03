@@ -56,6 +56,8 @@
 
     <h5 class="padding-lat-45">Avaliações que você fez</h5>
 
+    <asp:Label ID="lblAvaliacoes" runat="server" CssClass="padding-lat-45 padding-top-20" Text="Você não fez nenhuma avaliação"></asp:Label>
+
     <asp:Repeater
         ID="rptAvaliacoesUsuario"
         runat="server">
@@ -209,7 +211,9 @@
         <hr />
         <br />
 
-        <h5>Avaliações que você recebeu</h5>
+        <h5 class="padding-lat-45">Avaliações que você recebeu</h5>
+
+        <asp:Label ID="lblAvaliacoesAutonomo" CssClass="padding-lat-45 padding-top-20" runat="server" Text="Você não recebeu nenhuma avaliação"></asp:Label>
 
     </asp:Label>
 

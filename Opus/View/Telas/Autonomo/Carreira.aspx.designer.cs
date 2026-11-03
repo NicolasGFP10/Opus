@@ -69,13 +69,13 @@ namespace Opus.View.Telas.Autonomo
         protected global::System.Web.UI.WebControls.Button btnSalvarCidade;
 
         /// <summary>
-        /// Controle gvRegiao.
+        /// Controle rptCidadesEscolhidas.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvRegiao;
+        protected global::System.Web.UI.WebControls.Repeater rptCidadesEscolhidas;
 
         /// <summary>
         /// Controle buttonEnviar.

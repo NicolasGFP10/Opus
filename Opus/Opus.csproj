@@ -126,6 +126,7 @@
   <ItemGroup>
     <Content Include="View\CSS\estilo.css" />
     <Content Include="View\Img\Central.png" />
+    <Content Include="View\Img\buttonClose.png" />
     <Content Include="View\Img\GenericAvatar.png" />
     <Content Include="View\Img\OpusIcone.png" />
     <Content Include="View\Img\OpusIconePagina.png" />

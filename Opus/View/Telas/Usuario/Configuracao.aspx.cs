@@ -1,4 +1,5 @@
-﻿using Opus.DAO;
+﻿using Opus.Controller;
+using Opus.DAO;
 using Opus.View.Telas.Autonomo;
 using System;
 using System.Collections.Generic;
@@ -25,17 +26,9 @@ namespace Opus.View.Telas.Usuario
 
         protected void btnSair_Click(object sender, EventArgs e)
         {
-            Session["usu_ID"] = null;
-            Session["usu_nome"] = null;
-            Session["usu_imagem"] = null;
-            Session["usu_email"] = null;
+            UsuarioController controller = new UsuarioController();
 
-            Session["aut_ID"] = null;
-            Session["aut_email_corp"] = null;
-            Session["aut_telefone_corp"] = null;
-            Session["aut_descricao"] = null;
-
-            Session["mod_ID"] = null;
+            controller.SairConta();
 
             Response.Redirect("Default.aspx");
         }

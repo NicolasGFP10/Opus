@@ -54,7 +54,6 @@ namespace Opus.Controller
             return cpf.EndsWith(digito);
         }
 
-
         public int ValidarCadastro(string nome, string email, string telefone, string cpf, string senha, HttpPostedFile imagem)
         {
 
@@ -204,6 +203,13 @@ namespace Opus.Controller
             UsuarioDAO dao = new UsuarioDAO();
 
             return dao.AlterarStatus(id, status);
+        }
+
+        public void SairConta()
+        {
+            UsuarioDAO dao = new UsuarioDAO();
+
+            dao.SairConta();
         }
     }
 }

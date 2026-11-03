@@ -208,6 +208,12 @@ namespace Opus.View.Telas.Usuario
 
         private void CarregarPerfilAutonomo(int autonomoID)
         {
+
+            if (Convert.ToInt32(Session["aut_id"]) == autonomoID)
+            {
+                btnDenunciar.Visible = false;
+            }
+
             AutonomoController autonomoController = new AutonomoController();
 
             PortifolioController portifolioController = new PortifolioController();
@@ -306,10 +312,16 @@ namespace Opus.View.Telas.Usuario
         {
             LinkButton botao = (LinkButton)sender;
 
-            if (!int.TryParse(botao.CommandArgument, out int usuarioID)
-                || usuarioID <= 0)
+            if (!int.TryParse(botao.CommandArgument, out int usuarioID) || usuarioID <= 0)
             {
                 lblMensagemPesquisa.Text = "Usuário inválido.";
+                return;
+            }
+
+            if (usuarioID == Convert.ToInt32(Session["usu_ID"]))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Erro", "alert('Você não pode denunciar a se mesmo.');", true);
+
                 return;
             }
 
@@ -321,7 +333,7 @@ namespace Opus.View.Telas.Usuario
 
         protected void btnDenunciar_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse( hfUsuarioDenunciadoID.Value, out int usuarioDenunciadoID) || usuarioDenunciadoID <= 0)
+            if (!int.TryParse(hfUsuarioDenunciadoID.Value, out int usuarioDenunciadoID) || usuarioDenunciadoID <= 0)
             {
                 lblMensagemPesquisa.Text = "Não foi possível identificar o usuário denunciado.";
 

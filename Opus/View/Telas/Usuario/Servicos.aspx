@@ -248,8 +248,6 @@
 
                 </div>
 
-
-
                 <div class="card-titulo">
 
                     <hr />
@@ -356,11 +354,9 @@
                             CommandArgument='<%# Eval("UsuarioID") %>'
                             OnClick="DenunciarUsuario_Click" />
 
-                        <strong>
+                        <strong class="padding-lat-10">
                             <%#: Eval("NomeUsuario") %>
                         </strong>
-
-
 
                         <h6 class="mt-3">
                             <%#: Eval("Titulo") %>

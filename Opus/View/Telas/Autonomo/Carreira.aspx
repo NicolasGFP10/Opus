@@ -1,9 +1,9 @@
-﻿<%@ Page Title="Carreira - Opus"
-    Language="C#"
-    MasterPageFile="~/View/Site.Master"
-    AutoEventWireup="true"
-    CodeBehind="Carreira.aspx.cs"
-    Inherits="Opus.View.Telas.Autonomo.Carreira" %>
+﻿<%@ page title="Carreira - Opus"
+    language="C#"
+    masterpagefile="~/View/Site.Master"
+    autoeventwireup="true"
+    codebehind="Carreira.aspx.cs"
+    inherits="Opus.View.Telas.Autonomo.Carreira" %>
 
 <asp:Content ID="Content1"
     ContentPlaceHolderID="head"
@@ -56,7 +56,7 @@
 
         <asp:Repeater ID="rptServicosOferecidos" runat="server">
 
-            <ItemTemplate>
+            <itemtemplate>
 
                 <div class="informacao cor-roxa">
 
@@ -64,20 +64,22 @@
                         ID="lblServico"
                         runat="server"
                         Text='<%# Eval("Nome") %>'
-                        Style="padding-right: 10px;">
-                    </asp:Label>
+                        Style="padding-right: 10px;"></asp:Label>
 
                     <asp:LinkButton
                         ID="lbtRemoverServico"
                         runat="server"
-                        CssClass="btn-close"
                         style="color: white;"
                         CommandArgument='<%# Eval("ID") %>'
-                        OnClick="lbtRemoverServico_Click" />
+                        OnClick="lbtRemoverServico_Click">
+
+                        <img src="../../Img/buttonClose.png"/>
+
+                    </asp:LinkButton>
 
                 </div>
 
-            </ItemTemplate>
+            </itemtemplate>
 
         </asp:Repeater>
 
@@ -146,32 +148,37 @@
 
     <!-- CIDADES ESCOLHIDAS -->
 
-    <asp:GridView
-        ID="gvRegiao"
-        runat="server"
-        AutoGenerateColumns="False"
-        DataKeyNames="ID"
-        CssClass="table table-striped table-bordered"
-        OnRowDeleting="gvRegiao_RowDeleting">
+    <div class="ajuste">
 
-        <Columns>
+        <asp:Repeater ID="rptCidadesEscolhidas" runat="server">
 
-            <asp:BoundField
-                DataField="Estado"
-                HeaderText="Estado" />
+            <itemtemplate>
 
-            <asp:BoundField
-                DataField="Cidade"
-                HeaderText="Cidade" />
+                <div class="informacao cor-roxa">
 
-            <asp:CommandField
-                ShowDeleteButton="True"
-                DeleteText="Remover"
-                ButtonType="Button" />
+                    <asp:Label runat="server" Text="">
 
-        </Columns>
+                        <%# Eval("Cidade") %> - <%# Eval("Estado") %>
 
-    </asp:GridView>
+                    </asp:Label>
+
+                    <asp:LinkButton
+                        ID="lbtRemoverCidade"
+                        runat="server"
+                        CommandArgument='<%# Eval("ID") %>'
+                        OnClick="lbtRemoverCidade">
+
+                        <img src="../../Img/buttonClose.png"/>
+
+                    </asp:LinkButton>
+
+                </div>
+
+            </itemtemplate>
+
+        </asp:Repeater>
+
+    </div>
 
     <!-- ===================================================== -->
     <!-- PORTIFÓLIO -->
@@ -246,7 +253,7 @@
         runat="server"
         OnItemCommand="rptPortifolios_ItemCommand">
 
-        <ItemTemplate>
+        <itemtemplate>
 
             <div class="card-portifolio padding-top-20">
 
@@ -274,7 +281,7 @@
                         runat="server"
                         DataSource='<%# Eval("Fotos") %>'>
 
-                        <ItemTemplate>
+                        <itemtemplate>
 
                             <asp:Image
                                 ID="imgPortifolio"
@@ -282,7 +289,7 @@
                                 CssClass="foto-avaliacao img-thumbnail"
                                 ImageUrl='<%# Eval("Caminho") %>' />
 
-                        </ItemTemplate>
+                        </itemtemplate>
 
                     </asp:Repeater>
 
@@ -290,7 +297,7 @@
 
             </div>
 
-        </ItemTemplate>
+        </itemtemplate>
 
     </asp:Repeater>
 

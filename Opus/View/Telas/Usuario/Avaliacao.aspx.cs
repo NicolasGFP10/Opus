@@ -248,15 +248,23 @@ namespace Opus.View.Telas.Usuario
 
         private void CarregarAvaliacoes()
         {
-            if (Session["aut_ID"] == null) return;
-
             int autonomoID = Convert.ToInt32(Session["aut_ID"]);
 
             AvaliacaoController controller = new AvaliacaoController();
 
-            rptAvaliacoes.DataSource = controller.ListarAvaliacoesAutonomo(autonomoID);
+            var dados = controller.ListarAvaliacoesAutonomo(autonomoID);
 
-            rptAvaliacoes.DataBind();
+            rptAvaliacoes.DataSource = dados;
+
+            if (dados.Count == 0)
+            {
+                lblAvaliacoesAutonomo.Visible = true;
+            } else
+            {
+                lblAvaliacoesAutonomo.Visible = false;
+            }
+
+                rptAvaliacoes.DataBind();
         }
 
         private void CarregarAvaliacoesUsuario()
@@ -265,7 +273,18 @@ namespace Opus.View.Telas.Usuario
 
             AvaliacaoController controller = new AvaliacaoController();
 
-            rptAvaliacoesUsuario.DataSource = controller.ListarAvaliacoesUsuario(usuarioID);
+            var dados = controller.ListarAvaliacoesUsuario(usuarioID);
+
+            rptAvaliacoesUsuario.DataSource = dados;
+
+            if (dados.Count == 0)
+            {
+                lblAvaliacoes.Visible = true;
+            }
+            else
+            {
+                lblAvaliacoes.Visible = false;
+            }
 
             rptAvaliacoesUsuario.DataBind();
         }

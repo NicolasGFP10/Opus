@@ -19,6 +19,11 @@ namespace Opus.View.Telas.Autonomo
                 {
                     Response.Redirect("../Usuario/Entrar.aspx");
                 }
+
+                if (Session["aut_id"] != null)
+                {
+                    Response.Redirect("../Usuario/Servico.aspx");
+                }
             }
         }
 
@@ -40,7 +45,11 @@ namespace Opus.View.Telas.Autonomo
 
                     ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "alert('Cadastro realizado com sucesso!');", true);
 
-                    Response.Redirect("Carreira.aspx");
+                    UsuarioController controller = new UsuarioController();
+
+                    controller.SairConta();
+
+                    Response.Redirect("../Usuario/Entrar.aspx");
 
                     break;
 
