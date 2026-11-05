@@ -385,6 +385,7 @@ namespace Opus.DAO
                 u.usu_imagem,
                 a.aut_telefone_corp,
                 a.aut_email_corp,
+                a.aut_cnpj,
                 u.usu_telefone,
 
                 COALESCE(AVG(av.ava_nota), 0) AS nota_media,
@@ -434,6 +435,7 @@ namespace Opus.DAO
                                 Nome = reader["usu_nome"].ToString(),
                                 Foto = reader["usu_imagem"].ToString(),
                                 Descricao = reader["aut_descricao"].ToString(),
+                                CNPJ = reader["aut_cnpj"].ToString(),
                                 NotaMedia = Convert.ToDecimal(reader["nota_media"]),
                                 QuantidadeAvaliacoes = Convert.ToInt32(reader["quantidade_avaliacoes"]),
                                 Telefone = telefone,

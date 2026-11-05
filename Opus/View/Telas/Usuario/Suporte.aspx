@@ -5,6 +5,10 @@
     <center>
         <h2>Suporte</h2>
     </center>
+
+    <br />
+    <p>Utilize o campo abaixo para nos enviar uma pergunta, sua resposta será entregue via e-mail</p>
+
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">E-mail</label>
         <asp:Label runat="server" ID="lblEmail" CssClass="form-label" Text=""></asp:Label>

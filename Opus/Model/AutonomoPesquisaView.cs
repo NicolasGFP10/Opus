@@ -17,6 +17,7 @@ namespace Opus.Model
         public string Telefone { get; set; }
         public string TelefoneCorp { get; set; }
         public string Email { get; set; }
+        public string CNPJ { get; set; }
         public int QuantidadeAvaliacoes { get; set; }
     }
 }

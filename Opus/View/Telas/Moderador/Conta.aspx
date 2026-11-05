@@ -91,6 +91,8 @@
 
                         <p><%#: Eval("Telefone") %></p>
 
+                        <p><%#: Eval("CPF") %></p>
+
                     </div>
 
                     <asp:LinkButton
@@ -182,9 +184,16 @@
                                 CssClass="text-secondary" />
                         </p>
 
+                        <p>
+                            <asp:Label
+                                ID="lblCPFUsuario"
+                                runat="server"
+                                CssClass="text-secondary" />
+                        </p>
+
                     </div>
 
-                    <!-- DADOS PRINCIPAIS -->
+                    <!-- DADOS DE AUTÔNOMO -->
 
                     <div class="text-center mb-4">
 
@@ -208,6 +217,13 @@
                                 runat="server"
                                 CssClass="text-secondary" />
                         </p>
+
+                        <p class="mt-2">
+                            <asp:Label
+                                ID="lblCNPJ"
+                                runat="server"
+                                CssClass="text-secondary" />
+                            </p>
 
                         <br />
 
@@ -243,9 +259,9 @@
                                 <!-- Nota -->
                                 <p>
                                     Nota:
-        <strong>
-            <%# Eval("Nota") %> / 5
-        </strong>
+                                    <strong>
+                                        <%# Eval("Nota") %> / 5
+                                    </strong>
                                 </p>
 
                                 <!-- Fotos -->

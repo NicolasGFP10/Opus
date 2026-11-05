@@ -161,6 +161,8 @@ namespace Opus.View.Telas.Moderador
 
             lblEmailUsuario.Text = usu.Email;
 
+            lblCPFUsuario.Text = long.Parse(usu.CPF).ToString(@"###\.###\.###\-##");
+
             string telefoneLimpo = usu.Telefone;
 
             if (telefoneLimpo.Length == 11)
@@ -270,6 +272,8 @@ namespace Opus.View.Telas.Moderador
             lblEmailCorp.Text = "E-mail corporativo: " + autonomo.Email;
 
             lblDescricaoAutonomo.Text = Server.HtmlEncode(autonomo.Descricao);
+
+            lblCNPJ.Text = long.Parse(autonomo.CNPJ).ToString(@"##\.###\.###\/####\-##");
 
             // Portfólios cadastrados
             rptPortifoliosPerfil.DataSource = portifolioController.ListarPortifolios(autonomoID);

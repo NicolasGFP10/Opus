@@ -124,6 +124,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Uploads\Avaliacao\3150c772-7af2-4628-aca7-7ff72ba8092d.png" />
+    <Content Include="Uploads\Avaliacao\pintura.png" />
     <Content Include="View\CSS\estilo.css" />
     <Content Include="View\Img\Central.png" />
     <Content Include="View\Img\buttonClose.png" />
@@ -336,7 +338,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Uploads\Avaliacao\" />
     <Folder Include="Uploads\Denuncia\" />
     <Folder Include="Uploads\Portifolio\" />
     <Folder Include="Uploads\Usuario\" />

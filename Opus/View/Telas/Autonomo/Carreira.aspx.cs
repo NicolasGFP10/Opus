@@ -11,8 +11,7 @@ namespace Opus.View.Telas.Autonomo
 {
     public partial class Carreira : System.Web.UI.Page
     {
-        AutonomoServicoController servicoController =
-            new AutonomoServicoController();
+        AutonomoServicoController servicoController = new AutonomoServicoController();
 
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -379,6 +379,7 @@ namespace Opus.DAO
                     usu.Nome = reader["usu_nome"].ToString();
                     usu.Imagem = reader["usu_imagem"].ToString();
                     usu.Telefone = reader["usu_telefone"].ToString();
+                    usu.CPF = reader["usu_CPF"].ToString();
                     usu.Email = reader["usu_email"].ToString();
                     usu.Status = Convert.ToBoolean(reader["usu_status"]);
 
