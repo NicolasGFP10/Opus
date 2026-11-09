@@ -57,7 +57,7 @@
     <br />
 
     <center>
-        <asp:Button runat="server" ID="btnEnviar" type="button" class="btn cor-roxa" OnClick="btnEnviar_Click" Text="Confirmar" />
+        <asp:Button runat="server" ID="btnEnviar" type="button" class="btn btn-dark cor-roxa" OnClick="btnEnviar_Click" Text="Confirmar" />
     </center>
 
     <script src="../../JS/AjustarCaracteres.js"></script>

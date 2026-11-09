@@ -187,7 +187,7 @@
     <hr />
     <br />
 
-    <h5>Portifólio</h5>
+    <h5>Portfólio</h5>
 
     <br />
 
@@ -236,7 +236,7 @@
 
                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal" style="width: 200px;">Fechar</button>
 
-                    <asp:Button runat="server" ID="btnEnviar" type="button" class="btn btn-dark cor-roxa" OnClick="btnEnviar_Click" Text="Enviar portifólio" Width="200px" />
+                    <asp:Button runat="server" ID="btnEnviar" type="button" class="btn btn-dark cor-roxa" OnClick="btnEnviar_Click" Text="Enviar portfólio" Width="200px" />
 
                     <br />
                 </div>
